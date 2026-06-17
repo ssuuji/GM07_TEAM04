@@ -49,7 +49,7 @@ public class Monster : MonoBehaviour
     }
 
     //피해
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
