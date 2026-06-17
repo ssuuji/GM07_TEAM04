@@ -15,6 +15,12 @@ public class InputManager : MonoBehaviour
     private InputAction interactAction;
     private InputAction basicAttackAction;
 
+    // Inventory Part
+    // Add I Input
+    public static bool IsOpenInventory { get; private set; } = false;
+    private InputAction openInventoryAction;
+
+
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -22,6 +28,12 @@ public class InputManager : MonoBehaviour
         dashAction = InputSystem.actions.FindAction("Sprint");
         interactAction = InputSystem.actions.FindAction("Interact");
         basicAttackAction = InputSystem.actions.FindAction("BasicAttack");
+        // Inventory Part
+        // Add I Input
+        if (openInventoryAction == null)
+        {
+            openInventoryAction = InputSystem.actions.FindAction("Inventory");
+        }
     }
 
     private void Update()
@@ -31,5 +43,8 @@ public class InputManager : MonoBehaviour
         IsDash = dashAction.WasPressedThisFrame();               //대쉬 : 왼쪽 쉬프트
         IsInteract = interactAction.WasPressedThisFrame();       //상호작용 : F
         IsBasicAttack = basicAttackAction.WasPressedThisFrame(); //기본공격 : Z
+        // Inventory Part
+        // Add I Input
+        IsOpenInventory = openInventoryAction.WasPressedThisFrame();
     }
 }

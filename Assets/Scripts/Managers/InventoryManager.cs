@@ -22,10 +22,17 @@ public class InventoryManager : Singleton<InventoryManager>
         // 초기 소지 아이템 세팅
         foreach (InventoryItem startingItem in startingItems)
         {
-            // 예외 처리
-            if (startingItem.ItemData == null || startingItem.Amount <= 0) return;
             // 아이템 저장
-            AddItem(startingItem.ItemData, startingItem.Amount);
+            if (startingItem.ItemData != null && startingItem.Amount > 0)
+            {
+                AddItem(startingItem.ItemData, startingItem.Amount);
+            }
+        }
+        // UI 갱신
+        InventoryUI inventoryUI = FindFirstObjectByType<InventoryUI>();
+        if (inventoryUI != null)
+        {
+            inventoryUI.RefreshUI();
         }
     }
 
