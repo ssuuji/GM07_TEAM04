@@ -27,11 +27,12 @@ public class PlayerController : MonoBehaviour
     [Header("공격 설정")]
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRadius = 0.5f;
-    [SerializeField] private int attackDamange = 10;
     [SerializeField] private LayerMask enemyLayer;
+    private PlayerStat playerStat;
 
     private void Start()
     {
+        playerStat = GetComponent<PlayerStat>();
         rb = GetComponent<Rigidbody2D>();
         originGravity = rb.gravityScale;
         originScale = transform.localScale;
@@ -68,11 +69,15 @@ public class PlayerController : MonoBehaviour
     }
     private void Attack()
     {
-        Collider2D hits = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
-        if (hits == null) return;
+        Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
+        if (hit == null) return;
 
-        //여기에 몬스터 데미지 전달추가해야함
-        Debug.Log($"{hits.name} 공격");
+        IDamageable damageable = hit.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(playerStat.Attack);
+        }
+        Debug.Log($"{hit.name} 공격");
     }
     private void Dash()
     {
