@@ -23,10 +23,6 @@ public class MonsterIdleMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
-    {
-
-    }
 
     private void OnEnable()
     {
@@ -89,18 +85,19 @@ public class MonsterIdleMove : MonoBehaviour
         }
     }
 
-    
-
+    // 방향설정
     private void ChangeDirection()
     {
         dir = Random.Range(0, 2);
     }
 
+    // 이동시간
     private void MoveTimeSet()
     {
         moveTime = Random.Range(moveTimeMin, moveTimeMax);
     }
 
+    // 정지시간
     private void WaitTimeSet()
     {
         waitTime = Random.Range(waitTimeMin, waitTimeMax);

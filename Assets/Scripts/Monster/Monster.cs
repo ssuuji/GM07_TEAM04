@@ -74,12 +74,4 @@ public class Monster : MonoBehaviour
         currentState = state; 
     }
 
-    //테스트용 충돌시 데미지 피해
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            TakeDamage(1);
-        }
-    }
 }

@@ -15,6 +15,11 @@ public class MonsterAngryMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player");
+    }
+
     private void Update()
     {
         SetDirection();
@@ -29,11 +34,13 @@ public class MonsterAngryMove : MonoBehaviour
         }
     }
 
+    // 플레이어 상대 방향찾기
     private void SetDirection()
     {
         dir = (target.transform.position.x >= transform.position.x) ? true : false;
     }
 
+    // 추적
     private void Move()
     {
         if (dir)
@@ -46,6 +53,7 @@ public class MonsterAngryMove : MonoBehaviour
         }
     }
 
+    // 공격가능 거리판단
     private void RangeMeasure()
     {
         AttackableRange = Mathf.Abs(target.transform.position.x - transform.position.x) < attackRange ? true : false;
