@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     private bool isGround;
 
+    [Header("점프 설정")]
+    [SerializeField] private int maxJumpCount = 2;
+    private int jumpcount;
+
     [Header("대쉬 설정")]
     [SerializeField] private float dashPower = 10.0f;
     [SerializeField] private float dashTime = 0.2f;
@@ -118,8 +122,13 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (!isGround) return;
+        if (jumpcount >= maxJumpCount) return;
+
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+
+        jumpcount++;
+
+        isGround = false;
     }
     private void Move()
     {
@@ -128,6 +137,7 @@ public class PlayerController : MonoBehaviour
     private void CheckGround()
     {
         isGround = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer);
+        if (isGround) jumpcount = 0;
     }
     private void OnDrawGizmos()
     {
