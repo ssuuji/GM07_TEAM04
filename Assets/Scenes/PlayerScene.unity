@@ -427,7 +427,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8, y: 7.94}
   m_EdgeRadius: 0
 --- !u!50 &535596526
 Rigidbody2D:
@@ -664,7 +664,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8, y: 8}
+  m_Size: {x: 8.280149, y: 14.850264}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -678,8 +678,8 @@ Transform:
   m_GameObject: {fileID: 1023948813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.25, y: 6.46, z: 0}
-  m_LocalScale: {x: 0.94614905, y: 0.3649143, z: 1}
+  m_LocalPosition: {x: -13.6176, y: 6.189, z: 0}
+  m_LocalScale: {x: 1.0960124, y: 0.29716843, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -723,16 +723,16 @@ PolygonCollider2D:
     border: {x: 0.125, y: 0.125, z: 0.125, w: 0.125}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 8, y: 8}
-    newSize: {x: 8, y: 8}
+    newSize: {x: 8.280149, y: 14.850264}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0, y: 3.134457}
+      - {x: -4.0037165, y: -3.9224381}
+      - {x: 3.8678927, y: -3.8741431}
   m_UseDelaunayMesh: 1
 --- !u!1 &1804338742
 GameObject:
@@ -827,7 +827,7 @@ BoxCollider2D:
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 10.73, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &2041868733
 SpriteRenderer:
