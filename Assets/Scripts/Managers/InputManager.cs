@@ -8,12 +8,18 @@ public class InputManager : MonoBehaviour
     public static bool IsDash { get; private set; }
     public static bool IsInteract { get; private set; }
     public static bool IsBasicAttack { get; private set; }
+    public static bool IsAreaAttack { get; private set; }
+    public static bool IsBuff { get; private set; }
+    public static bool IsInvin { get; private set; }
 
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction dashAction;
     private InputAction interactAction;
     private InputAction basicAttackAction;
+    private InputAction areaAttackAction;
+    private InputAction buffAction;
+    private InputAction invinAction;
 
     // Inventory Part
     // Add I Input
@@ -28,6 +34,9 @@ public class InputManager : MonoBehaviour
         dashAction = InputSystem.actions.FindAction("Sprint");
         interactAction = InputSystem.actions.FindAction("Interact");
         basicAttackAction = InputSystem.actions.FindAction("BasicAttack");
+        areaAttackAction = InputSystem.actions.FindAction("AreaAttack");
+        buffAction = InputSystem.actions.FindAction("Buff");
+        invinAction = InputSystem.actions.FindAction("Invin");
         // Inventory Part
         // Add I Input
         if (openInventoryAction == null)
@@ -43,6 +52,9 @@ public class InputManager : MonoBehaviour
         IsDash = dashAction.WasPressedThisFrame();               //대쉬 : 왼쪽 쉬프트
         IsInteract = interactAction.WasPressedThisFrame();       //상호작용 : F
         IsBasicAttack = basicAttackAction.WasPressedThisFrame(); //기본공격 : Z
+        IsAreaAttack = areaAttackAction.WasPressedThisFrame();   //범위공격 : X
+        IsBuff = buffAction.WasPressedThisFrame();               //공격버프 : C
+        IsInvin = invinAction.WasPressedThisFrame();             //무적기   : V
         // Inventory Part
         // Add I Input
         IsOpenInventory = openInventoryAction.WasPressedThisFrame();

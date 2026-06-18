@@ -2,10 +2,8 @@
 
 public class PlayerEquipment : MonoBehaviour
 {
-    [Header("플레이어 기본 스탯")]
-    [SerializeField] private PlayerBaseStatSO playerStat;
-
-    [Header("현재 장비 상태")]
+    private PlayerStatus playerStatus;
+    
     private WeaponItem weaponItem; //장착된 무기 저장
     private ArmorItem armorItem;
 
@@ -16,36 +14,9 @@ public class PlayerEquipment : MonoBehaviour
     public WeaponItem WeaponItem => weaponItem; // 장착된 무기 정보확인
     public ArmorItem ArmorItem => armorItem;
 
-    //최종 공격력 계산
-    public int CurrentAttack
+    private void Start()
     {
-        get
-        {
-            int attack = playerStat.Attack;
-
-            if (IsWeapon)
-            {
-                attack += weaponItem.AtkPower;
-            }
-
-            return attack;
-        }
-    }
-
-    //최종 방어력 계산
-    public int CurrentDefense
-    {
-        get
-        {
-            int defense = playerStat.Defense;
-
-            if (IsArmor)
-            {
-                defense += armorItem.DefPower;
-            }
-
-            return defense;
-        }
+        playerStatus = GetComponent<PlayerStatus>();
     }
 
     public void EquipWeapon(WeaponItem weapon)
@@ -53,8 +24,9 @@ public class PlayerEquipment : MonoBehaviour
         if (weapon == null) return;
 
         weaponItem = weapon;
+        playerStatus.AddAttack(weaponItem.AtkPower);
 
-        Debug.Log($"무기 장착 완료 | 현재 공격력 {CurrentAttack}");
+        Debug.Log($"무기 장착 완료 | 현재 공격력 {playerStatus.CurrentAttack}");
     }
 
     public void UnEquipWeapon()
@@ -65,9 +37,10 @@ public class PlayerEquipment : MonoBehaviour
             return;
         }
 
+        playerStatus.RemoveAttack(weaponItem.AtkPower);
         weaponItem = null;
 
-        Debug.Log($"무기 해제 완료 | 현재 공격력 {CurrentAttack}");
+        Debug.Log($"무기 해제 완료 | 현재 공격력 {playerStatus.CurrentAttack}");
     }
 
     public void EquipArmor(ArmorItem armor)
@@ -75,8 +48,9 @@ public class PlayerEquipment : MonoBehaviour
         if (armor == null) return;
 
         armorItem = armor;
+        playerStatus.AddDefense(armorItem.DefPower);
 
-        Debug.Log($"방어구 장착 완료 | 현재 방어력 {CurrentDefense}");
+        Debug.Log($"방어구 장착 완료 | 현재 방어력 {playerStatus.CurrentDefense}");
     }
 
     public void UnEquipArmor()
@@ -87,8 +61,9 @@ public class PlayerEquipment : MonoBehaviour
             return;
         }
 
+        playerStatus.RemoveDefense(armorItem.DefPower);
         armorItem = null;
 
-        Debug.Log($"방어구 해제 완료 | 현재 방어력 {CurrentDefense}");
+        Debug.Log($"방어구 해제 완료 | 현재 방어력 {playerStatus.CurrentDefense}");
     }
 }
