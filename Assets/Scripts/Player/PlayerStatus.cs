@@ -63,6 +63,32 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    //마나 회복
+    public void RecoverMp(int amount)
+    {
+        currentMp += amount;
+
+        if (currentMp > MaxMp)
+        {
+            currentMp = MaxMp;
+        }
+    }
+
+    //마나 소모
+    public bool UseMp(int amount)
+    {
+        if (currentMp < amount)
+        {
+            Debug.Log("마나가 부족합니다.");
+            return false;
+        }
+        else
+        {
+            currentMp -= amount;
+            return true;
+        }
+    }
+
     //공격력 증가
     public void AddAttack(int amount)
     {
