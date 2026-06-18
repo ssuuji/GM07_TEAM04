@@ -3,6 +3,7 @@ using UnityEngine;
 public class MonsterAngryMove : MonoBehaviour
 {
     [SerializeField] GameObject target;
+    [SerializeField] Monster monster;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float attackRange = 1f;
 
@@ -14,16 +15,18 @@ public class MonsterAngryMove : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        monsterAttack = GetComponent<MonsterAttack>();
     }
 
     private void Update()
     {
-        SetDirection();
+        FindDirection();
         RangeMeasure();
         if(AttackableRange)
         {
@@ -37,9 +40,10 @@ public class MonsterAngryMove : MonoBehaviour
     }
 
     // 플레이어 상대 방향찾기
-    private void SetDirection()
+    private void FindDirection()
     {
         dir = (target.transform.position.x >= transform.position.x) ? true : false;
+        
         monsterAttack.SetAttackDirection(dir);
     }
 
