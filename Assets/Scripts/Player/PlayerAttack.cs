@@ -1,41 +1,200 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("공격 설정")]
+    [Header("공격범위")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRadius = 0.5f;
+    [SerializeField] private Vector2 attackSize = new Vector2(2.5f, 1.5f);
+
+    [Header("범위공격 설정")]
+    [SerializeField] private int areaAttackMpCost = 10;
+    [SerializeField] private float areaAttackCooldown = 3.0f;
+    private bool canAreaAttack = true;
+
+    [Header("공격버프 설정")]
+    [SerializeField] private int buffAmount = 10;         //공격버프량 +10
+    [SerializeField] private float buffDuration = 10.0f;  //공격버프 지속시간
+    [SerializeField] private float buffCooldown = 30.0f;  //공격버프 쿨타임
+    private bool isBuff;
+    private bool canBuff = true;
+
+    [Header("무적스킬 설정")]
+    [SerializeField] private float invinDuration = 3.0f;  //무적기 지속시간
+    [SerializeField] private float invinCooldown = 30.0f; //무적기 쿨타임
+    private bool isInvin;
+    private bool canInvin = true;
+
+    [Header("몬스터 레이어")]
     [SerializeField] private LayerMask enemyLayer;
+
     private PlayerStatus playerStatus;
+    private PlayerMovement playerMove;
+    private PlayerHealth playerHealth;
 
     private void Start()
     {
         playerStatus = GetComponent<PlayerStatus>();
+        playerMove = GetComponent<PlayerMovement>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
+
+    #region 기본공격
+    //기본공격 : 공격범위 안에서 가장 앞에 있는 몬스터 1마리 공격
     public void Attack()
     {
-        //기본공격
-        Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, enemyLayer);
-        if (hit == null) return;
+        // 박스범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
+        if (hits.Length == 0) return;
 
-        IDamageable damageable = hit.GetComponentInParent<IDamageable>();
+        //몬스터 1마리 추출
+        Collider2D target = GetTarget(hits);
+        if (target == null) return;
+
+        IDamageable damageable = target.GetComponentInParent<IDamageable>();
+
         if (damageable != null)
         {
             damageable.TakeDamage(playerStatus.CurrentAttack);
         }
-        Debug.Log($"{hit.name} 공격 | 데미지 {playerStatus.CurrentAttack}");
 
-        // X C V 관련 스킬공격 추가하기
-
+        Debug.Log($"{target.name} 공격");
     }
+
+    private Collider2D GetTarget(Collider2D[] hits)
+    {
+        Collider2D targetMonster = null;
+
+        //플레이어가 바라보고 있는 방향 
+        float dir = playerMove.CheckDirValue; //오른쪽 : 1 , 왼쪽: -1
+        //기준값(플레이어 <-> 몬스터 가장 가까운 거리)
+        float front = float.MaxValue;
+
+        foreach (Collider2D hit in hits)
+        {
+            //플레이어 기준 몬스터와의 거리 계산(distance)
+            //오른쪽을 보고있다면 :  몬스터 x - 플레이어 x
+            //왼쪽을 보고있다면   : (몬스터 x - 플레이어 x) * -1
+            float distance = (hit.transform.position.x - transform.position.x) * dir;
+
+            //플레이어 앞쪽에 있으면서 현재까지 찾은 몬스터보다 더 가까운 몬스터라면
+            if (distance > 0 && distance < front)
+            {
+                //기준값(front) 갱신
+                front = distance;
+                //공격대상 몬스터 갱신
+                targetMonster = hit;
+            }
+        }
+
+        return targetMonster;
+    }
+    #endregion
+
+    #region 범위공격
+    //범위공격 : 공격 범위 안 몬스터들 모두 공격
+    public void AreaAttack()
+    {
+        if (!canAreaAttack) return;
+        if (!playerStatus.UseMp(areaAttackMpCost)) return;
+
+        //범위공격스킬 쿨타임
+        StartCoroutine(areaAttackCooldownCo());
+
+        // 박스범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
+        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
+        if (hits.Length == 0) return;
+
+        //해당 범위의 몬스터들 공격
+        foreach (Collider2D hit in hits)
+        {
+            IDamageable damageable = hit.GetComponentInParent<IDamageable>();
+
+            if (damageable != null)
+            {
+                damageable.TakeDamage(playerStatus.CurrentAttack);
+            }
+
+            Debug.Log($"{hit.name} 공격");
+        }
+    }
+    IEnumerator areaAttackCooldownCo()
+    {
+        canAreaAttack = false;
+
+        yield return new WaitForSeconds(areaAttackCooldown);
+
+        canAreaAttack = true;
+    }
+    #endregion
+
+    #region 공격버프
+    //공격버프 : 공격력을 10초간 +10 해준다. 쿨타임은 30초
+    public void Buff()
+    {
+        if (!canBuff) return;
+        if (isBuff) return;
+
+        StartCoroutine(BuffCo());
+    }
+    IEnumerator BuffCo()
+    {
+        canBuff = false;
+        isBuff = true;
+
+        playerStatus.AddAttack(buffAmount);
+        Debug.Log("공격버프 시작");
+
+        yield return new WaitForSeconds(buffDuration);
+
+        playerStatus.RemoveAttack(buffAmount);
+        Debug.Log("공격버프 종료");
+
+        isBuff = false;
+
+        yield return new WaitForSeconds(buffCooldown - buffDuration);
+        Debug.Log("공격버프 사용가능");
+        canBuff = true;
+    }
+    #endregion
+
+    #region 무적기
+    // 무적기 : 플레이어는 3초동안 데미지를 받지 않는다. 쿨타임은 30초
+    public void Invin()
+    {
+        if (!canInvin) return;
+        if (isInvin) return;
+
+        StartCoroutine(InvinCo());
+    }
+    IEnumerator InvinCo()
+    {
+        canInvin = false;
+        isInvin = true;
+
+        playerHealth.SetInvin(true);
+        Debug.Log("무적기 시작");
+
+        yield return new WaitForSeconds(invinDuration);
+
+        playerHealth.SetInvin(false);
+        Debug.Log("무적기 종료");
+
+        isInvin = false;
+
+        yield return new WaitForSeconds(invinCooldown - invinDuration);
+        Debug.Log("무적기 사용가능");
+        canInvin = true;
+    }
+    #endregion
 
     private void OnDrawGizmos()
     {
         if (attackPoint != null)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+            Gizmos.DrawWireCube(attackPoint.position, attackSize);
         }
     }
 }
