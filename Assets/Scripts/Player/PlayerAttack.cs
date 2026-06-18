@@ -6,11 +6,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRadius = 0.5f;
     [SerializeField] private LayerMask enemyLayer;
-    private PlayerEquipment playerEquipment;
+    private PlayerStatus playerStatus;
 
     private void Start()
     {
-        playerEquipment = GetComponent<PlayerEquipment>();
+        playerStatus = GetComponent<PlayerStatus>();
     }
 
     public void Attack()
@@ -22,11 +22,12 @@ public class PlayerAttack : MonoBehaviour
         IDamageable damageable = hit.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(playerEquipment.CurrentAttack);
+            damageable.TakeDamage(playerStatus.CurrentAttack);
         }
-        Debug.Log($"{hit.name} 공격 | 데미지 {playerEquipment.CurrentAttack}");
+        Debug.Log($"{hit.name} 공격 | 데미지 {playerStatus.CurrentAttack}");
 
         // X C V 관련 스킬공격 추가하기
+
     }
 
     private void OnDrawGizmos()
