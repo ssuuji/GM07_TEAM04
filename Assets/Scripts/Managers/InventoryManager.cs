@@ -44,6 +44,13 @@ public class InventoryManager : Singleton<InventoryManager>
     public bool AddItem(Item newItem, int count = 1)
     {
         // 획득 시 추가 검사가 필요한 애들부터
+        // 획득한 아이템이 골드일 경우
+        if (newItem.ItemType == ItemType.Gold)
+        {
+            GoldItem goldItem = newItem as GoldItem;
+            GoldManager.Instance.AddGold(goldItem.GoldAmount * count);
+            return true;
+        }
         // 획득한 아이템이 소모품일 경우
         if (newItem.ItemType == ItemType.Consumable)
         {

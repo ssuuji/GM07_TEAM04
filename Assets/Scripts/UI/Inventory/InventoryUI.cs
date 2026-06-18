@@ -8,6 +8,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject inventoryUIPanel;   // 인벤토리 전체 UI패널
     [SerializeField] private Transform slotParent;          // 인벤토리 슬롯 생성 시 들어갈 위치
     [SerializeField] private GameObject slotPrefab;         // 인벤토리 한 칸을 담당할 슬롯 프리팹
+    [SerializeField] private GameObject inventoryGoldUI;    // 인벤토리 골드 UI 오브젝트
     // 골드 등이 들어온다면 여기에 추가
 
     private List<InventorySlotUI> slotUIList = new List<InventorySlotUI>(); // 생성할 SlotUI들 리스트로 관리
@@ -18,6 +19,10 @@ public class InventoryUI : MonoBehaviour
         if (inventoryUIPanel != null)
         {
             inventoryUIPanel.SetActive(false);
+        }
+        if (inventoryGoldUI != null)
+        {
+            inventoryGoldUI.SetActive(false);
         }
     }
 
@@ -64,10 +69,12 @@ public class InventoryUI : MonoBehaviour
     {
         // 예외 처리
         if (inventoryUIPanel == null) return;
+        if (inventoryGoldUI == null) return;
         // 인벤토리 패널이 켜져있는지 검사
         bool isActive = inventoryUIPanel.activeSelf;
         // 인벤토리의 현 상태의 반대 상태로 전환
         inventoryUIPanel.SetActive(!isActive);
+        inventoryGoldUI.SetActive(!isActive);
 
         if (!isActive)
         {
