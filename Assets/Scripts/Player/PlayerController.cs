@@ -22,21 +22,36 @@ public class PlayerController : MonoBehaviour
         playerJump.CheckGround();
         playerMovement.CheckDir();
 
+        //점프
         if (InputManager.IsJump)
         {
             playerJump.Jump();
         }
-
+        //대쉬
         if (InputManager.IsDash)
         {
             playerDash.Dash(playerMovement.CheckDirValue);
         }
-
+        //기본공격
         if (InputManager.IsBasicAttack)
         {
             playerAttack.Attack();
         }
-
+        //범위공격
+        if (InputManager.IsAreaAttack)
+        {
+            playerAttack.AreaAttack();
+        }
+        //공격버프
+        if (InputManager.IsBuff)
+        {
+            playerAttack.Buff();
+        }
+        //무적기
+        if (InputManager.IsInvin)
+        {
+            playerAttack.Invin();
+        }
         if (InputManager.IsInteract)
         {
             playerInteraction.Interact();

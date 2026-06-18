@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5562502547589525729}
   - component: {fileID: 7083346828835115078}
   - component: {fileID: 2575078050202660665}
-  - component: {fileID: 3933508686556108225}
+  - component: {fileID: 4442825873582691101}
   - component: {fileID: 7613615980703030134}
   - component: {fileID: 1580491731318122680}
   - component: {fileID: 4131259909146854280}
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cec410d69e38044c9fabb476616d0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
---- !u!114 &3933508686556108225
+--- !u!114 &4442825873582691101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   attackPoint: {fileID: 2729368853085574024}
-  attackRadius: 0.5
+  attackSize: {x: 2.5, y: 1.5}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -327,7 +327,7 @@ MonoBehaviour:
   jumpPower: 8
   maxJumpCount: 2
   groundCheck: {fileID: 4200473906353506656}
-  checkSize: {x: 0.99, y: -0.16}
+  checkSize: {x: 0.5, y: 0.08}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
