@@ -373,9 +373,16 @@ GameObject:
   m_Component:
   - component: {fileID: 535596529}
   - component: {fileID: 535596528}
-  - component: {fileID: 535596527}
   - component: {fileID: 535596526}
   - component: {fileID: 535596525}
+  - component: {fileID: 535596527}
+  - component: {fileID: 535596536}
+  - component: {fileID: 535596535}
+  - component: {fileID: 535596534}
+  - component: {fileID: 535596533}
+  - component: {fileID: 535596532}
+  - component: {fileID: 535596531}
+  - component: {fileID: 535596530}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -468,22 +475,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cec410d69e38044c9fabb476616d0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 5
-  jumpPower: 8
-  groundCheck: {fileID: 1804338743}
-  checkSize: {x: 0.96, y: 0.08}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  maxJumpCount: 2
-  dashPower: 10
-  dashTime: 0.2
-  dashCooldown: 1
-  attackPoint: {fileID: 857481032}
-  attackRadius: 0.5
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!212 &535596528
 SpriteRenderer:
   serializedVersion: 2
@@ -561,6 +552,108 @@ Transform:
   - {fileID: 857481032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &535596530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535596524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c647377dd6e82c49acdcdf292d84145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEquipment
+  playerStat: {fileID: 11400000, guid: f4c720e1ba4986f4990856434277d22d, type: 2}
+--- !u!114 &535596531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535596524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829cdc68bb1f20c499baa58414c86fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  playerStat: {fileID: 11400000, guid: f4c720e1ba4986f4990856434277d22d, type: 2}
+--- !u!114 &535596532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535596524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b917ec32e7c032f41ab4e118b058ecb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+--- !u!114 &535596533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535596524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab068ed4c0df82a448b040fcf189a440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
+  dashPower: 10
+  dashTime: 0.2
+  dashCooldown: 1
+--- !u!114 &535596534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535596524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623e923fe47ebc74bb79f2b19fad4e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
+  jumpPower: 8
+  maxJumpCount: 2
+  groundCheck: {fileID: 1804338743}
+  checkSize: {x: 0.5, y: 0.08}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &535596535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535596524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcd26c34f462374c9cbb0b6f77059e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+  attackPoint: {fileID: 857481032}
+  attackRadius: 0.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &535596536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535596524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a61e2bc71a5764c8b929523f5fcf93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  moveSpeed: 5
 --- !u!1 &857481031
 GameObject:
   m_ObjectHideFlags: 0
