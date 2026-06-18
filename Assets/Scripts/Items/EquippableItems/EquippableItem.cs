@@ -20,6 +20,23 @@ public abstract class EquippableItem : Item
     public override void Use(GameObject target, int itemID)
     {
         // Equip/UnEquip을 이용해 조건에 맞게 아이템 장착/해제를 담당할 메서드
+        if (target == null) return;
+        PlayerEquipment playerEquipment = target.GetComponent<PlayerEquipment>();
+        if (playerEquipment == null) return;
+
+        bool isEquipped = (playerEquipment.WeaponItem != null && playerEquipment.WeaponItem.ItemID == itemID) ||
+                      (playerEquipment.ArmorItem != null && playerEquipment.ArmorItem.ItemID == itemID);
+
+        if (isEquipped)
+        {
+            // 이미 장착 중이면 해제
+            this.UnEquip(target);
+        }
+        else
+        {
+            // 장착 중이 아니면 새로 장착
+            this.Equip(target);
+        }
     }
 
     // 장착/해제 시 효과를 작성할 추상 메서드

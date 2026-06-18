@@ -6,8 +6,8 @@ public class PlayerEquipment : MonoBehaviour
     [SerializeField] private PlayerBaseStatSO playerStat;
 
     [Header("현재 장비 상태")]
-    private WeaponItem weaponItem; //장착된 무기 저장
-    private ArmorItem armorItem;
+    [SerializeField] private WeaponItem weaponItem; //장착된 무기 저장
+    [SerializeField] private ArmorItem armorItem;
 
     //프로퍼티
     public bool IsWeapon => weaponItem != null; //무기 장착여부

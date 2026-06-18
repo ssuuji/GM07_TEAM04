@@ -40,7 +40,25 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
         if (item.ItemData.ItemType == ItemType.Equipment)
         {
             // 장착 여부 정보를 플레이어에게 받아와 조건 부 실행
+            PlayerEquipment playerEquipment = FindFirstObjectByType<PlayerEquipment>();
+            if (playerEquipment == null) return;
 
+            bool isEquipped = false;
+
+            // 무기 비교 (무기가 비어있지 않고, ID가 같다면 true)
+            if (playerEquipment.WeaponItem != null && playerEquipment.WeaponItem.ItemID == item.ItemData.ItemID)
+            {
+                isEquipped = true;
+            }
+
+            // 방어구 비교 (방어구가 비어있지 않고, ID가 같다면 true)
+            if (playerEquipment.ArmorItem != null && playerEquipment.ArmorItem.ItemID == item.ItemData.ItemID)
+            {
+                isEquipped = true;
+            }
+
+            // 최종 결과에 따라 마크 활성화/비활성화
+            equipMark.SetActive(isEquipped);
         }
         else
         {
@@ -72,7 +90,11 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 
             // 아이템 사용 메서드 호출
             //currentItem.ItemData.Use(플레이어 객체, currentItem.ItemData.ItemID);
-            
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null) return;
+
+            currentItem.ItemData.Use(player, currentItem.ItemData.ItemID);
 
             // UI 갱신
             InventoryUI inventoryUI = FindFirstObjectByType<InventoryUI>();
