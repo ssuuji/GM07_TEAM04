@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3834215680268142598}
   - component: {fileID: 7601408439983508488}
   - component: {fileID: 4896938182011083910}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Monster
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -198,6 +198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692c0ff622cf90143a6880029c8728aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttack
+  attackDamage: 2
+  attackableRange: 3
+  attackCoolTime: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7601408439983508488
 MonoBehaviour:
   m_ObjectHideFlags: 0

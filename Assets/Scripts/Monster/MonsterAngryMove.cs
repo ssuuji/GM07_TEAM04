@@ -6,6 +6,7 @@ public class MonsterAngryMove : MonoBehaviour
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float attackRange = 1f;
 
+    private MonsterAttack monsterAttack;
     private Rigidbody2D rb;
     private bool dir;
     private bool AttackableRange = false;
@@ -26,10 +27,11 @@ public class MonsterAngryMove : MonoBehaviour
         RangeMeasure();
         if(AttackableRange)
         {
-            //공격
+            monsterAttack.enabled = true;
         }
         else
         {
+            monsterAttack.enabled = false;
             Move();
         }
     }
@@ -38,6 +40,7 @@ public class MonsterAngryMove : MonoBehaviour
     private void SetDirection()
     {
         dir = (target.transform.position.x >= transform.position.x) ? true : false;
+        monsterAttack.SetAttackDirection(dir);
     }
 
     // 추적
