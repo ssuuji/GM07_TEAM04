@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviour, IDamageable
 {
     
     enum MonsterState
