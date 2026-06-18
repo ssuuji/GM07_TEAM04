@@ -24,6 +24,14 @@ public class ConsumableItem : Item
 
         // 여기에 아이템 별 제한 로직 작성
         // Ex) 체럭 포션 사용 시 체력이 가득 찼을 경우 return 등
+        PlayerStatus playerStatus = target.GetComponent<PlayerStatus>();
+        if (playerStatus == null) return;
+
+        if (playerStatus.CurrentHp >= playerStatus.MaxMp)
+        {
+            Debug.Log("이미 체력이 가득 차 있어 사용할 수 없습니다.");
+            return;
+        }
 
         foreach (ItemEffect effect in effects)
         {

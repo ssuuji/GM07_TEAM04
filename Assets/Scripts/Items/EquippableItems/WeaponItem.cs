@@ -23,6 +23,9 @@ public class WeaponItem : EquippableItem
         // 아이템 효과 적용
         // Attach 등의 메서드를 통해 오브젝트를 특정 위치에 장착
         Debug.Log($"무기 아이템 장착 시도 ! | + {atkPower}");
+
+        PlayerEquipment playerEquipment = target.GetComponent<PlayerEquipment>();
+        playerEquipment.EquipWeapon(this);
     }
     // 아이템 장착 해제 메서드
     public override void UnEquip(GameObject target)
@@ -30,5 +33,8 @@ public class WeaponItem : EquippableItem
         // 아이템 효과 제거
         // Dettach 등의 메서드를 통해 오브젝트를 제거
         Debug.Log($"무기 아이템 장착 해제 시도 ! | - {atkPower}");
+
+        PlayerEquipment playerEquipment = target.GetComponent<PlayerEquipment>();
+        playerEquipment.UnEquipWeapon();
     }
 }

@@ -10,6 +10,7 @@ public enum ItemType
     None = -1,
     Equipment,      // 장비
     Consumable,     // 소모품
+    Gold,           // 골드
     Length
 }
 

@@ -16,5 +16,10 @@ public class HealEffect : ItemEffect
     {
         // 플레이어의 능력치 스크립트를 받아와 체력 회복 메서드 실행
         Debug.Log($"체력 회복 아이템 사용 시도 ! | {healAmount}");
+
+        PlayerStatus playerStatus = target.GetComponent<PlayerStatus>();
+        if (playerStatus == null) return;
+
+        playerStatus.Heal(healAmount);
     }
 }
