@@ -8,11 +8,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Vector2 attackSize = new Vector2(2.5f, 1.5f);
 
     [Header("범위공격 설정")]
-    [SerializeField] private int areaAttackMpCost = 10;
-    [SerializeField] private float areaAttackCooldown = 3.0f;
+    [SerializeField] private int areaAttackMpCost = 10;       //범위공격 소모마나량
+    [SerializeField] private float areaAttackCooldown = 3.0f; //범위공격 쿨타임
     private bool canAreaAttack = true;
 
     [Header("공격버프 설정")]
+    [SerializeField] private int buffMpCost = 15;         //공격버프 소모마나량
     [SerializeField] private int buffAmount = 10;         //공격버프량 +10
     [SerializeField] private float buffDuration = 10.0f;  //공격버프 지속시간
     [SerializeField] private float buffCooldown = 30.0f;  //공격버프 쿨타임
@@ -20,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
     private bool canBuff = true;
 
     [Header("무적스킬 설정")]
+    [SerializeField] private int invinMpCost = 30;        //무적기 소모마나량
     [SerializeField] private float invinDuration = 3.0f;  //무적기 지속시간
     [SerializeField] private float invinCooldown = 30.0f; //무적기 쿨타임
     private bool isInvin;
@@ -32,13 +34,22 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMovement playerMove;
     private PlayerHealth playerHealth;
 
+    //스킬 쿨타임 UI
+    private float areaAttackCooldownRemain;
+    private float buffCooldownRemain;
+    private float buffDurationRemain;
+    private float invinCooldownRemain;
+    public float AreaAttackCooldownRemain => areaAttackCooldownRemain;
+    public float BuffCooldownRemain => buffCooldownRemain;
+    public float BuffDurationRemain => buffDurationRemain;
+    public float InvinCooldownRemain => invinCooldownRemain;
+
     private void Start()
     {
         playerStatus = GetComponent<PlayerStatus>();
         playerMove = GetComponent<PlayerMovement>();
         playerHealth = GetComponent<PlayerHealth>();
     }
-
 
     #region 기본공격
     //기본공격 : 공격범위 안에서 가장 앞에 있는 몬스터 1마리 공격
@@ -100,7 +111,7 @@ public class PlayerAttack : MonoBehaviour
         if (!playerStatus.UseMp(areaAttackMpCost)) return;
 
         //범위공격스킬 쿨타임
-        StartCoroutine(areaAttackCooldownCo());
+        StartCoroutine(AreaAttackCooldownCo());
 
         // 박스범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
         Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
@@ -119,12 +130,19 @@ public class PlayerAttack : MonoBehaviour
             Debug.Log($"{hit.name} 공격");
         }
     }
-    IEnumerator areaAttackCooldownCo()
+    IEnumerator AreaAttackCooldownCo()
     {
         canAreaAttack = false;
-
-        yield return new WaitForSeconds(areaAttackCooldown);
-
+        
+        //쿨타임 설정
+        areaAttackCooldownRemain = areaAttackCooldown;
+        while (areaAttackCooldownRemain > 0)
+        {
+            areaAttackCooldownRemain -= Time.deltaTime;
+            yield return null;
+        }
+        
+        areaAttackCooldownRemain = 0;
         canAreaAttack = true;
     }
     #endregion
@@ -135,27 +153,47 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!canBuff) return;
         if (isBuff) return;
+        if (!playerStatus.UseMp(buffMpCost)) return;
 
         StartCoroutine(BuffCo());
+        StartCoroutine(BuffCooldownCo());
     }
     IEnumerator BuffCo()
     {
-        canBuff = false;
         isBuff = true;
 
         playerStatus.AddAttack(buffAmount);
         Debug.Log("공격버프 시작");
 
-        yield return new WaitForSeconds(buffDuration);
+        buffDurationRemain = buffDuration;
+
+        while (buffDurationRemain > 0)
+        {
+            buffDurationRemain -= Time.deltaTime;
+            yield return null;
+        }
+
+        buffDurationRemain = 0;
 
         playerStatus.RemoveAttack(buffAmount);
-        Debug.Log("공격버프 종료");
-
         isBuff = false;
 
-        yield return new WaitForSeconds(buffCooldown - buffDuration);
-        Debug.Log("공격버프 사용가능");
+        Debug.Log("공격버프 종료");
+    }
+    IEnumerator BuffCooldownCo()
+    {
+        canBuff = false;
+
+        buffCooldownRemain = buffCooldown;
+
+        while (buffCooldownRemain > 0)
+        {
+            buffCooldownRemain -= Time.deltaTime;
+            yield return null;
+        }
+        buffCooldownRemain = 0;
         canBuff = true;
+        Debug.Log("공격버프 사용가능");
     }
     #endregion
 
@@ -165,12 +203,13 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!canInvin) return;
         if (isInvin) return;
+        if (!playerStatus.UseMp(invinMpCost)) return;
 
         StartCoroutine(InvinCo());
+        StartCoroutine(InvinCooldownCo());
     }
     IEnumerator InvinCo()
     {
-        canInvin = false;
         isInvin = true;
 
         playerHealth.SetInvin(true);
@@ -182,10 +221,21 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log("무적기 종료");
 
         isInvin = false;
+    }
+    IEnumerator InvinCooldownCo()
+    {
+        canInvin = false;
 
-        yield return new WaitForSeconds(invinCooldown - invinDuration);
-        Debug.Log("무적기 사용가능");
+        invinCooldownRemain = invinCooldown;
+
+        while (invinCooldownRemain > 0)
+        {
+            invinCooldownRemain -= Time.deltaTime;
+            yield return null;
+        }
+        invinCooldownRemain = 0;
         canInvin = true;
+        Debug.Log("무적기 사용가능");
     }
     #endregion
 
