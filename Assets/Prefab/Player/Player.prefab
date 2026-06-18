@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 5562502547589525729}
   - component: {fileID: 7083346828835115078}
   - component: {fileID: 2575078050202660665}
+  - component: {fileID: 3933508686556108225}
   - component: {fileID: 7613615980703030134}
   - component: {fileID: 1580491731318122680}
   - component: {fileID: 4131259909146854280}
@@ -264,6 +265,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cec410d69e38044c9fabb476616d0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+--- !u!114 &3933508686556108225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2832478524417347878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e6a66229127f140a916d41f98bf86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  baseStat: {fileID: 11400000, guid: f4c720e1ba4986f4990856434277d22d, type: 2}
+  currentHp: 0
+  currentMp: 0
+  currentAttack: 0
+  currentDefense: 0
 --- !u!114 &7613615980703030134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +327,7 @@ MonoBehaviour:
   jumpPower: 8
   maxJumpCount: 2
   groundCheck: {fileID: 4200473906353506656}
-  checkSize: {x: 0.5, y: 0.08}
+  checkSize: {x: 0.99, y: -0.16}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -352,7 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829cdc68bb1f20c499baa58414c86fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  playerStat: {fileID: 11400000, guid: f4c720e1ba4986f4990856434277d22d, type: 2}
 --- !u!114 &6458875382229569706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c647377dd6e82c49acdcdf292d84145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerEquipment
-  playerStat: {fileID: 11400000, guid: f4c720e1ba4986f4990856434277d22d, type: 2}
 --- !u!1 &7936597790432683975
 GameObject:
   m_ObjectHideFlags: 0

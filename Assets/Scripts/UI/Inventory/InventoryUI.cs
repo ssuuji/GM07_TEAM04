@@ -72,6 +72,7 @@ public class InventoryUI : MonoBehaviour
         if (!isActive)
         {
             // 인벤토리가 닫히면 데이터 갱신
+            RefreshUI();
         }
     }
     // 인벤토리 데이터 갱신

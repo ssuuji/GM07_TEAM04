@@ -25,7 +25,7 @@ public abstract class EquippableItem : Item
         if (playerEquipment == null) return;
 
         bool isEquipped = (playerEquipment.WeaponItem != null && playerEquipment.WeaponItem.ItemID == itemID) ||
-                      (playerEquipment.ArmorItem != null && playerEquipment.ArmorItem.ItemID == itemID);
+                          (playerEquipment.ArmorItem != null && playerEquipment.ArmorItem.ItemID == itemID);
 
         if (isEquipped)
         {
@@ -34,6 +34,10 @@ public abstract class EquippableItem : Item
         }
         else
         {
+            if ((playerEquipment.IsWeapon) || (playerEquipment.IsArmor))
+            {
+                this.UnEquip(target);
+            }
             // 장착 중이 아니면 새로 장착
             this.Equip(target);
         }
