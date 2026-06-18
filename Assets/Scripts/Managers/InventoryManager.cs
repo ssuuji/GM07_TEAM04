@@ -43,6 +43,9 @@ public class InventoryManager : Singleton<InventoryManager>
     // 아이템 획득 실패 시 false 반환
     public bool AddItem(Item newItem, int count = 1)
     {
+        // UI 갱신용
+        InventoryUI inventoryUI = FindFirstObjectByType<InventoryUI>();
+        if (inventoryUI == null) return false;
         // 획득 시 추가 검사가 필요한 애들부터
         // 획득한 아이템이 골드일 경우
         if (newItem.ItemType == ItemType.Gold)
@@ -65,6 +68,8 @@ public class InventoryManager : Singleton<InventoryManager>
                     // 아이템 소지 개수 증가
                     item.Value.AddAmount(count);
                     Debug.Log($"[Get New ConsumableItem] | [{newItem.ItemName}] + {item.Value.Amount}");
+                    // UI 갱신
+                    inventoryUI.RefreshUI();
                     // 아이템 획득 성공
                     return true;
                 }
@@ -84,6 +89,8 @@ public class InventoryManager : Singleton<InventoryManager>
         InventoryItem newItemInstance = new InventoryItem(newItem, count);
         inventoryDictionary.Add(newItemInstance.ItemData.ItemID, newItemInstance);
         Debug.Log($"[Get New EquippableItem] | [{newItem.ItemName}] + {count}");
+        // UI 갱신
+        inventoryUI.RefreshUI();
         // 아이템 획득 성공
         return true;
     }
@@ -106,6 +113,12 @@ public class InventoryManager : Singleton<InventoryManager>
         else
         {
             Debug.Log($"{targetItem.ItemData.ItemName} x{targetItem.Amount}");
+        }
+        // UI 갱신
+        InventoryUI inventoryUI = FindFirstObjectByType<InventoryUI>();
+        if (inventoryUI != null)
+        {
+            inventoryUI.RefreshUI();
         }
     }
     // 인벤토리 확장 메서드
