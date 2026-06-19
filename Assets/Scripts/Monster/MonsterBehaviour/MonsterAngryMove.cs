@@ -4,13 +4,13 @@ public class MonsterAngryMove : MonoBehaviour
 {
     [SerializeField] GameObject target;
     [SerializeField] Monster monster;
+    [SerializeField] MonsterAttack attack;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float attackRange = 1f;
-
-    private MonsterAttack monsterAttack;
     private Rigidbody2D rb;
     private bool dir;
     private bool AttackableRange = false;
+    public bool IsAttack {  get; private set; } = false;
 
     private void Awake()
     {
@@ -18,24 +18,25 @@ public class MonsterAngryMove : MonoBehaviour
         
     }
 
-    private void Start()
+    private void OnEnable()
     {
         target = GameObject.FindGameObjectWithTag("Player");
-        monsterAttack = GetComponent<MonsterAttack>();
     }
+
 
     private void Update()
     {
         FindDirection();
         RangeMeasure();
-        if(AttackableRange)
+        IsAttack = AttackableRange? true : false;
+        if(!IsAttack)
         {
-            monsterAttack.enabled = true;
+            attack.enabled = false;
+            Move();
         }
         else
         {
-            monsterAttack.enabled = false;
-            Move();
+            attack.enabled = true;
         }
     }
 
@@ -43,8 +44,7 @@ public class MonsterAngryMove : MonoBehaviour
     private void FindDirection()
     {
         dir = (target.transform.position.x >= transform.position.x) ? true : false;
-        
-        monsterAttack.SetAttackDirection(dir);
+        monster.SetDirection(dir);
     }
 
     // 추적
@@ -64,5 +64,10 @@ public class MonsterAngryMove : MonoBehaviour
     private void RangeMeasure()
     {
         AttackableRange = Mathf.Abs(target.transform.position.x - transform.position.x) < attackRange ? true : false;
+    }
+
+    public void OffIsAttack()
+    {
+        IsAttack = false;
     }
 }
