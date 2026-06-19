@@ -27,7 +27,7 @@ public class ConsumableItem : Item
         PlayerStatus playerStatus = target.GetComponent<PlayerStatus>();
         if (playerStatus == null) return;
 
-        if (playerStatus.CurrentHp >= playerStatus.MaxHp)
+        if (playerStatus.CurrentHp >= playerStatus.CurrentMaxHp)
         {
             Debug.Log("이미 체력이 가득 차 있어 사용할 수 없습니다.");
             return;
