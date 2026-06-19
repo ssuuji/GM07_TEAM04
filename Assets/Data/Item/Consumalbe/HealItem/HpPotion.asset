@@ -15,6 +15,7 @@ MonoBehaviour:
   itemID: 101
   itemType: 1
   itemPrefab: {fileID: 6030996329513890968, guid: 29e048347ff237d4ead34393008bdb27, type: 3}
+  itemPrice: 10
   itemName: HpPotion
   itemIcon: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   maxAmount: 99

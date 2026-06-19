@@ -10,7 +10,7 @@ public class InventoryManager : Singleton<InventoryManager>
     [SerializeField] private List<InventoryItem> startingItems = new List<InventoryItem>();
 
     [Header("Inventory Data")]
-    [SerializeField] private Dictionary<int, InventoryItem> inventoryDictionary = new Dictionary< int, InventoryItem>();
+    [SerializeField] private Dictionary<int, InventoryItem> inventoryDictionary = new Dictionary<int, InventoryItem>();
 
     // 프로퍼티
     public int MaxSize => maxSize;
