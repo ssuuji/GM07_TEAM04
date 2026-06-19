@@ -15,6 +15,7 @@ MonoBehaviour:
   itemID: 302
   itemType: 0
   itemPrefab: {fileID: 9133713294082040688, guid: 24eb9f9f9e149234ca02f9e20d86f106, type: 3}
+  itemPrice: 100
   itemName: Armor02
   itemIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   maxAmount: 1

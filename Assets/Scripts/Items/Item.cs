@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class Item : ScriptableObject
@@ -7,6 +8,7 @@ public class Item : ScriptableObject
     [SerializeField] private int itemID;            // 아이템 분류 ID
     [SerializeField] private ItemType itemType;     // 아이템 종류 ( 장비, 소모품, ...)
     [SerializeField] private GameObject itemPrefab; // 아이템 프리팹
+    [SerializeField] private int itemPrice;         // 아이템 가격
     // UI에 표기할 아이템 정보
     [Header("Item Info")]
     [SerializeField] private string itemName;       // 아이템 이름
@@ -25,6 +27,7 @@ public class Item : ScriptableObject
     public int ItemID => itemID;
     public ItemType ItemType => itemType;
     public GameObject ItemPrefab => itemPrefab;
+    public int ItemPrice => itemPrice;
     // 정보
     public string ItemName => itemName;
     public Sprite ItemIcon => itemIcon;
