@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
     [Header("플레이어 상태")]
-    [SerializeField] private PlayerStatus playerStatus;
-    [SerializeField] private PlayerAttack playerAttack;
-    [SerializeField] private PlayerLevel playerLevel;
-    [SerializeField] private PlayerSkill playerSkill;
+    [SerializeField] private GameObject player; //플레이어
+     private PlayerStatus playerStatus;
+     private PlayerAttack playerAttack;
+     private PlayerLevel playerLevel;
+     private PlayerSkill playerSkill;
 
     [Header("HP UI")]
     [SerializeField] private Slider hpSlider;
@@ -42,50 +43,63 @@ public class PlayerUI : MonoBehaviour
 
     private void Start()
     {
-        InitUI();
+        playerStatus = player.GetComponent<PlayerStatus>();
+        playerAttack = player.GetComponent<PlayerAttack>();
+        playerLevel = player.GetComponent<PlayerLevel>();
+        playerSkill = player.GetComponent<PlayerSkill>();
+
+        InitUI(); //UI 초기 설정
     }
     private void Update()
     {
-        UpdateStats();
-        UpdateSkill();
-        UpdateLevel();
-        UpdateSkillUnlock();
+        UpdateStats();       // HP/MP UI갱신
+        UpdateSkill();       // 스킬쿨타임 UI갱신
+        UpdateLevel();       // 레벨/경험치 UI갱신
+        UpdateSkillUnlock(); // 스킬잠금 UI갱신
     }
 
+    //UI 초기 설정
     private void InitUI()
     {
-        hpSlider.maxValue = playerStatus.CurrentMaxHp;
-        mpSlider.maxValue = playerStatus.CurrentMaxMp;
-        expSlider.maxValue = playerLevel.MaxExp;
+        hpSlider.maxValue = playerStatus.CurrentMaxHp; //HP 슬라이더 최대값 설정
+        mpSlider.maxValue = playerStatus.CurrentMaxMp; //MP 슬라이더 최대값 설정
+        expSlider.maxValue = playerLevel.MaxExp;       //경험치 슬라이더 최대값 설정
 
-        UpdateStats();
+        UpdateStats(); // HP/MP UI갱신
     }
 
+    // HP/MP UI갱신
     private void UpdateStats()
     {
-        hpSlider.value = playerStatus.CurrentHp;
-        mpSlider.value = playerStatus.CurrentMp;
+        hpSlider.value = playerStatus.CurrentHp; //현재 HP반영
+        mpSlider.value = playerStatus.CurrentMp; //현재 MP반영
 
         hpText.text = $"{playerStatus.CurrentHp} / {playerStatus.CurrentMaxHp}";
         mpText.text = $"{playerStatus.CurrentMp} / {playerStatus.CurrentMaxMp}";
     }
 
+    // 스킬쿨타임 UI갱신
     private void UpdateSkill()
     {
+        //각 스킬의 남은 쿨타임 UI갱신
         UpdateCooldownUI(playerAttack.AreaAttackCooldownRemain, areaAttackCooldownImage, areaAttackCooldownText);
         UpdateCooldownUI(playerAttack.BuffCooldownRemain, buffCooldownImage, buffCooldownText);
         UpdateCooldownUI(playerAttack.InvinCooldownRemain, invinCooldownImage, invinCooldownText);
+        
+        //공격버프 사용중 UI갱신
         UpdateUseBuffUI();
     }
     private void UpdateCooldownUI(float remainTime, Image cooldownImage, TextMeshProUGUI text)
     {
+        //쿨타임이 남아있으면 이미지와 남은시간텍스트 활성화
         if (remainTime > 0)
         {
             cooldownImage.gameObject.SetActive(true);
             text.gameObject.SetActive(true);
 
-            text.text = Mathf.CeilToInt(remainTime).ToString(); //소수를 정수로 변환
+            text.text = Mathf.CeilToInt(remainTime).ToString(); //남은시간 소수를 정수로 변환
         }
+        //쿨타임 끝나면 이미지, 텍스트 비활성화
         else
         {
             cooldownImage.gameObject.SetActive(false);
@@ -95,8 +109,10 @@ public class PlayerUI : MonoBehaviour
 
     private void UpdateUseBuffUI()
     {
+        //공격버프 남은 지속시간
         float remainTime = playerAttack.BuffDurationRemain;
 
+        //공격버프가 사용중이면 상단에 버프 UI표시
         if (remainTime > 0)
         {
             useBuffImage.gameObject.SetActive(true);
@@ -104,6 +120,7 @@ public class PlayerUI : MonoBehaviour
 
             useBuffText.text = Mathf.CeilToInt(remainTime).ToString();
         }
+        //공격버프 끝나면 버프UI 비활성화
         else
         {
             useBuffImage.gameObject.SetActive(false);
@@ -113,15 +130,16 @@ public class PlayerUI : MonoBehaviour
 
     private void UpdateLevel()
     {
-        expSlider.maxValue = playerLevel.MaxExp;
-        expSlider.value = playerLevel.CurrentExp;
+        expSlider.maxValue = playerLevel.MaxExp;   //현재 레벨의 Max경험치 
+        expSlider.value = playerLevel.CurrentExp;  //현재 경험치
 
-        levelText.text = $"Lv. {playerLevel.Level}";
-        expText.text = $"{playerLevel.CurrentExp} / {playerLevel.MaxExp}";
+        levelText.text = $"Lv. {playerLevel.Level}";                       //레벨 텍스트 표시
+        expText.text = $"{playerLevel.CurrentExp} / {playerLevel.MaxExp}"; //경험치 슬라이더바 위에 텍스트 표시
     }
 
     private void UpdateSkillUnlock()
     {
+        //스킬 해금 상태에 따라 잠금이미지(현재는 검정이미지) 표시 여부 갱신
         UpdateLockUI(playerSkill.AreaAttackUnlocked, areaAttackLockImage);
         UpdateLockUI(playerSkill.BuffUnlocked, buffLockImage);
         UpdateLockUI(playerSkill.InvinUnlocked, invinLockImage);
@@ -129,6 +147,7 @@ public class PlayerUI : MonoBehaviour
 
     private void UpdateLockUI(bool isUnlocked, Image lockIamage)
     {
+        //스킬 해금 되면 잠금이미지 숨기고 , 잠금상태면 표시하기
         lockIamage.gameObject.SetActive(!isUnlocked);
     }
 }
