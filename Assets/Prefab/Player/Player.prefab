@@ -442,11 +442,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWall
   wallCheck: {fileID: 4088767178093135103}
-  checkSize: {x: 1.09, y: 1.88}
+  checkSize: {x: 0.28, y: 2.01}
   wallLayer:
     serializedVersion: 2
     m_Bits: 256
   wallSlideSpeed: 0.5
+  wallJumpPower: {x: 7, y: 10}
+  wallJumpTime: 0.2
 --- !u!1 &4897693787111782810
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +474,7 @@ Transform:
   m_GameObject: {fileID: 4897693787111782810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.17, z: 0}
+  m_LocalPosition: {x: 4.63, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
