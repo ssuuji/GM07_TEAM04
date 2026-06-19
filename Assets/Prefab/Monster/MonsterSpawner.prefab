@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7217242582819261022}
-  - component: {fileID: 9121823859754038074}
+  - component: {fileID: 4756235386070991007}
   m_Layer: 0
   m_Name: MonsterSpawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9121823859754038074
+--- !u!114 &4756235386070991007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSpawner
   monsterPrefab: {fileID: 1750971951054956214, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
+  monsterCountMax: 10
   countPerWave: 4
   waveCount: 4
-  waveCoolTime: 60
+  waveCoolTime: 10
   widthMin: -10
   widthMax: 10
   heightMin: 0
