@@ -681,34 +681,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
-    - target: {fileID: 3834215680268142598, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-      propertyPath: attackSize.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3834215680268142598, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-      propertyPath: playerLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4896938182011083910, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2011475934}
-    - target: {fileID: 5021180830675267301, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-      propertyPath: KnockbackPower
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7021172968024163425, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7021172968024163425, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7021172968024163425, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9185154086948026643, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.9209
