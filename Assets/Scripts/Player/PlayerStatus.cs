@@ -5,16 +5,18 @@ public class PlayerStatus : MonoBehaviour
     [Header("플레이어 기본 스텟")]
     [SerializeField] private PlayerBaseStatSO baseStat;
 
-    [Header("현재 HP/MP")]
+    [Header("HP/MP")]
     [SerializeField] private int currentHp;
     [SerializeField] private int currentMp;
+    [SerializeField] private int currentMaxHp;
+    [SerializeField] private int currentMaxMp;
 
     [Header("현재 공격력/방어력")]
     [SerializeField] private int currentAttack;
     [SerializeField] private int currentDefense;
 
-    public int MaxHp => baseStat.MaxHp;
-    public int MaxMp => baseStat.MaxMp;
+    public int CurrentMaxHp => currentMaxHp;
+    public int CurrentMaxMp => currentMaxMp;
     public int CurrentHp => currentHp;
     public int CurrentMp => currentMp;
     public int CurrentAttack => currentAttack;
@@ -26,8 +28,12 @@ public class PlayerStatus : MonoBehaviour
     }
     private void InitStatus()
     {
-        currentHp = baseStat.MaxHp;
-        currentMp = baseStat.MaxMp;
+        currentMaxHp = baseStat.MaxHp;
+        currentMaxMp = baseStat.MaxMp;
+        
+        currentHp = currentMaxHp;
+        currentMp = currentMaxMp;
+        
         currentAttack = baseStat.Attack;
         currentDefense = baseStat.Defense;
     }
@@ -57,9 +63,9 @@ public class PlayerStatus : MonoBehaviour
     {
         currentHp += amount;
 
-        if (currentHp > MaxHp)
+        if (currentHp > currentMaxHp)
         {
-            currentHp = MaxHp;
+            currentHp = currentMaxHp;
         }
     }
 
@@ -68,9 +74,9 @@ public class PlayerStatus : MonoBehaviour
     {
         currentMp += amount;
 
-        if (currentMp > MaxMp)
+        if (currentMp > currentMaxMp)
         {
-            currentMp = MaxMp;
+            currentMp = currentMaxMp;
         }
     }
 
@@ -122,4 +128,15 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    //최대체력 증가
+    public void AddMaxHp(int hp)
+    {
+        currentMaxHp += hp;
+    }
+
+    //최대마나 증가
+    public void AddMaxMp(int mp)
+    {
+        currentMaxMp += mp;
+    }
 }

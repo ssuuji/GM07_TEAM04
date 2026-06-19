@@ -7,6 +7,8 @@ public class PlayerUI : MonoBehaviour
     [Header("플레이어 상태")]
     [SerializeField] private PlayerStatus playerStatus;
     [SerializeField] private PlayerAttack playerAttack;
+    [SerializeField] private PlayerLevel playerLevel;
+    [SerializeField] private PlayerSkill playerSkill;
 
     [Header("HP UI")]
     [SerializeField] private Slider hpSlider;
@@ -19,16 +21,24 @@ public class PlayerUI : MonoBehaviour
     [Header("범위공격 UI")]
     [SerializeField] private Image areaAttackCooldownImage;
     [SerializeField] private TextMeshProUGUI areaAttackCooldownText;
+    [SerializeField] private Image areaAttackLockImage;
 
     [Header("공격버프 UI")]
     [SerializeField] private Image buffCooldownImage;
     [SerializeField] private TextMeshProUGUI buffCooldownText;
+    [SerializeField] private Image buffLockImage;
     [SerializeField] private Image useBuffImage;
     [SerializeField] private TextMeshProUGUI useBuffText;
 
     [Header("무적기 UI")]
     [SerializeField] private Image invinCooldownImage;
     [SerializeField] private TextMeshProUGUI invinCooldownText;
+    [SerializeField] private Image invinLockImage;
+
+    [Header("레벨 UI")]
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private Slider expSlider;
+    [SerializeField] private TextMeshProUGUI expText;
 
     private void Start()
     {
@@ -38,12 +48,15 @@ public class PlayerUI : MonoBehaviour
     {
         UpdateStats();
         UpdateSkill();
+        UpdateLevel();
+        UpdateSkillUnlock();
     }
 
     private void InitUI()
     {
-        hpSlider.maxValue = playerStatus.MaxHp;
-        mpSlider.maxValue = playerStatus.MaxMp;
+        hpSlider.maxValue = playerStatus.CurrentMaxHp;
+        mpSlider.maxValue = playerStatus.CurrentMaxMp;
+        expSlider.maxValue = playerLevel.MaxExp;
 
         UpdateStats();
     }
@@ -53,8 +66,8 @@ public class PlayerUI : MonoBehaviour
         hpSlider.value = playerStatus.CurrentHp;
         mpSlider.value = playerStatus.CurrentMp;
 
-        hpText.text = $"{playerStatus.CurrentHp} / {playerStatus.MaxHp}";
-        mpText.text = $"{playerStatus.CurrentMp} / {playerStatus.MaxMp}";
+        hpText.text = $"{playerStatus.CurrentHp} / {playerStatus.CurrentMaxHp}";
+        mpText.text = $"{playerStatus.CurrentMp} / {playerStatus.CurrentMaxMp}";
     }
 
     private void UpdateSkill()
@@ -98,4 +111,24 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+    private void UpdateLevel()
+    {
+        expSlider.maxValue = playerLevel.MaxExp;
+        expSlider.value = playerLevel.CurrentExp;
+
+        levelText.text = $"Lv. {playerLevel.Level}";
+        expText.text = $"{playerLevel.CurrentExp} / {playerLevel.MaxExp}";
+    }
+
+    private void UpdateSkillUnlock()
+    {
+        UpdateLockUI(playerSkill.AreaAttackUnlocked, areaAttackLockImage);
+        UpdateLockUI(playerSkill.BuffUnlocked, buffLockImage);
+        UpdateLockUI(playerSkill.InvinUnlocked, invinLockImage);
+    }
+
+    private void UpdateLockUI(bool isUnlocked, Image lockIamage)
+    {
+        lockIamage.gameObject.SetActive(!isUnlocked);
+    }
 }

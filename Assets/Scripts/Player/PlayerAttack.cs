@@ -33,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
     private PlayerStatus playerStatus;
     private PlayerMovement playerMove;
     private PlayerHealth playerHealth;
+    private PlayerSkill playerSkill;
 
     //스킬 쿨타임 UI
     private float areaAttackCooldownRemain;
@@ -49,6 +50,7 @@ public class PlayerAttack : MonoBehaviour
         playerStatus = GetComponent<PlayerStatus>();
         playerMove = GetComponent<PlayerMovement>();
         playerHealth = GetComponent<PlayerHealth>();
+        playerSkill = GetComponent<PlayerSkill>();
     }
 
     #region 기본공격
@@ -107,6 +109,7 @@ public class PlayerAttack : MonoBehaviour
     //범위공격 : 공격 범위 안 몬스터들 모두 공격
     public void AreaAttack()
     {
+        if (!playerSkill.AreaAttackUnlocked) return;
         if (!canAreaAttack) return;
         if (!playerStatus.UseMp(areaAttackMpCost)) return;
 
@@ -151,6 +154,7 @@ public class PlayerAttack : MonoBehaviour
     //공격버프 : 공격력을 10초간 +10 해준다. 쿨타임은 30초
     public void Buff()
     {
+        if (!playerSkill.BuffUnlocked) return;
         if (!canBuff) return;
         if (isBuff) return;
         if (!playerStatus.UseMp(buffMpCost)) return;
@@ -201,6 +205,7 @@ public class PlayerAttack : MonoBehaviour
     // 무적기 : 플레이어는 3초동안 데미지를 받지 않는다. 쿨타임은 30초
     public void Invin()
     {
+        if (!playerSkill.InvinUnlocked) return;
         if (!canInvin) return;
         if (isInvin) return;
         if (!playerStatus.UseMp(invinMpCost)) return;
