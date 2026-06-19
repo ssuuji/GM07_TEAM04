@@ -13,6 +13,7 @@ public class PlayerSkill : MonoBehaviour
     public bool BuffUnlocked => buffUnlocked;
     public bool InvinUnlocked => invinUnlocked;     
 
+    //범위공격 스킬 해금
     public void UnlockAreaAttack()
     {
         if (areaAttackUnlocked) return;
@@ -22,6 +23,7 @@ public class PlayerSkill : MonoBehaviour
         Debug.Log("범위공격(X) 스킬 해금");
     }
 
+    //공격버프 스킬 해금
     public void UnlockBuff()
     {
         if (buffUnlocked) return;
@@ -31,6 +33,7 @@ public class PlayerSkill : MonoBehaviour
         Debug.Log("공격버프(C) 스킬 해금");
     }
 
+    //무적기 스킬 해금
     public void UnlockInvin()
     {
         if (invinUnlocked) return;

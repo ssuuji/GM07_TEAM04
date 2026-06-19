@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private PlayerDash playerDash;
     private PlayerAttack playerAttack;
     private PlayerInteraction playerInteraction;
+    private PlayerWall playerWall;
 
     private void Start()
     {
@@ -15,17 +16,29 @@ public class PlayerController : MonoBehaviour
         playerDash = GetComponent<PlayerDash>();
         playerAttack = GetComponent<PlayerAttack>();
         playerInteraction = GetComponent<PlayerInteraction>();
+        playerWall = GetComponent<PlayerWall>();
     }
 
     private void Update()
     {
-        playerJump.CheckGround();
-        playerMovement.CheckDir();
+        playerJump.CheckGround();    //바닥 체크
+        playerWall.CheckWall();      //벽 체크
+        playerWall.UpdateWallJump(); //벽점프상태 체크
+        playerMovement.CheckDir();   //방향 체크
 
         //점프
         if (InputManager.IsJump)
         {
-            playerJump.Jump();
+            //벽에 닿아있고 공중에 있다면 벽점프
+            if (playerWall.IsWall && !playerJump.IsGround)
+            {
+                playerWall.WallJump();
+            }
+            //일반 점프
+            else
+            {
+                playerJump.Jump();
+            }
         }
         //대쉬
         if (InputManager.IsDash)
@@ -52,6 +65,7 @@ public class PlayerController : MonoBehaviour
         {
             playerAttack.Invin();
         }
+        //상호작용
         if (InputManager.IsInteract)
         {
             playerInteraction.Interact();
@@ -60,8 +74,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerDash.IsDash) return;
+        if (playerDash.IsDash) return;     //대쉬 중에는 Move로 속도를 덮지 않도록 
+        if (playerWall.IsWallJump) return; //벽점프 직후에는 Move로 속도를 덮지 않도록
 
+        //이동
         playerMovement.Move();
+
+        //벽슬라이드
+        playerWall.WallSlide();
     }
 }
