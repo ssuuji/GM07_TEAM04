@@ -3,52 +3,60 @@ using UnityEngine;
 
 public class MonsterAttack : MonoBehaviour
 {
-    [SerializeField] private int attackDamage = 2;
-    [SerializeField] private float attackableRange = 3f;
-    [SerializeField] private float attackCoolTime = 2f;
+    [SerializeField] private int damage = 10;
+    [SerializeField] private float attackCoolTime = 1f;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private Vector2 attackSize = new Vector2(2f, 1f);
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private Monster monster;
 
-    private Vector2 direction;
+    private float currentCoolTime;
 
-    public void Attack()
+    private void Update()
     {
-        if(attackCoolTime<= 0)
+        if (currentCoolTime <= 0)
         {
-            RaycastHit2D hit = Physics2D.Raycast(
-            transform.position,
-            direction,
-            attackableRange,
-            playerLayer
-            );
-
-            if (hit.collider != null)
-            {
-                PlayerHealth player = hit.collider.GetComponent<PlayerHealth>();
-
-                if (player != null)
-                {
-                    player.TakeDamage(attackDamage);
-                }
-            }
+            Attack();
+            currentCoolTime = attackCoolTime;
         }
 
         else
         {
-            attackCoolTime -= Time.deltaTime;
+            currentCoolTime -= Time.deltaTime;
         }
     }
 
-    private void OnDrawGizmos()
+    private void Attack()
     {
-        Gizmos.color = Color.red;
+        SetAttackDirection();
 
-        Gizmos.DrawLine(
-            transform.position,
-            direction * attackableRange);
+        Collider2D player = Physics2D.OverlapBox(
+            attackPoint.position,
+            attackSize,
+            0f,
+            playerLayer);
+
+        if (player != null)
+        {
+            player.GetComponent<PlayerHealth>()?.TakeDamage(damage);
+        }
     }
 
-    public void SetAttackDirection(bool dir)
+    public void SetAttackDirection()
     {
-        direction = dir ? Vector2.right : Vector2.left;
+        if (!monster.Direction)
+        {
+            attackPoint.localPosition = new Vector3(-1f, 0, 0f);
+        }
+        else
+        {
+            attackPoint.localPosition = new Vector3(1f, 0f, 0f);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPoint.position, attackSize);
     }
 }

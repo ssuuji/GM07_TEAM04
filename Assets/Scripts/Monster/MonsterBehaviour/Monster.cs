@@ -5,14 +5,14 @@ public class Monster : MonoBehaviour, IDamageable
     
     enum MonsterState
     {
-        None = -1, Idle, Angry, Knockback, Attack
+        None = -1, Idle, Angry, Knockback
     }
 
     private MonsterState currentState;
 
     [Header("몬스터 상태")]
     [SerializeField] private int maxHealth = 10;
-    [SerializeField] private float knockbackTime = 1.0f; 
+    [SerializeField] private float knockbackTime = 1.0f;
     [SerializeField] private MonsterIdleMove monsterIdleMove;
     [SerializeField] private MonsterAngryMove monsterAngryMove;
     [SerializeField] private MonsterUI monsterUI;
@@ -20,6 +20,7 @@ public class Monster : MonoBehaviour, IDamageable
 
     private float flairTime = 3;
     private float knockbackTimer;
+    private float attackTimer;
     public bool IsDead { get; private set; } = false;
     public bool Direction { get; private set; } = true;
     private int currentHealth;
@@ -29,7 +30,7 @@ public class Monster : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         currentHealth = maxHealth;
-        currentState = MonsterState.Idle;
+        
         SetKnockbackTime();
     }
 
@@ -44,8 +45,7 @@ public class Monster : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        //테스트용
-        Flair();
+        
         StateManage();
         
     }
@@ -81,10 +81,9 @@ public class Monster : MonoBehaviour, IDamageable
     {
         currentState = state;
 
-        monsterIdleMove.enabled = state == MonsterState.Idle;
-        monsterAngryMove.enabled = state == MonsterState.Angry;
-        monsterKnockBack.enabled = state == MonsterState.Knockback;
-        //monsterAttack.enabled = state == MonsterState.Attack;
+        monsterIdleMove.enabled = currentState == MonsterState.Idle;
+        monsterAngryMove.enabled = currentState == MonsterState.Angry;
+        monsterKnockBack.enabled = currentState == MonsterState.Knockback;
     }
 
 
@@ -94,19 +93,24 @@ public class Monster : MonoBehaviour, IDamageable
         if (currentState == MonsterState.Knockback)
         {
             knockbackTimer -= Time.deltaTime;
-            if(knockbackTimer <= 0)
+
+            if (knockbackTimer <= 0)
             {
                 SetState(MonsterState.Angry);
                 SetKnockbackTime();
             }
-            
+
+            return;
         }
+
+        if (currentHealth < maxHealth)
+        {
+            SetState(MonsterState.Angry);
+        }
+
         else
         {
-            if (currentHealth < maxHealth)
-            {
-                SetState(MonsterState.Angry);
-            }
+            SetState(MonsterState.Idle);
         }
     }
 
@@ -114,7 +118,7 @@ public class Monster : MonoBehaviour, IDamageable
     {
         knockbackTimer = knockbackTime;
     }
-
+    
 
     //방향설정
     public void SetDirection(bool dir)

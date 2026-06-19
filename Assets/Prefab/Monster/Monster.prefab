@@ -142,6 +142,7 @@ Transform:
   m_Children:
   - {fileID: 4056409573313327478}
   - {fileID: 8658429523279470008}
+  - {fileID: 7021172968024163425}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7093002692898327219
@@ -288,7 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b222b0b2644ff4f92676def2ef9665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
-  maxHealth: 10
+  maxHealth: 100
+  knockbackTime: 2
   monsterIdleMove: {fileID: 7601408439983508488}
   monsterAngryMove: {fileID: 4896938182011083910}
   monsterUI: {fileID: 6921468742504701833}
@@ -300,17 +302,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750971951054956214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 692c0ff622cf90143a6880029c8728aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttack
-  attackDamage: 2
-  attackableRange: 3
+  damage: 10
   attackCoolTime: 2
+  attackPoint: {fileID: 7021172968024163425}
+  attackSize: {x: 2, y: 1}
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
+  monster: {fileID: 8427493216937825215}
 --- !u!114 &7601408439983508488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterMove
   moveSpeed: 3
-  jumpPower: 6
+  jumpPower: 8
   waitTimeMin: 2
   waitTimeMax: 3
   moveTimeMin: 2
@@ -337,13 +341,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750971951054956214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5da407aea4828af4f8bb4c9f3da8f7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAngryMove
   target: {fileID: 0}
   monster: {fileID: 8427493216937825215}
+  attack: {fileID: 3834215680268142598}
   moveSpeed: 3
   attackRange: 3
 --- !u!114 &6921468742504701833
@@ -366,12 +371,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750971951054956214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d43ca5c915518744a9f77c06ffb61be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterKnockBack
-  KnockbackPower: 2
+  KnockbackPower: 3
   monster: {fileID: 8427493216937825215}
 --- !u!1 &2120694980969924854
 GameObject:
@@ -496,6 +501,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7660844951109169852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7021172968024163425}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7021172968024163425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7660844951109169852}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9185154086948026643}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8509472999321302606
 GameObject:
   m_ObjectHideFlags: 0
