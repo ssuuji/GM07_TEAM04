@@ -5,6 +5,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("이동 설정")]
     [SerializeField] private float moveSpeed = 5.0f;
 
+    [Header("애니메이션 설정")]
+    [SerializeField] private Animator spumAnimator;
+
     private Rigidbody2D rb;
     private Vector3 originScale;  // 플레이어 기존 크기 저장
     private float checkDir = 1f;  // 플레이어가 바라보는 방향 저장
@@ -22,6 +25,14 @@ public class PlayerMovement : MonoBehaviour
     {
         //입력 값에 따라 X 속도 변경하고 y 속도는 그대로 유지
         rb.linearVelocity = new Vector2(InputManager.Movement.x * moveSpeed, rb.linearVelocity.y);
+
+        //이동 애니메이션
+        bool isMove = Mathf.Abs(InputManager.Movement.x) > 0.01f;
+        if (spumAnimator != null)
+        {
+            //true : MOVE / flase : Idle
+            spumAnimator.SetBool("1_Move", isMove);
+        }
     }
 
     //플레이어 방향체크
