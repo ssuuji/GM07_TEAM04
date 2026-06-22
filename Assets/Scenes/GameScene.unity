@@ -499,19 +499,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4756235386070991007, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: widthMin
-      value: -30
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 4756235386070991007, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: heightMax
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4756235386070991007, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: heightMin
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7217242582819261022, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 7217242582819261022, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: m_LocalPosition.y
