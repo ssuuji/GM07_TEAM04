@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack playerAttack;
     private PlayerInteraction playerInteraction;
     private PlayerWall playerWall;
+    private PlayerHealth playerHealth;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
         playerInteraction = GetComponent<PlayerInteraction>();
         playerWall = GetComponent<PlayerWall>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     private void Update()
@@ -74,8 +76,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerDash.IsDash) return;     //대쉬 중에는 Move로 속도를 덮지 않도록 
-        if (playerWall.IsWallJump) return; //벽점프 직후에는 Move로 속도를 덮지 않도록
+        if (playerDash.IsDash) return;        //대쉬 중에는 Move로 속도를 덮지 않도록 
+        if (playerWall.IsWallJump) return;    //벽점프 직후에는 X
+        if (playerHealth.IsKnockBack) return; //넉백 중에는 X
 
         //이동
         playerMovement.Move();
