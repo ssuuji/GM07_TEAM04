@@ -8,6 +8,9 @@ public class ConsumableItem : Item
     [Header("Item Effects")]
     [SerializeField] private List<ItemEffect> effects;
 
+    // 프로퍼티
+    public List<ItemEffect> Effects => effects;
+
     private void Awake()
     {
         // 아이템 타입 소모품으로 세팅
