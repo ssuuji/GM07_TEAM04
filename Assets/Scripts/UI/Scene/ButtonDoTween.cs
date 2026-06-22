@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TitleButtonDoTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonDoTween : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 {
     [Header("마우스 오버 크기")]
