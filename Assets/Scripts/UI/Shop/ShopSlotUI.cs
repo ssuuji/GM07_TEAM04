@@ -83,6 +83,7 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
         amountText.gameObject.SetActive(false);
         nameText.gameObject.SetActive(false);
         priceText.gameObject.SetActive(false);
+        descriptionText.gameObject.SetActive(false);
     }
     // 유니티 제공 마우스 클릭 이벤트 메서드
     public void OnPointerClick(PointerEventData eventData)

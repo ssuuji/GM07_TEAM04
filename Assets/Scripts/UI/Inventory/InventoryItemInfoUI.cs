@@ -77,18 +77,19 @@ public class InventoryItemInfoUI : MonoBehaviour
         if (Mouse.current == null) return;
 
         // 캔버스의 렌더 모드가 Overlay면 null, Camera/World면 해당 카메라를 저장
+        // 캔버스 상황에 따라 UI 위치에 오차가 생길 수 있기 때문에 미리 저장
         Camera uiCamera = parentCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : parentCanvas.worldCamera;
         Vector2 mousePos = Mouse.current.position.ReadValue();
         
         // 마우스 좌표를 UI 패널 부모의 로컬 좌표로 반환하는 법
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            parentRectTransform,
-            mousePos,
-            uiCamera,
-            out Vector2 localPoint
+            parentRectTransform,    // 부모인 캔버스의 RectTransform값
+            mousePos,               // InputSystem을 통한 마우스 위치값
+            uiCamera,               // 캔버스에 설정되어 있는 RenderMode값
+            out Vector2 localPoint  // 결과로 출력될 위치값
         );
 
-        // 변환한 좌표에 오프셋을 더해서 최종 위치 적용
+        // 출력된 좌표에 오프셋을 더해서 최종 위치 적용
         rectTransform.anchoredPosition = localPoint + cursorOffset;
     }
 }
