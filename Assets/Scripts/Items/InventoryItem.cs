@@ -30,4 +30,9 @@ public class InventoryItem
     {
         this.amount -= amount;
     }
+    //
+    public void SetItemData(Item data)
+    {
+        this.itemData = data;
+    }
 }

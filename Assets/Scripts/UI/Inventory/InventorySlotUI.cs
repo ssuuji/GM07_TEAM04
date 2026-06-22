@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // 마우스 클릭 이벤트를 위한 상속
 
-public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
+public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Item Data Binding")]
     [SerializeField] private Image iconImage;               // 아이템 아이콘에 나타날 이미지
@@ -15,8 +15,16 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
     // UI 칸에서 현재 보여지고 있는 아이템의 실제 데이터
     private InventoryItem currentItem;
 
+    // 부모 UI 설정
+    private InventoryUI inventoryUI;
+
     /*=============== Method ===============*/
-    
+
+    // 인벤토리 부모 UI 설정
+    public void Initialize(InventoryUI parent)
+    {
+        inventoryUI = parent;
+    }
     public void UpdateSlot(InventoryItem item)
     {
         currentItem = item;
@@ -104,5 +112,20 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
         {
             Debug.Log("RightClick");
         }
+    }
+    // 마우스가 들어왔을 때
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        // 예외 처리
+        // 빈 칸 호밍 시 리턴
+        if (currentItem == null) return;
+
+        // 아이템 정보 UI 데이터 갱신
+        inventoryUI.ShowItemInfo(currentItem);
+    }
+    // 마우스가 떠났을 때
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        inventoryUI.CloseItemInfo();
     }
 }

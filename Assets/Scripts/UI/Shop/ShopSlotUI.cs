@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
 {
     [Header("Item Data Binding")]
-    [SerializeField] private Image iconImage;               // 아이템 아이콘에 나타날 이미지
-    [SerializeField] private TextMeshProUGUI amountText;    // 아이템 수량을 표시할 텍스트
-    [SerializeField] private TextMeshProUGUI nameText;      // 아이템 이름 텍스트
-    [SerializeField] private TextMeshProUGUI priceText;     // 아이템 가격 텍스트
+    [SerializeField] private Image iconImage;                   // 아이템 아이콘에 나타날 이미지
+    [SerializeField] private TextMeshProUGUI amountText;        // 아이템 수량을 표시할 텍스트
+    [SerializeField] private TextMeshProUGUI nameText;          // 아이템 이름 텍스트
+    [SerializeField] private TextMeshProUGUI priceText;         // 아이템 가격 텍스트
+    [SerializeField] private TextMeshProUGUI descriptionText;   // 아이템 정보 텍스트
 
     // UI 칸에서 현재 보여지고 있는 아이템의 실제 데이터
     private InventoryItem currentItem;
@@ -37,6 +38,41 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
         nameText.text = item.ItemData.ItemName;
         priceText.gameObject.SetActive(true);
         priceText.text = item.ItemData.ItemPrice.ToString();
+        descriptionText.gameObject.SetActive(true);
+        // 아이템 타입에 따른 설명
+        if (item.ItemData.ItemType == ItemType.Equipment)
+        {
+            if (item.ItemData is WeaponItem weapon)
+            {
+                descriptionText.text = $"AtkPower +{weapon.AtkPower}";
+            }
+            else if (item.ItemData is ArmorItem armor)
+            {
+                descriptionText.text = $"DefPower +{armor.DefPower}";
+            }
+        }
+        if (item.ItemData.ItemType == ItemType.Consumable)
+        {
+            if (item.ItemData is ConsumableItem consumable)
+            {
+                if (consumable.Effects == null || consumable.Effects.Count <= 0) return;
+                // 여러 효과가 있을 수 있으므로 StringBuilder사용
+                System.Text.StringBuilder effectDesc = new System.Text.StringBuilder();
+                for (int i = 0; i < consumable.Effects.Count; i++)
+                {
+                    // 위 1단계에서 만든 Description 프로퍼티 활용
+                    effectDesc.Append(consumable.Effects[i].Description);
+
+                    // 효과가 여러 개일 경우 줄바꿈 추가
+                    if (i < consumable.Effects.Count - 1)
+                    {
+                        effectDesc.AppendLine();
+                    }
+                }
+                // 최종 텍스트 적용
+                descriptionText.text = effectDesc.ToString();
+            }
+        }
     }
     // 슬롯 초기화 메서드
     public void ClearSlot()
@@ -47,6 +83,7 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
         amountText.gameObject.SetActive(false);
         nameText.gameObject.SetActive(false);
         priceText.gameObject.SetActive(false);
+        descriptionText.gameObject.SetActive(false);
     }
     // 유니티 제공 마우스 클릭 이벤트 메서드
     public void OnPointerClick(PointerEventData eventData)

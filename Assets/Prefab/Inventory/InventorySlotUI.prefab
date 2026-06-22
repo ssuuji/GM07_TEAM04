@@ -366,6 +366,7 @@ MonoBehaviour:
   iconImage: {fileID: 5065024723346043324}
   amountText: {fileID: 3048970404364675915}
   equipMark: {fileID: 2016043709916553963}
+  itemInfoPanel: {fileID: 0}
 --- !u!1 &6997089822393517045
 GameObject:
   m_ObjectHideFlags: 0
