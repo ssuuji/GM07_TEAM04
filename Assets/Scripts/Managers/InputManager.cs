@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     public static bool IsAreaAttack { get; private set; }
     public static bool IsBuff { get; private set; }
     public static bool IsInvin { get; private set; }
+    public static bool IsStatus { get; private set; }
 
     private InputAction moveAction;
     private InputAction jumpAction;
@@ -20,12 +21,12 @@ public class InputManager : MonoBehaviour
     private InputAction areaAttackAction;
     private InputAction buffAction;
     private InputAction invinAction;
+    private InputAction statusAction;
 
     // Inventory Part
     // Add I Input
     public static bool IsOpenInventory { get; private set; } = false;
     private InputAction openInventoryAction;
-
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class InputManager : MonoBehaviour
         areaAttackAction = InputSystem.actions.FindAction("AreaAttack");
         buffAction = InputSystem.actions.FindAction("Buff");
         invinAction = InputSystem.actions.FindAction("Invin");
+        statusAction = InputSystem.actions.FindAction("Status");
         // Inventory Part
         // Add I Input
         if (openInventoryAction == null)
@@ -55,6 +57,7 @@ public class InputManager : MonoBehaviour
         IsAreaAttack = areaAttackAction.WasPressedThisFrame();   //범위공격 : X
         IsBuff = buffAction.WasPressedThisFrame();               //공격버프 : C
         IsInvin = invinAction.WasPressedThisFrame();             //무적기   : V
+        IsStatus = statusAction.WasPressedThisFrame();           //스탯창   : Tab
         // Inventory Part
         // Add I Input
         IsOpenInventory = openInventoryAction.WasPressedThisFrame();
