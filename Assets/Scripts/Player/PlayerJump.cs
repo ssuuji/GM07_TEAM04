@@ -11,6 +11,9 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private Vector2 checkSize = new Vector2(0.5f, 0.08f);
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("애니메이션 설정")]
+    [SerializeField] private Animator spumAnimator;
+
     private Rigidbody2D rb;
     private bool isGround; //바닥 체크
     private int jumpCount; //현재 점프 횟수
@@ -20,6 +23,10 @@ public class PlayerJump : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (spumAnimator == null)
+        {
+            spumAnimator = GetComponentInChildren<Animator>();
+        }
     }
 
     public void Jump()
@@ -32,6 +39,12 @@ public class PlayerJump : MonoBehaviour
 
         jumpCount++;      //점프 횟수 증가
         isGround = false; //점프 했으니까 아직 공중상태 유지
+
+        //애니메이션
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetBool("7_Jump", true);
+        }
     }
 
     public void CheckGround()
@@ -46,6 +59,13 @@ public class PlayerJump : MonoBehaviour
         if (!wasGround && isGround && rb.linearVelocity.y <= 0f)
         {
             jumpCount = 0;
+
+            // 애니메이션
+            if (spumAnimator != null)
+            {
+                //바닥에 닿았으면 애니메이션 종료
+                spumAnimator.SetBool("7_Jump", false);
+            }
         }
     }
 

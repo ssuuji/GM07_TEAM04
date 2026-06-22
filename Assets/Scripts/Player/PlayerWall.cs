@@ -17,6 +17,9 @@ public class PlayerWall : MonoBehaviour
     private bool isWallJump;                                              //현재 벽 점프중인지 확인
     private float wallJumpTimer;                                          //벽 점프중 상태유지 시간
 
+    [Header("애니메이션 설정")]
+    [SerializeField] private Animator spumAnimator;
+
     private Rigidbody2D rb;
     private PlayerJump playerJump;
     private PlayerMovement playerMovement;
@@ -29,6 +32,12 @@ public class PlayerWall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerJump = GetComponent<PlayerJump>();
         playerMovement = GetComponent<PlayerMovement>();
+        
+        //애니메이션
+        if (spumAnimator == null)
+        {
+            spumAnimator = GetComponentInChildren<Animator>();
+        }
     }
 
     //벽에 닿아있는지 체크
@@ -52,9 +61,22 @@ public class PlayerWall : MonoBehaviour
         //벽 방향으로 방향키를 누르고 있는지 확인
         bool isInputWall = moveX != 0 && Mathf.Sign(moveX) == dir;
 
+        //애니메이션
+        if (isInputWall)
+        {
+            //벽타기 애니메이션이 없어서 .. Idle 상태로
+            if (spumAnimator != null)
+            {
+                spumAnimator.SetBool("7_Jump", false);
+                spumAnimator.SetBool("1_Move", false);
+            }
+        }
+
         //아래로 떨어지고 있으면서 벽쪽으로 방향키를 누르고 있을 때 천천히 내려오기
         if (rb.linearVelocity.y < 0 && isInputWall)
         {
+            
+
             rb.linearVelocity = new Vector2(0f, -wallSlideSpeed);
         }
     }
