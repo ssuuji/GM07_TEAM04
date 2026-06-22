@@ -49,9 +49,11 @@ public class PlayerLevel : MonoBehaviour
 
         Debug.Log($"레벨업! 현재 레벨 {level}");
 
-        //레벨업 보상 (HP 증가 / MP 증가)
+        //레벨업 보상 (HP 증가 / MP 증가) + 레벨업시 HP/MP 전부 회복
         playerStatus.AddMaxHp(levelUpHp);
         playerStatus.AddMaxMp(levelUpMp);
+        playerStatus.Heal(playerStatus.CurrentMaxHp);
+        playerStatus.RecoverMp(playerStatus.CurrentMaxMp);
 
         //경험치통 증가
         maxExp += 50;
