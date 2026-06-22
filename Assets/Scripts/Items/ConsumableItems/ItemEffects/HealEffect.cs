@@ -8,7 +8,8 @@ public class HealEffect : ItemEffect
     [SerializeField] private int healAmount = 10;
 
     // 프로퍼티
-    public int HealAmount => healAmount;
+    public int HealAmount => healAmount; 
+    public override string Description => $"HP +{healAmount}";    // 아이템 효과 점보 프로퍼티 설정
 
     /*=============== Method ===============*/
 

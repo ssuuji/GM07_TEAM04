@@ -5,13 +5,18 @@ public class InventoryUI : MonoBehaviour
 {
     // 관리할 UI 컴포넌트 연결
     [Header("UI Component Binding")]
-    [SerializeField] private GameObject inventoryUIPanel;   // 인벤토리 전체 UI패널
+    [SerializeField] private GameObject inventoryUIPanel;   // 인벤토리 UI패널
     [SerializeField] private Transform slotParent;          // 인벤토리 슬롯 생성 시 들어갈 위치
     [SerializeField] private GameObject slotPrefab;         // 인벤토리 한 칸을 담당할 슬롯 프리팹
     [SerializeField] private GameObject inventoryGoldUI;    // 인벤토리 골드 UI 오브젝트
+    [SerializeField] private GameObject inventoryMainPanel; // 인벤토리 전체 UI 패널
+    [SerializeField] private GameObject InventoryEquipmentUIPanel;      // 인벤토리 장착 아이템 UI 패널
+    [SerializeField] private InventoryItemInfoUI inventoryItemInfoUI;   // 인벤토리 아이템 정보 출력 UI
     // 골드 등이 들어온다면 여기에 추가
-
-    private List<InventorySlotUI> slotUIList = new List<InventorySlotUI>(); // 생성할 SlotUI들 리스트로 관리
+    
+    [Header("Inventory Slot UI")]
+    [SerializeField] private List<InventorySlotUI> slotUIList = new List<InventorySlotUI>();    // 생성할 SlotUI들 리스트로 관리
+    [SerializeField] private List<InventoryEquipmentSlotUI> equipSlotUIList = new List<InventoryEquipmentSlotUI>();     // 장착 중인 아이템 출력 슬롯 UI
 
     private void Awake()
     {
@@ -23,6 +28,18 @@ public class InventoryUI : MonoBehaviour
         if (inventoryGoldUI != null)
         {
             inventoryGoldUI.SetActive(false);
+        }
+        if (inventoryItemInfoUI != null)
+        {
+            inventoryItemInfoUI.gameObject.SetActive(false);
+        }
+        if (inventoryMainPanel != null)
+        {
+            inventoryMainPanel.gameObject.SetActive(false);
+        }
+        if (InventoryEquipmentUIPanel != null)
+        {
+            InventoryEquipmentUIPanel.SetActive(false);
         }
     }
 
@@ -62,7 +79,16 @@ public class InventoryUI : MonoBehaviour
             if (slotUI == null) return;
             // 슬롯을 빈 칸으로 초기화 후 해당 위치에 아이템 저장
             slotUI.ClearSlot();
+            slotUI.Initialize(this);
             slotUIList.Add(slotUI);
+        }
+        int equipmentCount = equipSlotUIList.Count;
+        if (equipmentCount >= amount) return;
+        for (int i = 0; i < equipmentCount; i++)
+        {
+            if (equipSlotUIList[i] == null) return;
+            equipSlotUIList[i].ClearSlot();
+            equipSlotUIList[i].Initialize(this);
         }
     }
     private void ToggleInventoryUI()
@@ -73,13 +99,19 @@ public class InventoryUI : MonoBehaviour
         // 인벤토리 패널이 켜져있는지 검사
         bool isActive = inventoryUIPanel.activeSelf;
         // 인벤토리의 현 상태의 반대 상태로 전환
+        inventoryMainPanel.SetActive(!isActive);
         inventoryUIPanel.SetActive(!isActive);
         inventoryGoldUI.SetActive(!isActive);
+        InventoryEquipmentUIPanel.SetActive(!isActive);
 
         if (!isActive)
         {
-            // 인벤토리가 닫히면 데이터 갱신
+            // 인벤토리가 켜질 때 데이터 갱신
             RefreshUI();
+        }
+        else
+        {
+            CloseItemInfo();
         }
     }
     // 인벤토리 데이터 갱신
@@ -108,5 +140,29 @@ public class InventoryUI : MonoBehaviour
             // 다음 인덱스로
             slotIndex++;
         }
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            PlayerEquipment equipment = player.GetComponent<PlayerEquipment>();
+            if (equipment != null)
+            {
+                if (equipSlotUIList[0] != null) equipSlotUIList[0].UpdateEquipmentSlot(equipment);
+                if (equipSlotUIList[1] != null) equipSlotUIList[1].UpdateEquipmentSlot(equipment);
+            }
+        }
+    }
+    // 아이템 정보 UI 출력
+    public void ShowItemInfo(InventoryItem item)
+    {
+        if (item == null) return;
+
+        inventoryItemInfoUI.SetItemInfo(item);
+        inventoryItemInfoUI.gameObject.SetActive(true);
+    }
+    // 아이템 정보 UI 끄기
+    public void CloseItemInfo()
+    {
+        inventoryItemInfoUI.gameObject.SetActive(false);
     }
 }
