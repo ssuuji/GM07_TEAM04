@@ -14,8 +14,8 @@ public class InventoryUI : MonoBehaviour
     // 골드 등이 들어온다면 여기에 추가
     
     [Header("Inventory Slot UI")]
-    [SerializeField] private List<InventorySlotUI> slotUIList = new List<InventorySlotUI>(); // 생성할 SlotUI들 리스트로 관리
-    [SerializeField] private List<InventoryEquipmentSlotUI> equipSlotUIList = new List<InventoryEquipmentSlotUI>();
+    [SerializeField] private List<InventorySlotUI> slotUIList = new List<InventorySlotUI>();    // 생성할 SlotUI들 리스트로 관리
+    [SerializeField] private List<InventoryEquipmentSlotUI> equipSlotUIList = new List<InventoryEquipmentSlotUI>();     // 장착 중인 아이템 출력 슬롯 UI
 
     private void Awake()
     {

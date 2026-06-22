@@ -113,7 +113,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
             Debug.Log("RightClick");
         }
     }
-    // 
+    // 마우스가 들어왔을 때
     public void OnPointerEnter(PointerEventData eventData)
     {
         // 예외 처리
@@ -123,7 +123,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
         // 아이템 정보 UI 데이터 갱신
         inventoryUI.ShowItemInfo(currentItem);
     }
-    // 
+    // 마우스가 떠났을 때
     public void OnPointerExit(PointerEventData eventData)
     {
         inventoryUI.CloseItemInfo();

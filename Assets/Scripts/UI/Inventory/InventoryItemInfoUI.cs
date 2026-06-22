@@ -53,10 +53,10 @@ public class InventoryItemInfoUI : MonoBehaviour
             {
                 if (consumable.Effects == null || consumable.Effects.Count <= 0) return;
                 // 여러 효과가 있을 수 있으므로 StringBuilder사용
+                // 문자열 최적화
                 System.Text.StringBuilder effectDesc = new System.Text.StringBuilder();
                 for (int i = 0; i < consumable.Effects.Count; i++)
                 {
-                    // 위 1단계에서 만든 Description 프로퍼티 활용
                     effectDesc.Append(consumable.Effects[i].Description);
 
                     // 효과가 여러 개일 경우 줄바꿈 추가
@@ -79,8 +79,8 @@ public class InventoryItemInfoUI : MonoBehaviour
         // 캔버스의 렌더 모드가 Overlay면 null, Camera/World면 해당 카메라를 저장
         Camera uiCamera = parentCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : parentCanvas.worldCamera;
         Vector2 mousePos = Mouse.current.position.ReadValue();
-
-        // 마우스 좌표를 UI 패널 부모의 로컬 좌표로 정확히 치환
+        
+        // 마우스 좌표를 UI 패널 부모의 로컬 좌표로 반환하는 법
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             parentRectTransform,
             mousePos,
@@ -88,7 +88,7 @@ public class InventoryItemInfoUI : MonoBehaviour
             out Vector2 localPoint
         );
 
-        // 치환된 좌표에 오프셋을 더해서 최종 위치 적용
+        // 변환한 좌표에 오프셋을 더해서 최종 위치 적용
         rectTransform.anchoredPosition = localPoint + cursorOffset;
     }
 }

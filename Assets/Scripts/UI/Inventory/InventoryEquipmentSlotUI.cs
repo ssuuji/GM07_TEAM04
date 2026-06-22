@@ -1,4 +1,3 @@
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -32,7 +31,7 @@ public class InventoryEquipmentSlotUI : MonoBehaviour, IPointerEnterHandler, IPo
                 currentItem = new InventoryItem(equipment.WeaponItem, 1);
 
                 itemIcon.sprite = currentItem.ItemData.ItemIcon;
-                itemIcon.color = new Color(1f, 1f, 1f, 1f); // 불투명하게
+                itemIcon.color = new Color(1f, 1f, 1f, 1f);
             }
             else
             {
