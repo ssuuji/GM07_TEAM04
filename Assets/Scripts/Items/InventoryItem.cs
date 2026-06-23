@@ -4,14 +4,15 @@ using UnityEngine;
 [Serializable]
 public class InventoryItem
 {
+    [Header("Item Data")]
     [SerializeField] private Item itemData;   // 아이템 데이터
     [SerializeField] private int amount;      // 아이템 개수
 
     // 프로퍼티
     public Item ItemData => itemData;
     public int Amount => amount;
-    // 아이템 개별 정보 (강화 수치 등)들은 여기서 관리
 
+    // 생성자
     public InventoryItem(Item data, int amount)
     {
         this.itemData = data;
@@ -30,7 +31,7 @@ public class InventoryItem
     {
         this.amount -= amount;
     }
-    //
+    // 아이템 데이터 설정을 위한 메서드
     public void SetItemData(Item data)
     {
         this.itemData = data;
