@@ -75,8 +75,6 @@ public class PlayerWall : MonoBehaviour
         //아래로 떨어지고 있으면서 벽쪽으로 방향키를 누르고 있을 때 천천히 내려오기
         if (rb.linearVelocity.y < 0 && isInputWall)
         {
-            
-
             rb.linearVelocity = new Vector2(0f, -wallSlideSpeed);
         }
     }
