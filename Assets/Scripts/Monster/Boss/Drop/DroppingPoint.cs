@@ -9,20 +9,27 @@ public class DroppingPoint : MonoBehaviour
     [SerializeField] private float movingLength = 8.0f;
 
     private Rigidbody2D rb;
-    private Transform startPosition;
+    private Vector3 startPosition;
     private bool moveDirection;
 
 
     private void Awake()
     {
-        if (boss == null)
+        if(rb == null)
         {
-            boss = GetComponent<Boss>();
+            rb = GetComponent<Rigidbody2D>();
         }
 
-        startPosition.position = transform.position;
+        if (boss == null)
+        {
+            boss = GetComponentInParent<Boss>();
+        }
+        startPosition = transform.localPosition;
+    }
 
-        UpdateDirection();
+    private void Start()
+    {
+        StartCoroutine(LengthMeasureCo());
     }
 
     private void FixedUpdate()
@@ -30,20 +37,7 @@ public class DroppingPoint : MonoBehaviour
         Move(); 
     }
 
-    private void UpdateDirection()
-    {
-        moveDirection = boss.Direction;
-
-        if (moveDirection)
-        {
-            transform.localPosition = new Vector3(1, 6, 0);
-        }
-
-        else
-        {
-            transform.localPosition = new Vector3(-1, 6, 0);
-        }
-    }
+    
 
     private void Move()
     {
@@ -57,11 +51,16 @@ public class DroppingPoint : MonoBehaviour
         }
     }
 
-    private void LengthMeasure()
+    IEnumerator LengthMeasureCo()
     {
-        if(Mathf.Abs(transform.position.x - startPosition.position.x) > movingLength)
+        while (true)
         {
-            moveDirection = !moveDirection;
+            if (Mathf.Abs(transform.localPosition.x - startPosition.x) >= movingLength)
+            {
+                moveDirection = !moveDirection;
+                yield return new WaitForSeconds(1f);
+            }
+            yield return null;
         }
     }
 }
