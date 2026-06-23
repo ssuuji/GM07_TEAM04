@@ -14,6 +14,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject areaAttackEffectPrefab;
     [SerializeField] private Transform slashEffectPoint;
 
+    [Header("버프 이펙트")]
+    [SerializeField] private GameObject buffEffectPrefab;
+    [SerializeField] private Transform buffEffectPoint;
+
     [Header("기본공격 설정")]
     [SerializeField] private float attackCooldown = 0.5f;    //기본공격 쿨타임
     private bool canAttack = true;
@@ -215,6 +219,9 @@ public class PlayerAttack : MonoBehaviour
             spumAnimator.SetTrigger("5_Buff");
         }
 
+        //이펙트
+        Instantiate(buffEffectPrefab, buffEffectPoint.position, Quaternion.identity);
+
         //버프 지속시간
         StartCoroutine(BuffCo());
         //공격버프 스킬 쿨타임
@@ -282,6 +289,9 @@ public class PlayerAttack : MonoBehaviour
         {
             spumAnimator.SetTrigger("5_Buff");
         }
+
+        //이펙트
+        Instantiate(buffEffectPrefab, buffEffectPoint.position, Quaternion.identity);
 
         //무적기 지속시간
         StartCoroutine(InvinCo());

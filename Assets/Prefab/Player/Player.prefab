@@ -1658,6 +1658,37 @@ Transform:
   - {fileID: 2578968386973596629}
   m_Father: {fileID: 6278895381824813635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &730546016192387476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2787783667330534604}
+  m_Layer: 0
+  m_Name: BuffPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2787783667330534604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730546016192387476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5231766338184684316}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &769945831856554594
 GameObject:
   m_ObjectHideFlags: 0
@@ -3997,6 +4028,7 @@ Transform:
   - {fileID: 5559699857072400810}
   - {fileID: 8608809506551209718}
   - {fileID: 8562948086010965986}
+  - {fileID: 2787783667330534604}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2821442040494701557
@@ -4195,6 +4227,8 @@ MonoBehaviour:
   attackEffectPrefab: {fileID: 3924272989729898666, guid: 93893a4a14150d44ea57b8dc486c0965, type: 3}
   areaAttackEffectPrefab: {fileID: 2626085178192721610, guid: 1903991ab03fcfc45904b0cd31b41c3d, type: 3}
   slashEffectPoint: {fileID: 8562948086010965986}
+  buffEffectPrefab: {fileID: 8966686482850526422, guid: 88b35d4cb03ba4144a21fd62d2e2a4d8, type: 3}
+  buffEffectPoint: {fileID: 2787783667330534604}
   attackCooldown: 0.5
   areaAttackMpCost: 10
   areaAttackCooldown: 3
