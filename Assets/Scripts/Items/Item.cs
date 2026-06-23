@@ -6,7 +6,7 @@ public class Item : ScriptableObject
     // 아이템 내부 데이터
     [Header("Item Data")]
     [SerializeField] private int itemID;            // 아이템 분류 ID
-    [SerializeField] private ItemType itemType;     // 아이템 종류 (장비, 소모품, ...)
+    [SerializeField] private ItemType itemType;     // 아이템 종류 ( 장비, 소모품, ...)
     [SerializeField] private GameObject itemPrefab; // 아이템 프리팹
     [SerializeField] private int itemPrice;         // 아이템 가격
     // UI에 표기할 아이템 정보
@@ -15,7 +15,7 @@ public class Item : ScriptableObject
     [SerializeField] private Sprite itemIcon;       // 아이템 아이콘
     [SerializeField] private int maxAmount;         // 아이템 최대 소지 개수
 
-    // 출력 메세지 --> 이걸 어떻게 잘 써먹을지를 모르겠네...
+    // 출력 메세지
     [Header("Message")]
     [TextArea(2, 15)]
     private string messageWhenCollected;            // 아이템 획득 시 출력할 메세지
