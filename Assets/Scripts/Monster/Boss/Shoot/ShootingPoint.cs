@@ -10,17 +10,17 @@ public class ShootingPoint : MonoBehaviour
     {
         if(boss == null)
         {
-            boss = GetComponent<Boss>();
+            boss = GetComponentInParent<Boss>();
         }
         
     }
 
     private void Update()
     {
-        UpdateDirection();
+        UpdatePosition();
     }
 
-    private void UpdateDirection()
+    private void UpdatePosition()
     {
         if( boss.Direction)
         {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4715720945531345204}
   - component: {fileID: 3014972114136335558}
   - component: {fileID: 2534279794350454051}
+  - component: {fileID: 1906916113648603908}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -107,9 +108,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
   player: {fileID: 0}
-  moveSpeed: 0
-  maxHealth: 0
+  moveSpeed: 5
+  maxHealth: 500
   Direction: 0
+--- !u!114 &1906916113648603908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46bae96041d20f3459ece7554442fae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAttack
+  shootingPoint: {fileID: 5002019365116889087}
+  droppingPoint: {fileID: 7369423267549948126}
+  attackDuration: 5
+  attackCoolTime: 1
+  shootCoolTime: 1
+  dropCoolTime: 1
+  bulletPrefab: {fileID: 2769472408590175319, guid: 2f1b451c5552dab428ec7acb54d228d2, type: 3}
+  dropPrefab: {fileID: 6854078610707574458, guid: bec2c446bf6d4fd4d8ba5c6080f54557, type: 3}
 --- !u!1 &2618844152807217304
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317e93f50a92a414c8401359b7c5ef32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackPoint
-  boss: {fileID: 2534279794350454051}
+  boss: {fileID: 0}
 --- !u!1 &3182755310258188036
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f4a24ae4140354898866e58e0b369a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropingPoint
-  boss: {fileID: 2534279794350454051}
+  boss: {fileID: 0}
   movingSpeed: 5
   movingLength: 8
 --- !u!50 &4664887619641388149
