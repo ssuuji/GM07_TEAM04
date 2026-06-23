@@ -5,7 +5,14 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("공격범위")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private Vector2 attackSize = new Vector2(2.5f, 1.5f);
+    [SerializeField] private Vector2 attackSize = new Vector2(1.8f, 1.5f);
+    [SerializeField] private Transform areaAttackPoint;
+    [SerializeField] private Vector2 areaAttackSize = new Vector2(2.5f, 1.5f);
+
+    [Header("공격 이펙트")]
+    [SerializeField] private GameObject attackEffectPrefab;
+    [SerializeField] private GameObject areaAttackEffectPrefab;
+    [SerializeField] private Transform slashEffectPoint;
 
     [Header("기본공격 설정")]
     [SerializeField] private float attackCooldown = 0.5f;    //기본공격 쿨타임
@@ -75,6 +82,9 @@ public class PlayerAttack : MonoBehaviour
         {
             spumAnimator.SetTrigger("2_Attack");
         }
+
+        //이펙트
+        Instantiate(attackEffectPrefab, slashEffectPoint.position, Quaternion.identity);
 
         // 공격범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
         Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
@@ -147,11 +157,14 @@ public class PlayerAttack : MonoBehaviour
             spumAnimator.SetTrigger("2_Attack");
         }
 
+        //이펙트
+        Instantiate(areaAttackEffectPrefab, slashEffectPoint.position, Quaternion.identity);
+
         //범위공격스킬 쿨타임 시작
         StartCoroutine(AreaAttackCooldownCo());
 
         // 공격범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
-        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(areaAttackPoint.position, areaAttackSize, 0f, enemyLayer);
         if (hits.Length == 0) return;
 
         //해당 범위의 모든 몬스터들 공격
@@ -318,8 +331,13 @@ public class PlayerAttack : MonoBehaviour
         //공격 범위 확인 Gizmos
         if (attackPoint != null)
         {
-            Gizmos.color = Color.yellow;
+            Gizmos.color = Color.blue;
             Gizmos.DrawWireCube(attackPoint.position, attackSize);
+        }
+        if (areaAttackPoint != null)
+        {
+            Gizmos.color = Color.orange;
+            Gizmos.DrawWireCube(areaAttackPoint.position, areaAttackSize);
         }
     }
 }
