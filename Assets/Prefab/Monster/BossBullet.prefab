@@ -179,8 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6221712cb45c5264ca2b01bb3be94781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBullet
-  boss: {fileID: 2534279794350454051, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
-  player: {fileID: 0}
-  damage: 10
+  boss: {fileID: 0}
   bulletSpeed: 2
   lifeTime: 5

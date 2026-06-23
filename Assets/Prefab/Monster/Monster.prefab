@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da407aea4828af4f8bb4c9f3da8f7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAngryMove
-  target: {fileID: 2832478524417347878, guid: 319e04d4cbaac6d4591abe6cd9650feb, type: 3}
+  target: {fileID: 0}
   monster: {fileID: 8427493216937825215}
   attack: {fileID: 3834215680268142598}
   moveSpeed: 3
