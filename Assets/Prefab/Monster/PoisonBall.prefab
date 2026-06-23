@@ -180,6 +180,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoisonBall
   throwingPowerMin: 2
-  throwingPowerMax: 5
+  throwingPowerMax: 10
   boss: {fileID: 0}
   floorPrefab: {fileID: 6132060288930671451, guid: b870e19568b358544a707a69ed815719, type: 3}

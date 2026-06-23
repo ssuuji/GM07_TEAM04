@@ -11,7 +11,6 @@ public class DroppingPoint : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 startPosition;
     private bool moveDirection;
-    private float timer;
 
 
     private void Awake()
@@ -25,7 +24,6 @@ public class DroppingPoint : MonoBehaviour
         {
             boss = GetComponentInParent<Boss>();
         }
-        UpdateDirection();
         startPosition = transform.localPosition;
     }
 
@@ -39,20 +37,7 @@ public class DroppingPoint : MonoBehaviour
         Move(); 
     }
 
-    private void UpdateDirection()
-    {
-        moveDirection = boss.Direction;
-
-        if (moveDirection)
-        {
-            transform.localPosition = new Vector3(1, 6, 0);
-        }
-
-        else
-        {
-            transform.localPosition = new Vector3(-1, 6, 0);
-        }
-    }
+    
 
     private void Move()
     {
