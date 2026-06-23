@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DropingPoint
   boss: {fileID: 0}
   movingSpeed: 5
-  movingLength: 8
+  movingLength: 10
 --- !u!50 &4664887619641388149
 Rigidbody2D:
   serializedVersion: 5
