@@ -1,8 +1,19 @@
-﻿using System.Collections;
+﻿using DamageNumbersPro;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
+    [Header("애니메이션 설정")]
+    [SerializeField] private Animator spumAnimator;  
+    [SerializeField] private CanvasGroup fadeImage;  
+    [SerializeField] private float dieTime = 1.0f; // Die애니메이션 시간
+    [SerializeField] private float fadeTime = 1.0f;  // 화면 전환 시간
+
+    [Header("데미지 숫자")]
+    [SerializeField] private DamageNumber damageNumberPrefab;
+    [SerializeField] private Transform damageNumberPoint;
+
     private PlayerStatus playerStatus;
     private bool isDead;       //플레이어 사망여부
     private bool isInvin;      //무적상태 확인여부
@@ -13,7 +24,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private float knockBackTime = 0.15f; //넉백 유지시간
     private bool isKnockBack;            //넉백 중인지 확인여부
     private Coroutine currentCo;         //피격 색상 코루틴
-
     public bool IsKnockBack => isKnockBack;
 
     private void Start()
@@ -21,6 +31,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         playerStatus = GetComponent<PlayerStatus>();
         playerMovement = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody2D>();
+        if (spumAnimator == null)
+        {
+            spumAnimator = GetComponentInChildren<Animator>();
+        }
     }
 
     //데미지 받을 때
@@ -29,13 +43,22 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (isDead) return;  //이미 사망상태면 X
         if (isInvin) return; //무적상태면 X
 
+        //애니메이션
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("3_Damaged");
+        }
         //damage만큼 HP 감소
         playerStatus.TakeDamage(damage);
+
+        //받은 데미지 숫자 표시
+        damageNumberPrefab.Spawn(damageNumberPoint.position, damage); //DamageNumbersPro 에셋에서 Spawn을 지원함
 
         //HP가 0이하라면 사망처리(Die)
         if (playerStatus.CurrentHp <= 0)
         {
             Die();
+            return;
         }
 
         //피격시 넉백 적용 및 색상처리(추후 색상 -> 애니메이션으로 변경예정)
@@ -91,10 +114,42 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Die()
     {
         isDead = true;
+
+        //사망후 멈추기
+        rb.linearVelocity = Vector2.zero;
+
+        //애니메이션
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("4_Death");
+        }
         Debug.Log("플레이어 사망");
 
+        StartCoroutine(DieCo());
+    }
+
+    IEnumerator DieCo()
+    {
+        //Die 애니메이션 재생시간
+        yield return new WaitForSeconds(dieTime);
+
+        //화면 페이드 아웃
+        float timer = 0f;
+        while (timer < fadeTime)
+        {
+            timer += Time.deltaTime;
+
+            fadeImage.alpha = timer / fadeTime;
+
+            yield return null;
+        }
+
+        fadeImage.alpha = 1f;
+
+        // 게임 오버 씬 이동
         GameSceneManager.Instance.LoadScene(SceneType.GameOver);
     }
+
 
     //무적 상태 변경
     public void SetInvin(bool value)

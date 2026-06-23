@@ -3812,6 +3812,37 @@ Transform:
   - {fileID: 7221401483356894167}
   m_Father: {fileID: 7555660636338031782}
   m_LocalEulerAnglesHint: {x: -0.107, y: -0.004, z: 3.056}
+--- !u!1 &2673478989677128768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8608809506551209718}
+  m_Layer: 0
+  m_Name: PlayerNumberPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8608809506551209718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2673478989677128768}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 11.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5231766338184684316}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2691023781493069991
 GameObject:
   m_ObjectHideFlags: 0
@@ -3963,6 +3994,7 @@ Transform:
   - {fileID: 2729368853085574024}
   - {fileID: 4088767178093135103}
   - {fileID: 5559699857072400810}
+  - {fileID: 8608809506551209718}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2821442040494701557
@@ -4156,6 +4188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   attackPoint: {fileID: 2729368853085574024}
   attackSize: {x: 2.74, y: 1.45}
+  attackCooldown: 0.5
   areaAttackMpCost: 10
   areaAttackCooldown: 3
   buffMpCost: 15
@@ -4168,6 +4201,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  spumAnimator: {fileID: 0}
 --- !u!114 &4131259909146854280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4227,6 +4261,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829cdc68bb1f20c499baa58414c86fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  spumAnimator: {fileID: 0}
+  fadeImage: {fileID: 0}
+  dieTime: 1
+  fadeTime: 1
+  damageNumberPrefab: {fileID: 0}
+  damageNumberPoint: {fileID: 0}
 --- !u!114 &6458875382229569706
 MonoBehaviour:
   m_ObjectHideFlags: 0

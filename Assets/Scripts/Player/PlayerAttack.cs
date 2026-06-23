@@ -7,6 +7,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private Vector2 attackSize = new Vector2(2.5f, 1.5f);
 
+    [Header("기본공격 설정")]
+    [SerializeField] private float attackCooldown = 0.5f;    //기본공격 쿨타임
+    private bool canAttack = true;
+
     [Header("범위공격 설정")]
     [SerializeField] private int areaAttackMpCost = 10;       //범위공격 소모 MP
     [SerializeField] private float areaAttackCooldown = 3.0f; //범위공격 쿨타임
@@ -30,6 +34,9 @@ public class PlayerAttack : MonoBehaviour
     [Header("몬스터 레이어")]
     [SerializeField] private LayerMask enemyLayer;
 
+    [Header("애니메이션 설정")]
+    [SerializeField] private Animator spumAnimator;
+
     private PlayerStatus playerStatus;
     private PlayerMovement playerMove;
     private PlayerHealth playerHealth;
@@ -51,12 +58,24 @@ public class PlayerAttack : MonoBehaviour
         playerMove = GetComponent<PlayerMovement>();
         playerHealth = GetComponent<PlayerHealth>();
         playerSkill = GetComponent<PlayerSkill>();
+        spumAnimator = GetComponentInChildren<Animator>();
     }
 
     #region 기본공격
     //기본공격 : 공격범위 안에서 플레이어 가장 앞에 있는 몬스터 1마리 공격
     public void Attack()
     {
+        if (!canAttack) return;
+
+        //쿨타임 : 너무 빠르게 재사용 할 수 없도록..
+        StartCoroutine(AttackCooldownCo());
+
+        //애니메이션 : 몬스터가 없어도 공격모션이 나오게끔
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("2_Attack");
+        }
+
         // 공격범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
         Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
         if (hits.Length == 0) return;
@@ -105,6 +124,13 @@ public class PlayerAttack : MonoBehaviour
 
         return targetMonster;
     }
+
+    IEnumerator AttackCooldownCo()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+    }
     #endregion
 
     #region 범위공격
@@ -114,6 +140,12 @@ public class PlayerAttack : MonoBehaviour
         if (!playerSkill.AreaAttackUnlocked) return;       //스킬해금이 되지 않았으면 X : (2레벨부터 사용가능)
         if (!canAreaAttack) return;                        //쿨타임 중이라면 X
         if (!playerStatus.UseMp(areaAttackMpCost)) return; //MP가 부족하면 X
+
+        //애니메이션 
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("2_Attack");
+        }
 
         //범위공격스킬 쿨타임 시작
         StartCoroutine(AreaAttackCooldownCo());
@@ -163,6 +195,12 @@ public class PlayerAttack : MonoBehaviour
         if (!canBuff) return;                        //쿨타임 중이면 X
         if (isBuff) return;                          //이미 버프가 적용중이면 X
         if (!playerStatus.UseMp(buffMpCost)) return; //MP가 부족하면 X
+
+        //애니메이션
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("5_Buff");
+        }
 
         //버프 지속시간
         StartCoroutine(BuffCo());
@@ -225,6 +263,12 @@ public class PlayerAttack : MonoBehaviour
         if (!canInvin) return;                        //쿨타임 중이면 X
         if (isInvin) return;                          //이미 무적상태면 X
         if (!playerStatus.UseMp(invinMpCost)) return; //MP가 부족하면 X
+
+        //애니메이션
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("5_Buff");
+        }
 
         //무적기 지속시간
         StartCoroutine(InvinCo());
