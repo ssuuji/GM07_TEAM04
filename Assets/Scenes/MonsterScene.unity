@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d77b22d5e05854da93a4bc23ee35aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossMove
-  speed: 1
+  speed: 0.5
   boss: {fileID: 0}
 --- !u!61 &46889656
 BoxCollider2D:
@@ -800,16 +800,28 @@ PrefabInstance:
       value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 1906916113648603908, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
+      propertyPath: dropCoolTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906916113648603908, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
+      propertyPath: throwCoolTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1906916113648603908, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
       propertyPath: poisonBallPrefab
       value: 
       objectReference: {fileID: 6872996407926395352, guid: 426ebabf83d2c37459186797e753f828, type: 3}
     - target: {fileID: 4715720945531345204, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715720945531345204, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4715720945531345204, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4715720945531345204, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
       propertyPath: m_LocalPosition.z
