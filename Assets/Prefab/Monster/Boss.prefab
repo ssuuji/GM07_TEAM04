@@ -10,10 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4715720945531345204}
   - component: {fileID: 3014972114136335558}
+  - component: {fileID: 738072141484563231}
+  - component: {fileID: 620982363497849881}
   - component: {fileID: 2534279794350454051}
+  - component: {fileID: 1906916113648603908}
+  - component: {fileID: 2239031841084528390}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.5, y: 1.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5002019365116889087}
@@ -94,6 +98,79 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!50 &738072141484563231
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &620982363497849881
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!114 &2534279794350454051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,9 +184,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
   player: {fileID: 0}
-  moveSpeed: 0
-  maxHealth: 0
+  moveSpeed: 5
+  maxHealth: 500
   Direction: 0
+--- !u!114 &1906916113648603908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46bae96041d20f3459ece7554442fae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAttack
+  shootingPoint: {fileID: 5002019365116889087}
+  droppingPoint: {fileID: 7369423267549948126}
+  attackDuration: 5
+  attackCoolTime: 1
+  shootCoolTime: 1
+  dropCoolTime: 0.5
+  throwCoolTime: 2
+  bulletPrefab: {fileID: 2769472408590175319, guid: 2f1b451c5552dab428ec7acb54d228d2, type: 3}
+  dropPrefab: {fileID: 6854078610707574458, guid: bec2c446bf6d4fd4d8ba5c6080f54557, type: 3}
+  poisonBallPrefab: {fileID: 6872996407926395352, guid: 426ebabf83d2c37459186797e753f828, type: 3}
+--- !u!114 &2239031841084528390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d77b22d5e05854da93a4bc23ee35aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossMove
+  speed: 0.5
+  boss: {fileID: 0}
 --- !u!1 &2618844152807217304
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317e93f50a92a414c8401359b7c5ef32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackPoint
-  boss: {fileID: 2534279794350454051}
+  boss: {fileID: 0}
 --- !u!1 &3182755310258188036
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,9 +313,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f4a24ae4140354898866e58e0b369a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropingPoint
-  boss: {fileID: 2534279794350454051}
+  boss: {fileID: 0}
   movingSpeed: 5
-  movingLength: 8
+  movingLength: 10
 --- !u!50 &4664887619641388149
 Rigidbody2D:
   serializedVersion: 5

@@ -27,7 +27,7 @@ public class MonsterSpawner : MonoBehaviour
         while (waveCount > 0)
         {
 
-            while (CountMonsters() > monsterCountMax)
+            while (CountMonster() > monsterCountMax)
             {
                 yield return null;
             }
@@ -60,8 +60,8 @@ public class MonsterSpawner : MonoBehaviour
             0f);
     }
 
-    private int CountMonsters()
+    private int CountMonster()
     {
-        return GameObject.FindGameObjectsWithTag("Monster").Length; ;
+        return GameObject.FindGameObjectsWithTag("Monster").Length; 
     }
 }

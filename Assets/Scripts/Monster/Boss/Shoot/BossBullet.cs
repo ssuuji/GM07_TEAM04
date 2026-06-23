@@ -3,7 +3,9 @@ using UnityEngine;
 public class BossBullet : MonoBehaviour
 {
     [SerializeField] private Boss boss;
+    [SerializeField] private PlayerHealth player;
 
+    [SerializeField] private int damage = 10;
     [SerializeField] private float bulletSpeed = 2.0f;
     [SerializeField] private float lifeTime = 5.0f;
 
@@ -14,6 +16,8 @@ public class BossBullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+        boss = GameObject.FindWithTag("Boss").GetComponent<Boss>();
     }
 
     private void OnEnable()
@@ -42,6 +46,7 @@ public class BossBullet : MonoBehaviour
         {
             rb.linearVelocity = new Vector2 (-bulletSpeed, 0);
         }
+        bulletSpeed += 0.2f;
     }
 
     private void Aging()
@@ -51,6 +56,14 @@ public class BossBullet : MonoBehaviour
         if(currentLifeTime <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            player.TakeDamage(damage);
         }
     }
 }

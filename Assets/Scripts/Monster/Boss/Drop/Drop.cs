@@ -12,6 +12,7 @@ public class Drop : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        player= GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     private void OnEnable()
@@ -41,12 +42,14 @@ public class Drop : MonoBehaviour
     private void Move()
     {
         rb.linearVelocity = new Vector2(0, -dropSpeed);
+        dropSpeed += 0.2f;
     }
 
     private void Die()
     {
         rb.linearVelocity = Vector2.zero;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
