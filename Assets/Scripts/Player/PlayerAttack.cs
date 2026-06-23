@@ -5,7 +5,22 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("공격범위")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private Vector2 attackSize = new Vector2(2.5f, 1.5f);
+    [SerializeField] private Vector2 attackSize = new Vector2(1.8f, 1.5f);
+    [SerializeField] private Transform areaAttackPoint;
+    [SerializeField] private Vector2 areaAttackSize = new Vector2(2.5f, 1.5f);
+
+    [Header("공격 이펙트")]
+    [SerializeField] private GameObject attackEffectPrefab;
+    [SerializeField] private GameObject areaAttackEffectPrefab;
+    [SerializeField] private Transform slashEffectPoint;
+
+    [Header("버프 이펙트")]
+    [SerializeField] private GameObject buffEffectPrefab;
+    [SerializeField] private Transform buffEffectPoint;
+
+    [Header("기본공격 설정")]
+    [SerializeField] private float attackCooldown = 0.5f;    //기본공격 쿨타임
+    private bool canAttack = true;
 
     [Header("범위공격 설정")]
     [SerializeField] private int areaAttackMpCost = 10;       //범위공격 소모 MP
@@ -30,6 +45,9 @@ public class PlayerAttack : MonoBehaviour
     [Header("몬스터 레이어")]
     [SerializeField] private LayerMask enemyLayer;
 
+    [Header("애니메이션 설정")]
+    [SerializeField] private Animator spumAnimator;
+
     private PlayerStatus playerStatus;
     private PlayerMovement playerMove;
     private PlayerHealth playerHealth;
@@ -51,12 +69,27 @@ public class PlayerAttack : MonoBehaviour
         playerMove = GetComponent<PlayerMovement>();
         playerHealth = GetComponent<PlayerHealth>();
         playerSkill = GetComponent<PlayerSkill>();
+        spumAnimator = GetComponentInChildren<Animator>();
     }
 
     #region 기본공격
     //기본공격 : 공격범위 안에서 플레이어 가장 앞에 있는 몬스터 1마리 공격
     public void Attack()
     {
+        if (!canAttack) return;
+
+        //쿨타임 : 너무 빠르게 재사용 할 수 없도록..
+        StartCoroutine(AttackCooldownCo());
+
+        //애니메이션 : 몬스터가 없어도 공격모션이 나오게끔
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("2_Attack");
+        }
+
+        //이펙트
+        Instantiate(attackEffectPrefab, slashEffectPoint.position, Quaternion.identity);
+
         // 공격범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
         Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
         if (hits.Length == 0) return;
@@ -105,6 +138,13 @@ public class PlayerAttack : MonoBehaviour
 
         return targetMonster;
     }
+
+    IEnumerator AttackCooldownCo()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+    }
     #endregion
 
     #region 범위공격
@@ -115,11 +155,20 @@ public class PlayerAttack : MonoBehaviour
         if (!canAreaAttack) return;                        //쿨타임 중이라면 X
         if (!playerStatus.UseMp(areaAttackMpCost)) return; //MP가 부족하면 X
 
+        //애니메이션 
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("2_Attack");
+        }
+
+        //이펙트
+        Instantiate(areaAttackEffectPrefab, slashEffectPoint.position, Quaternion.identity);
+
         //범위공격스킬 쿨타임 시작
         StartCoroutine(AreaAttackCooldownCo());
 
         // 공격범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
-        Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(areaAttackPoint.position, areaAttackSize, 0f, enemyLayer);
         if (hits.Length == 0) return;
 
         //해당 범위의 모든 몬스터들 공격
@@ -163,6 +212,15 @@ public class PlayerAttack : MonoBehaviour
         if (!canBuff) return;                        //쿨타임 중이면 X
         if (isBuff) return;                          //이미 버프가 적용중이면 X
         if (!playerStatus.UseMp(buffMpCost)) return; //MP가 부족하면 X
+
+        //애니메이션
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("5_Buff");
+        }
+
+        //이펙트
+        Instantiate(buffEffectPrefab, buffEffectPoint.position, Quaternion.identity);
 
         //버프 지속시간
         StartCoroutine(BuffCo());
@@ -226,6 +284,15 @@ public class PlayerAttack : MonoBehaviour
         if (isInvin) return;                          //이미 무적상태면 X
         if (!playerStatus.UseMp(invinMpCost)) return; //MP가 부족하면 X
 
+        //애니메이션
+        if (spumAnimator != null)
+        {
+            spumAnimator.SetTrigger("5_Buff");
+        }
+
+        //이펙트
+        Instantiate(buffEffectPrefab, buffEffectPoint.position, Quaternion.identity);
+
         //무적기 지속시간
         StartCoroutine(InvinCo());
         //무적기 쿨타임
@@ -274,8 +341,13 @@ public class PlayerAttack : MonoBehaviour
         //공격 범위 확인 Gizmos
         if (attackPoint != null)
         {
-            Gizmos.color = Color.yellow;
+            Gizmos.color = Color.blue;
             Gizmos.DrawWireCube(attackPoint.position, attackSize);
+        }
+        if (areaAttackPoint != null)
+        {
+            Gizmos.color = Color.orange;
+            Gizmos.DrawWireCube(areaAttackPoint.position, areaAttackSize);
         }
     }
 }

@@ -10,8 +10,10 @@ public class BossAttack : MonoBehaviour
     [SerializeField] private float attackCoolTime = 1.0f;
     [SerializeField] private float shootCoolTime = 1.0f;
     [SerializeField] private float dropCoolTime = 1.0f;
+    [SerializeField] private float throwCoolTime = 1.0f;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject dropPrefab;
+    [SerializeField] private GameObject poisonBallPrefab;
 
     private int randomInt;
     private Coroutine currentAttack;
@@ -33,7 +35,7 @@ public class BossAttack : MonoBehaviour
     {
         while (true)
         {
-            randomInt = Random.Range(0, 2);
+            randomInt = Random.Range(0, 3);
             StartAttack(randomInt);
             yield return new WaitForSeconds(attackDuration);
             EndAttack();
@@ -58,6 +60,15 @@ public class BossAttack : MonoBehaviour
             yield return new WaitForSeconds(dropCoolTime);
         }
     }
+
+    IEnumerator ThrowingCo()
+    {
+        while (true)
+        {
+            ThrowPoison();
+            yield return new WaitForSeconds(throwCoolTime);
+        }
+    }
     
     private void StartAttack(int random)
     {
@@ -69,6 +80,9 @@ public class BossAttack : MonoBehaviour
 
             case 1:
                 currentAttack = StartCoroutine(DroppingCo());
+                break;
+            case 2:
+                currentAttack = StartCoroutine(ThrowingCo());
                 break;
         }
 
@@ -91,5 +105,10 @@ public class BossAttack : MonoBehaviour
     private void Drop()
     {
         Instantiate(dropPrefab, droppingPoint.position, Quaternion.identity);
+    }
+
+    private void ThrowPoison()
+    {
+        Instantiate(poisonBallPrefab, shootingPoint.position, Quaternion.identity);
     }
 }
