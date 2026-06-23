@@ -4,7 +4,7 @@ public class PlayerWall : MonoBehaviour
 {
     [Header("벽 체크")]
     [SerializeField] private Transform wallCheck;                         //벽 체크
-    [SerializeField] private Vector2 checkSize = new Vector2(0.1f, 0.8f); //벽 체크범위
+    [SerializeField] private Vector2 checkSize = new Vector2(0.3f, 1.7f); //벽 체크범위
     [SerializeField] private LayerMask wallLayer;                         //벽 체크레이어
 
     [Header("슬라이드")]
@@ -60,23 +60,16 @@ public class PlayerWall : MonoBehaviour
 
         //벽 방향으로 방향키를 누르고 있는지 확인
         bool isInputWall = moveX != 0 && Mathf.Sign(moveX) == dir;
-
-        //애니메이션
         if (isInputWall)
         {
-            //벽타기 애니메이션이 없어서 .. Idle 상태로
+            //벽타기 애니메이션이 없으므로.. 일단 Idle 상태로 처리
             if (spumAnimator != null)
             {
                 spumAnimator.SetBool("7_Jump", false);
                 spumAnimator.SetBool("1_Move", false);
             }
-        }
 
-        //아래로 떨어지고 있으면서 벽쪽으로 방향키를 누르고 있을 때 천천히 내려오기
-        if (rb.linearVelocity.y < 0 && isInputWall)
-        {
-            
-
+            //천천히 내려오기
             rb.linearVelocity = new Vector2(0f, -wallSlideSpeed);
         }
     }

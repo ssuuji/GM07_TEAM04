@@ -12,7 +12,7 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("애니메이션 설정")]
-    [SerializeField] private Animator spumAnimator;
+    [SerializeField] private Animator spumAnimator;  
 
     private Rigidbody2D rb;
     private bool isGround; //바닥 체크
