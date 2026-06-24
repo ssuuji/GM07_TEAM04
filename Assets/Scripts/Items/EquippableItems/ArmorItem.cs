@@ -5,10 +5,10 @@ using UnityEngine;
 public class ArmorItem : EquippableItem
 {
     [Header("Armor Item Setting")]
-    [SerializeField] private int defPower;
+    [SerializeField] private int baseDefPower;
 
     // 프로퍼티
-    public int DefPower => defPower;
+    public int CurrentDefPower => baseDefPower + (UpgradeLevel * 2);    // 강화 수치를 반영한 실제 방어력 증가량
 
     private void Awake()
     {
@@ -21,8 +21,7 @@ public class ArmorItem : EquippableItem
     public override void Equip(GameObject target)
     {
         // 아이템 효과 적용
-        // Attach 등의 메서드를 통해 오브젝트를 특정 위치에 장착
-        Debug.Log($"방어구 아이템 장착 시도 ! | + {defPower}");
+        Debug.Log($"방어구 아이템 장착 시도 ! | + {CurrentDefPower}");
 
         PlayerEquipment playerEquipment = target.GetComponent<PlayerEquipment>();
         playerEquipment.EquipArmor(this);
@@ -31,8 +30,7 @@ public class ArmorItem : EquippableItem
     public override void UnEquip(GameObject target)
     {
         // 아이템 효과 제거
-        // Dettach 등의 메서드를 통해 오브젝트를 제거
-        Debug.Log($"방어구 아이템 장착 해제 시도 ! | - {defPower}");
+        Debug.Log($"방어구 아이템 장착 해제 시도 ! | - {CurrentDefPower}");
 
         PlayerEquipment playerEquipment = target.GetComponent<PlayerEquipment>();
         playerEquipment.UnEquipArmor();

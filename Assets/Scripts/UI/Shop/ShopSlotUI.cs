@@ -19,6 +19,7 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
 
     public void UpdateSlot(InventoryItem item)
     {
+        // 아이템 데이터 저장
         currentItem = item;
         // 아이콘 이미지 적용 및 투명도 조절
         iconImage.sprite = item.ItemData.ItemIcon;
@@ -30,25 +31,29 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
             amountText.text = item.Amount.ToString();
             amountText.gameObject.SetActive(true);
         }
+        // 1개 이하면 비활성화
         else
         {
             amountText.gameObject.SetActive(false);
         }
+        // 아이템 이름 활성화 및 갱신
         nameText.gameObject.SetActive(true);
         nameText.text = item.ItemData.ItemName;
+        // 아이템 가격 활성화 및 갱신
         priceText.gameObject.SetActive(true);
         priceText.text = item.ItemData.ItemPrice.ToString();
+        // 아이템 설명 활성화
         descriptionText.gameObject.SetActive(true);
-        // 아이템 타입에 따른 설명
+        // 아이템 타입에 따른 설명 갱신
         if (item.ItemData.ItemType == ItemType.Equipment)
         {
             if (item.ItemData is WeaponItem weapon)
             {
-                descriptionText.text = $"AtkPower +{weapon.AtkPower}";
+                descriptionText.text = $"AtkPower +{weapon.CurrentAtkPower}";
             }
             else if (item.ItemData is ArmorItem armor)
             {
-                descriptionText.text = $"DefPower +{armor.DefPower}";
+                descriptionText.text = $"DefPower +{armor.CurrentDefPower}";
             }
         }
         if (item.ItemData.ItemType == ItemType.Consumable)
@@ -57,10 +62,11 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
             {
                 if (consumable.Effects == null || consumable.Effects.Count <= 0) return;
                 // 여러 효과가 있을 수 있으므로 StringBuilder사용
+                // StringBuilder : 문자열 수정, 문자열 결합 시 발생하는 메모리 할당, GC 문제를 방지해 최적화하는 클래스
                 System.Text.StringBuilder effectDesc = new System.Text.StringBuilder();
                 for (int i = 0; i < consumable.Effects.Count; i++)
                 {
-                    // 위 1단계에서 만든 Description 프로퍼티 활용
+                    // Effect에 정의해둔 Description 활용
                     effectDesc.Append(consumable.Effects[i].Description);
 
                     // 효과가 여러 개일 경우 줄바꿈 추가
