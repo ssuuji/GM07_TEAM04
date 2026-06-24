@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: beb5229fd3d98d3489ae3cce477221d1
-AssetOrigin:
-  serializedVersion: 1
-  productId: 280247
-  packageName: 'Fantasy Chests: Pixel art Animation'
-  packageVersion: 1.0
-  assetPath: Assets/FantasyChestPixelArtAsset/small_chests/sheetlist_48x32_smallchest_1.png
-  uploadId: 652900
+guid: 25dcd21f143b79a4686a57d4165cfba4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -130,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sheetlist_48x32_bigchest_1_0
+      name: Chest_0
       rect:
         serializedVersion: 2
         x: 0
@@ -138,21 +131,21 @@ TextureImporter:
         width: 48
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 537ec256ee168ea43b25a139b57dad61
-      internalID: 526432443
+      spriteID: cd977daadfae16146adcb1dfd31b2b10
+      internalID: 458889154
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheetlist_48x32_bigchest_1_1
+      name: Chest_1
       rect:
         serializedVersion: 2
         x: 48
@@ -160,21 +153,21 @@ TextureImporter:
         width: 48
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f34988ba8ac22e749b920e5fc8309c52
-      internalID: 251177634
+      spriteID: 9cad2fac3d29f1840ad6821cc6412f05
+      internalID: -730269606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheetlist_48x32_bigchest_1_2
+      name: Chest_2
       rect:
         serializedVersion: 2
         x: 96
@@ -182,21 +175,21 @@ TextureImporter:
         width: 48
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e273359411c00b54ab36231d544244e8
-      internalID: -1174437656
+      spriteID: d09334a45e3686a4bb26e457530d0bee
+      internalID: -1716407794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheetlist_48x32_bigchest_1_3
+      name: Chest_3
       rect:
         serializedVersion: 2
         x: 144
@@ -204,21 +197,21 @@ TextureImporter:
         width: 48
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f32f52b37251ce8418eba356a2f60d15
-      internalID: 887052267
+      spriteID: 2f0803310ecfaf448bd4c99765aa1f84
+      internalID: 582610180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheetlist_48x32_bigchest_1_4
+      name: Chest_4
       rect:
         serializedVersion: 2
         x: 192
@@ -226,21 +219,21 @@ TextureImporter:
         width: 48
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c70eb8795a04db47b1fdc9a355030da
-      internalID: 1201243856
+      spriteID: a98affcec50267c479418d6c33fe66af
+      internalID: 1203413150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheetlist_48x32_bigchest_1_5
+      name: Chest_5
       rect:
         serializedVersion: 2
         x: 240
@@ -248,15 +241,15 @@ TextureImporter:
         width: 48
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 618186eeb078ef9449a109c9218e0aaa
-      internalID: -397965613
+      spriteID: d8544bff535b7e84f9e751b29cb56653
+      internalID: 1129745566
       vertices: []
       indices: 
       edges: []
@@ -273,14 +266,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":48.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      sheetlist_48x32_bigchest_1_0: 526432443
-      sheetlist_48x32_bigchest_1_1: 251177634
-      sheetlist_48x32_bigchest_1_2: -1174437656
-      sheetlist_48x32_bigchest_1_3: 887052267
-      sheetlist_48x32_bigchest_1_4: 1201243856
-      sheetlist_48x32_bigchest_1_5: -397965613
+      Chest_0: 458889154
+      Chest_1: -730269606
+      Chest_2: -1716407794
+      Chest_3: 582610180
+      Chest_4: 1203413150
+      Chest_5: 1129745566
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
