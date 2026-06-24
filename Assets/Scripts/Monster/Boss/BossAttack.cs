@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
+    [SerializeField] private Boss boss;
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform droppingPoint;
     [SerializeField] private float attackDuration = 5.0f;
@@ -11,9 +12,9 @@ public class BossAttack : MonoBehaviour
     [SerializeField] private float shootCoolTime = 1.0f;
     [SerializeField] private float dropCoolTime = 1.0f;
     [SerializeField] private float throwCoolTime = 1.0f;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private GameObject dropPrefab;
-    [SerializeField] private GameObject poisonBallPrefab;
+    [SerializeField] private BossBullet bulletPrefab;
+    [SerializeField] private Drop dropPrefab;
+    [SerializeField] private PoisonBall poisonBallPrefab;
 
     private int randomInt;
     private Coroutine currentAttack;
@@ -22,6 +23,7 @@ public class BossAttack : MonoBehaviour
 
     private void Awake()
     {
+        boss = GetComponent<Boss>();
         shootingPoint = transform.Find("ShootingPoint");
         droppingPoint = transform.Find("DroppingPoint");
     }
@@ -99,16 +101,18 @@ public class BossAttack : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+        BossBullet bullet = Instantiate(bulletPrefab, shootingPoint.position, Quaternion.identity);
+        bullet.Init(boss);
     }
 
     private void Drop()
     {
-        Instantiate(dropPrefab, droppingPoint.position, Quaternion.identity);
+        Drop drop = Instantiate(dropPrefab, droppingPoint.position, Quaternion.identity);
     }
 
     private void ThrowPoison()
     {
-        Instantiate(poisonBallPrefab, shootingPoint.position, Quaternion.identity);
+        PoisonBall poisonBall = Instantiate(poisonBallPrefab, shootingPoint.position, Quaternion.identity);
+        poisonBall.Init(boss);
     }
 }

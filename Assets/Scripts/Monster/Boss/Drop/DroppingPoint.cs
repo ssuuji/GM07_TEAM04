@@ -9,7 +9,6 @@ public class DroppingPoint : MonoBehaviour
     [SerializeField] private float movingLength = 8.0f;
 
     private Rigidbody2D rb;
-    private Vector3 startPosition;
     private bool moveDirection;
 
 
@@ -24,7 +23,7 @@ public class DroppingPoint : MonoBehaviour
         {
             boss = GetComponentInParent<Boss>();
         }
-        startPosition = transform.localPosition;
+        
     }
 
     private void Start()
@@ -43,11 +42,11 @@ public class DroppingPoint : MonoBehaviour
     {
         if(moveDirection)
         {
-            rb.linearVelocity = new Vector2(movingSpeed, 0);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x + movingSpeed, 0);
         }
         else
         {
-            rb.linearVelocity = new Vector2(-movingSpeed, 0);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x - movingSpeed, 0);
         }
     }
 
@@ -55,7 +54,7 @@ public class DroppingPoint : MonoBehaviour
     {
         while (true)
         {
-            if (Mathf.Abs(transform.localPosition.x - startPosition.x) >= movingLength)
+            if (Mathf.Abs(transform.localPosition.x - boss.transform.position.x) >= movingLength)
             {
                 moveDirection = !moveDirection;
                 yield return new WaitForSeconds(1f);
