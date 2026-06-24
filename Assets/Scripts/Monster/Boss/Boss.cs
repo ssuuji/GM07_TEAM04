@@ -5,17 +5,22 @@ using UnityEngine;
 public class Boss : MonoBehaviour, IDamageable
 {
     [SerializeField] GameObject player;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float maxHealth;
 
+    [SerializeField] private int maxHealth = 500;
 
-    private float currentHealth;
+    [SerializeField] Cloning cloning;
 
+    //테스트용
+    private float flairTime = 1.0f;
+
+    private int currentHealth;
+    public bool IsFake = false;
     public bool Direction = false;
 
     private void Awake()
     {
         currentHealth = maxHealth;
+        cloning = GetComponent<Cloning>();  
     }
 
     private void Start()
@@ -29,6 +34,9 @@ public class Boss : MonoBehaviour, IDamageable
     private void Update()
     {
         UpdateDirection();
+
+        //테스트용
+        Flair();
     }
 
     private void UpdateDirection()
@@ -39,6 +47,12 @@ public class Boss : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+
+        if (currentHealth % 35 == 0 && IsFake == false)
+        {
+            cloning.UseCloning();
+        }
 
         if (currentHealth <= 0)
         {
@@ -51,8 +65,33 @@ public class Boss : MonoBehaviour, IDamageable
         //}
     }
 
+    public void SetHp(int hp)
+    {
+        currentHealth = hp;
+    }
+
+    public int GetHpInfo()
+    {
+        return currentHealth;
+    }
+
+
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    //테스트용
+    private void Flair()
+    {
+        if (flairTime <= 0)
+        {
+            TakeDamage(10);
+            flairTime = 1;
+        }
+        else
+        {
+            flairTime -= Time.deltaTime;
+        }
     }
 }

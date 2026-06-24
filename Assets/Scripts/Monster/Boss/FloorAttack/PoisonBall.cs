@@ -11,11 +11,17 @@ public class PoisonBall : MonoBehaviour
     private float throwingPower;
     private Rigidbody2D rb;
 
+    public void Init(Boss boss)
+    {
+        this.boss = boss;
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        boss = GameObject.FindWithTag("Boss").GetComponent<Boss>();
     }
+
+    
 
     private void Start()
     {
