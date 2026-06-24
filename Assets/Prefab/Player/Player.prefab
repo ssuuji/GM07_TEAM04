@@ -3440,6 +3440,37 @@ Transform:
   - {fileID: 2823183483213725832}
   m_Father: {fileID: 143780221423480810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2261299921566192818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6482824260393418039}
+  m_Layer: 0
+  m_Name: DashPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6482824260393418039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261299921566192818}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.4, y: 3.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5231766338184684316}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2324567113828580855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3954,6 +3985,7 @@ Transform:
   - {fileID: 8608809506551209718}
   - {fileID: 8562948086010965986}
   - {fileID: 2787783667330534604}
+  - {fileID: 6482824260393418039}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2821442040494701557
@@ -4003,7 +4035,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: d4af4fb54795e6f43ad0a19fe1b22403, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4133,6 +4165,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
   spumAnimator: {fileID: 6987284825911416808}
+  audioSource: {fileID: 0}
+  moveSound: {fileID: 8300000, guid: 0f97509dcee5a024f98f2cb3f986cb53, type: 3}
+  moveSoundInterval: 0.4
 --- !u!114 &1580491731318122680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4193,6 +4228,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   spumAnimator: {fileID: 0}
+  audioSource: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 9e4a241481509fa4785581ee757913b4, type: 3}
+  jumpEffectPrefab: {fileID: 9203438506646207666, guid: 8269a693e99d1474f9225e8d39edb34f, type: 3}
+  jumpEffectPoint: {fileID: 4200473906353506656}
 --- !u!114 &5928616671076496107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4208,6 +4247,11 @@ MonoBehaviour:
   dashPower: 20
   dashTime: 0.2
   dashCooldown: 1
+  audioSource: {fileID: 0}
+  dashSound: {fileID: 8300000, guid: d48ad370467a1004a81ece5ad8464a1c, type: 3}
+  dashEffectPrefab: {fileID: 9203438506646207666, guid: 6aab09d2ca6732f4aa8e6ad409783b01, type: 3}
+  dashPoint: {fileID: 6482824260393418039}
+  dashSize: {x: 0.28, y: 0.7}
 --- !u!114 &1210297170528098767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4220,6 +4264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b917ec32e7c032f41ab4e118b058ecb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  isInShop: 0
+  isInSmith: 0
 --- !u!114 &6788831975828478449
 MonoBehaviour:
   m_ObjectHideFlags: 0

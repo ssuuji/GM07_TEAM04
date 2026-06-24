@@ -65,7 +65,6 @@ public class PlayerWall : MonoBehaviour
             //벽타기 애니메이션이 없으므로.. 일단 Idle 상태로 처리
             if (spumAnimator != null)
             {
-                spumAnimator.SetBool("7_Jump", false);
                 spumAnimator.SetBool("1_Move", false);
             }
 
