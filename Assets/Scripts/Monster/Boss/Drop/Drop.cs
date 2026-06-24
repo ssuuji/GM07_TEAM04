@@ -9,6 +9,7 @@ public class Drop : MonoBehaviour
     private Rigidbody2D rb;
     private float currentLifeTime;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

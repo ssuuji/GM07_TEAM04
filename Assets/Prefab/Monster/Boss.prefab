@@ -11,9 +11,14 @@ GameObject:
   - component: {fileID: 4715720945531345204}
   - component: {fileID: 3014972114136335558}
   - component: {fileID: 2534279794350454051}
-  m_Layer: 0
+  - component: {fileID: 5175112856139856591}
+  - component: {fileID: 5340671927739267603}
+  - component: {fileID: 3484256187747145676}
+  - component: {fileID: 8979728276219844328}
+  - component: {fileID: 5621435265256864722}
+  m_Layer: 7
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,9 +112,139 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
   player: {fileID: 0}
-  moveSpeed: 0
-  maxHealth: 0
+  maxHealth: 500
+  cloning: {fileID: 0}
+  IsFake: 0
   Direction: 0
+--- !u!114 &5175112856139856591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46bae96041d20f3459ece7554442fae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAttack
+  boss: {fileID: 0}
+  shootingPoint: {fileID: 5002019365116889087}
+  droppingPoint: {fileID: 7369423267549948126}
+  attackDuration: 5
+  attackCoolTime: 1
+  shootCoolTime: 1
+  dropCoolTime: 1
+  throwCoolTime: 1
+  bulletPrefab: {fileID: 338599266752577140, guid: 2f1b451c5552dab428ec7acb54d228d2, type: 3}
+  dropPrefab: {fileID: 3910219672178960412, guid: bec2c446bf6d4fd4d8ba5c6080f54557, type: 3}
+  poisonBallPrefab: {fileID: 4640182280107946811, guid: 426ebabf83d2c37459186797e753f828, type: 3}
+--- !u!114 &5340671927739267603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d77b22d5e05854da93a4bc23ee35aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossMove
+  reach: 5
+  speed: 1
+  boss: {fileID: 0}
+  player: {fileID: 0}
+--- !u!50 &3484256187747145676
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &8979728276219844328
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &5621435265256864722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118292537483752031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2818cf4b66d15754bb5f8e14b9a6da9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cloning
+  boss: {fileID: 0}
+  bossPrefab: {fileID: 2534279794350454051}
+  cloneCount: 4
+  spawnWidth: 10
+  spawnHeight: 5
 --- !u!1 &2618844152807217304
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5002019365116889087}
   - component: {fileID: 4454512186063552001}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +301,7 @@ GameObject:
   - component: {fileID: 7369423267549948126}
   - component: {fileID: 5356081367934323873}
   - component: {fileID: 4664887619641388149}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DroppingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

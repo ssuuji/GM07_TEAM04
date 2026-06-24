@@ -13,16 +13,21 @@ public class BossBullet : MonoBehaviour
     private bool direction;
     private float currentLifeTime;
 
+    public void Init(Boss boss)
+    {
+        this.boss = boss;
+        direction = boss.Direction;
+    }
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
-        boss = GameObject.FindWithTag("Boss").GetComponent<Boss>();
     }
 
     private void OnEnable()
     {
-        direction = boss.Direction;
         currentLifeTime = lifeTime;
     }
 
