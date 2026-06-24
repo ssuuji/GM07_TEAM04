@@ -48,6 +48,13 @@ public class PlayerAttack : MonoBehaviour
     [Header("애니메이션 설정")]
     [SerializeField] private Animator spumAnimator;
 
+    [Header("스킬 사운드")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip attackSound;
+    [SerializeField] private AudioClip areaAttackSound;
+    [SerializeField] private AudioClip buffSound;
+    [SerializeField] private AudioClip invinSound;
+
     private PlayerStatus playerStatus;
     private PlayerMovement playerMove;
     private PlayerHealth playerHealth;
@@ -70,6 +77,7 @@ public class PlayerAttack : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         playerSkill = GetComponent<PlayerSkill>();
         spumAnimator = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     #region 기본공격
@@ -87,8 +95,11 @@ public class PlayerAttack : MonoBehaviour
             spumAnimator.SetTrigger("2_Attack");
         }
 
+        //사운드 
+        audioSource.PlayOneShot(attackSound);
+
         //이펙트
-        Instantiate(attackEffectPrefab, slashEffectPoint.position, Quaternion.identity);
+        Instantiate(attackEffectPrefab, slashEffectPoint.position, Quaternion.identity, slashEffectPoint);
 
         // 공격범위 안 enemy레이어를 가진 몬스터 콜라이더 리스트
         Collider2D[] hits = Physics2D.OverlapBoxAll(attackPoint.position, attackSize, 0f, enemyLayer);
@@ -161,8 +172,11 @@ public class PlayerAttack : MonoBehaviour
             spumAnimator.SetTrigger("2_Attack");
         }
 
+        //사운드 
+        audioSource.PlayOneShot(areaAttackSound);
+
         //이펙트
-        Instantiate(areaAttackEffectPrefab, slashEffectPoint.position, Quaternion.identity);
+        Instantiate(areaAttackEffectPrefab, slashEffectPoint.position, Quaternion.identity, slashEffectPoint);
 
         //범위공격스킬 쿨타임 시작
         StartCoroutine(AreaAttackCooldownCo());
@@ -218,6 +232,9 @@ public class PlayerAttack : MonoBehaviour
         {
             spumAnimator.SetTrigger("5_Buff");
         }
+
+        //사운드 
+        audioSource.PlayOneShot(buffSound);
 
         //이펙트
         Instantiate(buffEffectPrefab, buffEffectPoint.position, Quaternion.identity);
@@ -289,6 +306,9 @@ public class PlayerAttack : MonoBehaviour
         {
             spumAnimator.SetTrigger("5_Buff");
         }
+
+        //사운드 
+        audioSource.PlayOneShot(invinSound);
 
         //이펙트
         Instantiate(buffEffectPrefab, buffEffectPoint.position, Quaternion.identity);
