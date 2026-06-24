@@ -48,6 +48,7 @@ public class InventoryManager : Singleton<InventoryManager>
     // 아이템 획득 실패 시 false 반환
     public bool AddItem(Item newItem, int count = 1)
     {
+        Item itemData = newItem;
         // UI 갱신용
         InventoryUI inventoryUI = FindFirstObjectByType<InventoryUI>();
         if (inventoryUI == null) return false;
@@ -84,6 +85,12 @@ public class InventoryManager : Singleton<InventoryManager>
                 }
             }
         }
+        // 장비 아이템이라면
+        if (newItem.ItemType == ItemType.Equipment)
+        {
+            // SO의 복사본 저장
+            itemData = Instantiate(newItem);
+        }
         // 인벤토리의 크기가 가득 찼을 경우
         if (inventoryDictionary.Count >= maxSize)
         {
@@ -95,13 +102,13 @@ public class InventoryManager : Singleton<InventoryManager>
         // 위 두 조건 모두 아닐 경우
         // + 중복 획득이 가능한 소모품이 아닌 경우 (아이템 획득 시 무조건 새로운 슬롯을 필요로 하는 경우)
         // + 인벤토리가 가득 차지 않은 경우 (빈 아이템 슬롯이 존재하는 경우)
-        // 인벤토리에 아이템 저장
+        // 인벤토리에 장비 아이템 저장
         // 아이템 생성 및 저장
-        InventoryItem newItemInstance = new InventoryItem(newItem, count);
-        // 인벤토리 딕셔너리에 아이템 ID값을 Key값으로 지정해서 추가
+        InventoryItem newItemInstance = new InventoryItem(itemData, count);
+        // 인벤토리 딕셔너리에 장비 아이템 ID값을 Key값으로 지정해서 추가
         inventoryDictionary.Add(newItemInstance.ItemData.ItemID, newItemInstance);
         // 아이템 획득 완료 디버그
-        Debug.Log($"[Get New EquippableItem] | [{newItem.ItemName}] + {count}");
+        Debug.Log($"[Get New EquippableItem] | [{newItem.ItemName}] +{count}");
         // 인벤토리 UI 갱신
         inventoryUI.RefreshUI();
         // 아이템 획득 성공

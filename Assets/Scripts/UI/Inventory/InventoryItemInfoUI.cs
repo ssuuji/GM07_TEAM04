@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class InventoryItemInfoUI : MonoBehaviour
 {
+    // 출력할 정보 UI 설정
     [Header("Info Panel Setting")]
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
-
+    // UI가 생성될 위치 설정
     [Header("Panel Settings")]
     [SerializeField] private Vector2 cursorOffset = new Vector2(15f, -15f);
     private RectTransform rectTransform;
@@ -18,6 +19,7 @@ public class InventoryItemInfoUI : MonoBehaviour
 
     private void Awake()
     {
+        // 컴포넌트 받아오기
         rectTransform = GetComponent<RectTransform>();
         parentRectTransform = transform.parent as RectTransform;
         parentCanvas = GetComponentInParent<Canvas>();
@@ -25,26 +27,36 @@ public class InventoryItemInfoUI : MonoBehaviour
 
     private void Update()
     {
+        // 커서 위치 따라가기
         FollowCursor();
     }
 
     /*=============== Method ===============*/
 
+    // 아이템 정보 설정
     public void SetItemInfo(InventoryItem item)
     {
+        // 아이콘 갱신
         iconImage.sprite = item.ItemData.ItemIcon;
-        nameText.text = item.ItemData.ItemName;
-
-        // 아이템 타입에 따른 설명
+        // 아이템 이름 갱신
+        if (item.ItemData is EquippableItem equip)
+        {
+            nameText.text = $"{equip.ItemName} (+{equip.UpgradeLevel})";
+        }
+        else
+        {
+            nameText.text = item.ItemData.ItemName;
+        }
+        // 아이템 타입에 따른 설명 갱신
         if (item.ItemData.ItemType == ItemType.Equipment)
         {
             if (item.ItemData is WeaponItem weapon)
             {
-                descriptionText.text = $"AtkPower +{weapon.AtkPower}";
+                descriptionText.text = $"AtkPower +{weapon.CurrentAtkPower}";
             }
             else if (item.ItemData is ArmorItem armor)
             {
-                descriptionText.text = $"DefPower +{armor.DefPower}";
+                descriptionText.text = $"DefPower +{armor.CurrentDefPower}";
             }
         }
         if (item.ItemData.ItemType == ItemType.Consumable)
@@ -77,11 +89,12 @@ public class InventoryItemInfoUI : MonoBehaviour
         if (Mouse.current == null) return;
 
         // 캔버스의 렌더 모드가 Overlay면 null, Camera/World면 해당 카메라를 저장
-        // 캔버스 상황에 따라 UI 위치에 오차가 생길 수 있기 때문에 미리 저장
+        // 캔버스 상황에 따라 UI 위치에 오차가 생길 수 있기 때문에 미리 설정
         Camera uiCamera = parentCanvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : parentCanvas.worldCamera;
+        // InputSystem을 통해 구한 마우스 위치값
         Vector2 mousePos = Mouse.current.position.ReadValue();
         
-        // 마우스 좌표를 UI 패널 부모의 로컬 좌표로 반환하는 법
+        // 마우스 좌표를 UI 패널 부모의 로컬 좌표로 반환하는 클래스.메서드
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             parentRectTransform,    // 부모인 캔버스의 RectTransform값
             mousePos,               // InputSystem을 통한 마우스 위치값

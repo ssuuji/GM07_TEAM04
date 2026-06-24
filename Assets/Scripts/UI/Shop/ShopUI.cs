@@ -5,11 +5,14 @@ public class ShopUI : MonoBehaviour
 {
     // 관리할 UI 컴포넌트 연결
     [Header("UI Component Binding")]
-    [SerializeField] private GameObject shopUIPanel;   // 상점 전체 UI패널
+    [SerializeField] private GameObject shopUIPanel;        // 상점 전체 UI패널
     [SerializeField] private Transform slotParent;          // 상점 슬롯 생성 시 들어갈 위치
     [SerializeField] private GameObject slotPrefab;         // 상점 한 칸을 담당할 슬롯 프리팹
 
     private List<ShopSlotUI> slotUIList = new List<ShopSlotUI>(); // 생성할 SlotUI들 리스트로 관리
+
+    // 프로퍼티
+    public bool IsOpened => shopUIPanel != null && shopUIPanel.activeSelf;  // UI가 존재하고 켜져있을 때
 
     private void Awake()
     {
@@ -22,15 +25,8 @@ public class ShopUI : MonoBehaviour
 
     private void Start()
     {
+        // 상점 가방 초기화
         InitializeShopSlots(ShopManager.Instance.MaxSize);
-    }
-
-    private void Update()
-    {
-        if (InputManager.IsInteract)
-        {
-            ToggleShopyUI();
-        }
     }
 
     /*=============== Method ===============*/
@@ -57,7 +53,7 @@ public class ShopUI : MonoBehaviour
             slotUIList.Add(slotUI);
         }
     }
-    private void ToggleShopyUI()
+    public void ToggleShopUI()
     {
         // 예외 처리
         if (shopUIPanel == null) return;
@@ -68,7 +64,7 @@ public class ShopUI : MonoBehaviour
 
         if (!isActive)
         {
-            // 인벤토리가 닫히면 데이터 갱신
+            // 인벤토리가 켜질 때 데이터 갱신
             RefreshUI();
         }
     }
@@ -85,12 +81,11 @@ public class ShopUI : MonoBehaviour
         {
             slotUIList[i].ClearSlot();
         }
-        // 인벤토리 슬롯에 실제 아이템 데이터 저장
+        // 상점 슬롯에 실제 아이템 데이터 저장
         int slotIndex = 0;
         foreach (var item in ShopManager.Instance.ShopDictionary)
         {
-            // 예외 처리
-            // 인벤토리가 가득 찬 경우 중지
+            // 상점이 가득 찬 경우 중지
             if (slotIndex >= slotUIList.Count) break;
             // 슬롯에 아이템 저장
             InventoryItem itemInstance = item.Value;
