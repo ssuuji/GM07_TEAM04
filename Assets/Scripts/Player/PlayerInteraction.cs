@@ -14,13 +14,14 @@ public class PlayerInteraction : MonoBehaviour
         if (IsInShop)
         {
             Debug.Log("상점 오픈");
-            if (ShopManager.Instance == null) return;
-            ShopManager.Instance.ToggleShop();
+            if (ShopManager.Instance != null)
+            {
+                ShopManager.Instance.ToggleShop();
+            }
         }
         else
         {
-            if (ShopManager.Instance == null) return;
-            if (ShopManager.Instance.IsShopOpend())
+            if (ShopManager.Instance != null && ShopManager.Instance.IsShopOpend())
             {
                 ShopManager.Instance.ToggleShop();
             }
@@ -29,13 +30,14 @@ public class PlayerInteraction : MonoBehaviour
         if (IsInSmith)
         {
             Debug.Log("대장간 오픈");
-            if (SmithUI.Instance == null) return;
-            SmithUI.Instance.ToggleSmithUI();
+            if (SmithUI.Instance != null)
+            {
+                SmithUI.Instance.ToggleSmithUI();
+            }
         }
         else
         {
-            if (SmithUI.Instance == null) return;
-            if (SmithUI.Instance.IsOpened)
+            if (SmithUI.Instance != null && SmithUI.Instance.IsOpened)
             {
                 SmithUI.Instance.ToggleSmithUI();
             }

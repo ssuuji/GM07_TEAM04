@@ -22,7 +22,11 @@ public class SmithUI : Singleton<SmithUI>
 
     // 프로퍼티
     public bool IsOpened => smithUI != null && smithUI.activeSelf;
-
+    protected override void Awake()
+    {
+        // UI 전부 닫고 시작
+        ClearUI();
+    }
 
     private void Start()
     {
@@ -33,8 +37,6 @@ public class SmithUI : Singleton<SmithUI>
         {
             upgradeButton.onClick.AddListener(OnClickUpgradeButton);
         }
-        // UI 전부 닫고 시작
-        ClearUI();
     }
 
     /*=============== Method ===============*/
