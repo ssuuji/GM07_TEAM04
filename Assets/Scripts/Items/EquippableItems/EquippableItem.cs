@@ -1,13 +1,20 @@
+using System.Net.NetworkInformation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class EquippableItem : Item
 {
     [Header("Equipment Settings")]
-    [SerializeField] private EquipmentType equipType;
+    [SerializeField] private EquipmentType equipType;   // 아이템 종류
     // 아무래도 강화 정보는 여기서 처리해야겠지?
+    [Header("Upgrade Data")]
+    [SerializeField] private int upgradeLevel = 0;      // 아이템 강화 수치
+    [SerializeField] private int maxUpgradeLevel = 5;   // 아이템 최대 강화 수치
 
     // 프로퍼티
     public EquipmentType EquipType => equipType;
+    public int UpgradeLevel => upgradeLevel;
+    public int MaxUpgradeLevel => maxUpgradeLevel;
 
     private void Awake()
     {
@@ -56,5 +63,28 @@ public abstract class EquippableItem : Item
     protected void SetEquipmentType(EquipmentType equipType)
     {
         this.equipType = equipType;
+    }
+    // 장비 강화 메서드
+    public virtual bool UpgradeItem()
+    {
+        // 실패 조건부터 처리
+        // 최대 강화 수치일 경우
+        if (upgradeLevel >= maxUpgradeLevel)
+        {
+            Debug.Log("최대 강화 수치입니다.");
+            return false;
+        }
+        if (GoldManager.Instance == null) return false;
+        // 장비 강화 재화 설정
+        int upgradePrice = 100 + (upgradeLevel * 100);
+        // 골드 지급
+        bool isUpgrade = GoldManager.Instance.SpendGold(upgradePrice);
+        // 소지 골드가 부족할 경우
+        if (!isUpgrade) return false;
+        // 강화 수치 증가
+        upgradeLevel++;
+        Debug.Log($"강화 성공! | {ItemName} +{upgradeLevel}");
+        // 강화 성공
+        return true;
     }
 }

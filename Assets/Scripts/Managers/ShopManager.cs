@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class ShopManager : Singleton<ShopManager>
 {
+    // 상점 가방 크기 설정
     [Header("Shop Setting")]
     [SerializeField] private int maxSize = 10;
-
+    // 상점에서 판매할 아이템 설정
     [Header("Shop Items")]
     [SerializeField] private List<InventoryItem> shopItems;
-
+    // 상점 가방 데이터 관리
     [Header("Shop Data")]
     [SerializeField] private Dictionary<int, InventoryItem> shopDictionary = new Dictionary<int, InventoryItem>();
 
@@ -19,7 +20,7 @@ public class ShopManager : Singleton<ShopManager>
 
     private void Start()
     {
-        // 인벤토리 아이템 세팅
+        // 상점 판매 아이템 세팅
         foreach (InventoryItem shopItem in  shopItems)
         {
             if (shopItem.ItemData != null && shopItem.Amount > 0)
@@ -37,7 +38,7 @@ public class ShopManager : Singleton<ShopManager>
 
     /*=============== Method ===============*/
 
-    // 아이템 저장 메서드
+    // 아이템 저장(추가) 메서드
     public bool AddItem(Item newItem, int count = 1)
     {
         // UI 갱신용
@@ -120,7 +121,6 @@ public class ShopManager : Singleton<ShopManager>
 
     public bool BuyItem(InventoryItem item, int count = 1)
     {
-        // 예외 처리
         // 상점에 입력된 ID를 가진 아이템이 없다면 리턴
         if (!shopDictionary.ContainsKey(item.ItemData.ItemID)) return false;
         // 골드 매니저가 없다면 리턴
@@ -152,5 +152,19 @@ public class ShopManager : Singleton<ShopManager>
             shopUI.RefreshUI();
         }
         return true;
+    }
+    // 상점 활성/비활성화 메서드
+    public void ToggleShop()
+    {
+        ShopUI shopUI = FindFirstObjectByType<ShopUI>();
+        if (shopUI == null) return;
+        shopUI.ToggleShopUI();
+    }
+    // 상점이 열려있는지 판단할 메서드
+    public bool IsShopOpend()
+    {
+        ShopUI shopUI = FindFirstObjectByType<ShopUI>();
+        if (shopUI == null) return false;
+        return shopUI.IsOpened;
     }
 }

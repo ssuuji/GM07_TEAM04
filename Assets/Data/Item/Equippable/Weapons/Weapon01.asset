@@ -20,4 +20,6 @@ MonoBehaviour:
   itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   maxAmount: 1
   equipType: 0
-  atkPower: 10
+  upgradeLevel: 0
+  maxUpgradeLevel: 5
+  baseAtkPower: 10

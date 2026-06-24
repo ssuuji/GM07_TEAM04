@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,16 +16,19 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     // UI 칸에서 현재 보여지고 있는 아이템의 실제 데이터
     private InventoryItem currentItem;
 
-    // 부모 UI 설정
-    private InventoryUI inventoryUI;
+    // 슬롯을 다른 곳에도 쓰기 위해 부모 UI를 직접 설정하는 방식에서 이벤트 형식으로 변경
+    private Action<InventoryItem> onClickAction;    // 슬롯이 클릭될 때
+    private Action<InventoryItem> onEnterAction;    // 슬롯 위로 커서가 올라올 때
+    private Action onExitAction;                    // 슬롯에서 커서가 나갈 때
 
     /*=============== Method ===============*/
 
-    // 인벤토리 부모 UI 설정
-    // 메서드로 부모를 알려주는 방식이 하나하나 Find로 컴포넌트를 찾는 방식보다 효율적이라고 한다.
-    public void Initialize(InventoryUI parent)
+    // 이벤트를 활용(전달)할 메서드
+    public void Initialize(Action<InventoryItem> onClick, Action<InventoryItem> onEnter, Action onExit)
     {
-        inventoryUI = parent;
+        onClickAction = onClick;
+        onEnterAction = onEnter;
+        onExitAction = onExit;
     }
     // 슬롯 내부 데이터 갱신 메서드
     public void UpdateSlot(InventoryItem item)
@@ -98,15 +102,8 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
         {
             // 클릭이 됐는지 확인 디버그
             Debug.Log("LeftClick");
-            // 플레이어 정보 받아오기
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player == null) return;
-            // 아이템 사용 메서드 호출
-            currentItem.ItemData.Use(player, currentItem.ItemData.ItemID);
-            // 인벤토리 UI 갱신
-            InventoryUI inventoryUI = FindFirstObjectByType<InventoryUI>();
-            if (inventoryUI == null) return;
-            inventoryUI.RefreshUI();
+            // 클릭이 되었다는 이벤트 알림
+            onClickAction?.Invoke(currentItem);
         }
         // 마우스 우클릭
         else if (eventData.button == PointerEventData.InputButton.Right)
@@ -121,12 +118,14 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
         // 빈 칸일 시 리턴
         if (currentItem == null) return;
         // 아이템 정보 UI 활성화
-        inventoryUI.ShowItemInfo(currentItem);
+        // 커서가 슬롯 위로 올라왔다는 이벤트 알림
+        onEnterAction?.Invoke(currentItem);
     }
     // 마우스가 떠났을 때
     public void OnPointerExit(PointerEventData eventData)
     {
         // 아이템 정보 UI 비활성화
-        inventoryUI.CloseItemInfo();
+        // 커서가 슬롯 밖으로 나갔다는 이벤트 알림
+        onExitAction?.Invoke();
     }
 }
