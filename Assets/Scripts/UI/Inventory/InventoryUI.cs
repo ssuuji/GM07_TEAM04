@@ -6,11 +6,11 @@ public class InventoryUI : MonoBehaviour
     // 관리할 UI 컴포넌트 연결
     // 너무 많은 오브젝트들을 관리하는 것 같기도 하고...
     [Header("UI Component Binding")]
-    [SerializeField] private GameObject inventoryUIPanel;   // 인벤토리 UI패널
-    [SerializeField] private Transform slotParent;          // 인벤토리 슬롯 생성 시 들어갈 위치
-    [SerializeField] private GameObject slotPrefab;         // 인벤토리 한 칸을 담당할 슬롯 프리팹
-    [SerializeField] private GameObject inventoryGoldUI;    // 인벤토리 골드 UI 오브젝트
-    [SerializeField] private GameObject inventoryMainPanel;     // 인벤토리 전체 UI 패널
+    [SerializeField] private GameObject inventoryUIPanel;               // 인벤토리 UI패널
+    [SerializeField] private Transform slotParent;                      // 인벤토리 슬롯 생성 시 들어갈 위치
+    [SerializeField] private GameObject slotPrefab;                     // 인벤토리 한 칸을 담당할 슬롯 프리팹
+    [SerializeField] private GameObject inventoryGoldUI;                // 인벤토리 골드 UI 오브젝트
+    [SerializeField] private GameObject inventoryMainPanel;             // 인벤토리 전체 UI 패널
     [SerializeField] private GameObject InventoryEquipmentUIPanel;      // 인벤토리 장착 아이템 UI 패널
     [SerializeField] private InventoryItemInfoUI inventoryItemInfoUI;   // 인벤토리 아이템 정보 출력 UI
     // UI에 표시될 슬롯들 관리
@@ -56,7 +56,6 @@ public class InventoryUI : MonoBehaviour
     private void Update()
     {
         // I 키 입력 시 인벤토리 토글
-        // 여기에 NPC 상호작용 조건 추가 예정
         if (InputManager.IsOpenInventory)
         {
             // 인벤토리 토글 메서드
@@ -84,8 +83,22 @@ public class InventoryUI : MonoBehaviour
             if (slotUI == null) return;
             // 슬롯을 빈 칸으로 초기화
             slotUI.ClearSlot();
-            // 슬롯의 부모 스크립트 지정 (Find 대신 메서드로)
-            slotUI.Initialize(this);
+            // Slot에서 담당하던 메서드 이벤트를 통해 전달받아 실행
+            slotUI.Initialize(
+                onClick: (clickedItem) =>                               // 슬롯 클릭 시 호출
+                {
+                    GameObject player = GameObject.FindGameObjectWithTag("Player");
+                    if (player != null)
+                    {
+                        // 실제 아이템 사용 호출
+                        clickedItem.ItemData.Use(player, clickedItem.ItemData.ItemID);
+                    }
+                    // UI 갱신
+                    RefreshUI();
+                },
+                onEnter: (hoveredItem) => ShowItemInfo(hoveredItem),    // 슬롯 위로 커서가 올라갈 때 호출
+                onExit: () => CloseItemInfo()                           // 슬롯에서 커서가 나갈 때 호출
+            );
             // 인벤토리 슬롯 UI 관리 List에 추가
             slotUIList.Add(slotUI);
         }

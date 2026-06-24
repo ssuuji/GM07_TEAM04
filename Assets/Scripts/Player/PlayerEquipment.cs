@@ -28,7 +28,7 @@ public class PlayerEquipment : MonoBehaviour
         //현재 무기 저장
         weaponItem = weapon;
         //무기 공격력 만큼 플레이어 공격력 증가
-        playerStatus.AddAttack(weaponItem.AtkPower);
+        playerStatus.AddAttack(weaponItem.CurrentAtkPower);
 
         Debug.Log($"무기 장착 완료 | 현재 공격력 {playerStatus.CurrentAttack}");
     }
@@ -43,7 +43,7 @@ public class PlayerEquipment : MonoBehaviour
         }
 
         //장착중인 무기 공격력만큼 플레이어 공격력 감소
-        playerStatus.RemoveAttack(weaponItem.AtkPower);
+        playerStatus.RemoveAttack(weaponItem.CurrentAtkPower);
         //현재 무기정보 초기화
         weaponItem = null;
 
@@ -58,7 +58,7 @@ public class PlayerEquipment : MonoBehaviour
         //현재 방어구 저장
         armorItem = armor;
         //방어구 방어력 만큼 플레이어 방어력 증가
-        playerStatus.AddDefense(armorItem.DefPower);
+        playerStatus.AddDefense(armorItem.CurrentDefPower);
 
         Debug.Log($"방어구 장착 완료 | 현재 방어력 {playerStatus.CurrentDefense}");
     }
@@ -73,7 +73,7 @@ public class PlayerEquipment : MonoBehaviour
         }
 
         //장착중인 방어구 방어력 만큼 플레이어 방어력 감소
-        playerStatus.RemoveDefense(armorItem.DefPower);
+        playerStatus.RemoveDefense(armorItem.CurrentDefPower);
         //현재 방어구정보 초기화
         armorItem = null;
 
