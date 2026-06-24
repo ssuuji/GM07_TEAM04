@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerDash : MonoBehaviour
 {
     [Header("대쉬 설정")]
-    [SerializeField] private float dashPower = 10.0f;   //대쉬 속도
+    [SerializeField] private float dashPower = 20.0f;   //대쉬 속도
     [SerializeField] private float dashTime = 0.2f;     //대쉬 지속시간
     [SerializeField] private float dashCooldown = 1.0f; //대쉬 쿨타임
 
