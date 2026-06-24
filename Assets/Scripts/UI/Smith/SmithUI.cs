@@ -127,6 +127,7 @@ public class SmithUI : Singleton<SmithUI>
             }
         }
         // 강화 소모 재화 수정
+        if (upgradeSlot.TargetItem == null) return;
         if (upgradeSlot.TargetItem.ItemData is EquippableItem equip)
         {
             itemUpgradePriceText.text = $"{100 + (equip.UpgradeLevel * 100)} G";
