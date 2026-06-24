@@ -3,7 +3,7 @@
 public class PlayerJump : MonoBehaviour
 {
     [Header("점프 설정")]
-    [SerializeField] private float jumpPower = 8.0f; 
+    [SerializeField] private float jumpPower = 12.0f; 
     [SerializeField] private int maxJumpCount = 2;   //최대 점프 횟수
 
     [Header("바닥 체크")]
