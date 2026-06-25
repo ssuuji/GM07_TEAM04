@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         playerWall.CheckWall();      //벽 체크
         playerWall.UpdateWallJump(); //벽점프상태 체크
         playerMovement.CheckDir();   //방향 체크
+        playerJump.Hovering();
 
         //점프
         if (InputManager.IsJump)

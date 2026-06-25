@@ -65,10 +65,12 @@ public class PlayerAttack : MonoBehaviour
     private float buffCooldownRemain;
     private float buffDurationRemain;
     private float invinCooldownRemain;
+    private float invinDurationRemain;
     public float AreaAttackCooldownRemain => areaAttackCooldownRemain;
     public float BuffCooldownRemain => buffCooldownRemain;
     public float BuffDurationRemain => buffDurationRemain;
     public float InvinCooldownRemain => invinCooldownRemain;
+    public float InvinDurationRemain => invinDurationRemain;
 
     private void Start()
     {
@@ -326,8 +328,18 @@ public class PlayerAttack : MonoBehaviour
         playerHealth.SetInvin(true);
         Debug.Log("무적기 시작");
 
-        //무적시간동안 대기
-        yield return new WaitForSeconds(invinDuration);
+        //UI에 표시할 무적기 지속시간
+        invinDurationRemain = invinDuration;
+
+        //무적기 지속시간이 끝날 때 까지 매 프레임 감소시키기
+        while (invinDurationRemain > 0)
+        {
+            invinDurationRemain -= Time.deltaTime;
+            yield return null;
+        }
+
+        //무적기 종료
+        invinDurationRemain = 0;
 
         //무적상태 해제
         playerHealth.SetInvin(false);
