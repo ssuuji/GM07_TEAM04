@@ -341,9 +341,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1736770878444969533, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
+      propertyPath: m_Name
+      value: Name
+      objectReference: {fileID: 0}
     - target: {fileID: 1750971951054956214, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
       propertyPath: m_Name
       value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419802578978170067, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
+      propertyPath: m_text
+      value: Evil Dog
       objectReference: {fileID: 0}
     - target: {fileID: 9185154086948026643, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
       propertyPath: m_LocalPosition.x
