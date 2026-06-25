@@ -12,7 +12,15 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("애니메이션 설정")]
-    [SerializeField] private Animator spumAnimator;  
+    [SerializeField] private Animator spumAnimator;
+
+    [Header("사운드 설정")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSound;
+
+    [Header("점프 이펙트")]
+    [SerializeField] private GameObject jumpEffectPrefab;
+    [SerializeField] private Transform jumpEffectPoint;
 
     private Rigidbody2D rb;
     private bool isGround; //바닥 체크
@@ -27,6 +35,7 @@ public class PlayerJump : MonoBehaviour
         {
             spumAnimator = GetComponentInChildren<Animator>();
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Jump()
@@ -40,31 +49,35 @@ public class PlayerJump : MonoBehaviour
         jumpCount++;      //점프 횟수 증가
         isGround = false; //점프 했으니까 아직 공중상태 유지
 
-        //애니메이션
+        //사운드
+        audioSource.PlayOneShot(jumpSound);
+
+        //점프애니메이션이 없어서 Idle 이미지(?)로 대체
         if (spumAnimator != null)
         {
-            spumAnimator.SetBool("7_Jump", true);
+            //이펙트
+            Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
+
+            spumAnimator.Play("IDLE", 0, 0f); //Idle 상태를 BaseLayer(0) 에서 재생시간(0f) 부터 실행
+            spumAnimator.Update(0f);          //위에 Play()로 바꾼 상태를 프레임에 바로 반영 
+            spumAnimator.enabled = false;     //잠시 애니메이션 비활성화
         }
     }
 
     public void CheckGround()
     {
-        //이전 바닥체크 상태 저장
-        bool wasGround = isGround;
-
-        //바닥체크
+        // 바닥 체크
         isGround = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer);
 
-        // 이전에는 공중상태이고 현재는 바닥상태 이며 아래로 내려오고 있는 중이라면 점프횟수 초기화
-        if (!wasGround && isGround && rb.linearVelocity.y <= 0f)
+        // 바닥에 닿아 있으면 점프 횟수 초기화
+        if (isGround)
         {
             jumpCount = 0;
 
-            // 애니메이션
-            if (spumAnimator != null)
+            // Animator 다시 활성화
+            if (spumAnimator != null && !spumAnimator.enabled)
             {
-                //바닥에 닿았으면 애니메이션 종료
-                spumAnimator.SetBool("7_Jump", false);
+                spumAnimator.enabled = true;
             }
         }
     }
