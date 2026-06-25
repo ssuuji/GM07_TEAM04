@@ -8,6 +8,15 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private float dashTime = 0.2f;     //대쉬 지속시간
     [SerializeField] private float dashCooldown = 1.0f; //대쉬 쿨타임
 
+    [Header("사운드 설정")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip dashSound;
+
+    [Header("대쉬 이펙트")]
+    [SerializeField] private GameObject dashEffectPrefab;
+    [SerializeField] private Transform dashPoint;
+    [SerializeField] private Vector2 dashSize = new Vector2(1.8f, 1.5f);
+
     private Rigidbody2D rb;
     private float originGravity;  //기존 중력값 저장
     private bool isDash;          //현재 대쉬 중인지 확인여부
@@ -19,6 +28,7 @@ public class PlayerDash : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         originGravity = rb.gravityScale; //대쉬 종료 후 복구할 기존 중력값 저장
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Dash(float dir)
@@ -34,6 +44,15 @@ public class PlayerDash : MonoBehaviour
     {
         canDash = false; //대쉬 사용 불가능(대쉬 쿨타임 시작)
         isDash = true;   //대쉬상태
+
+        //사운드
+        audioSource.PlayOneShot(dashSound);
+
+        //이펙트
+        //... 이상하게 얘는 이펙트 반전이 안되는 문제가 있음
+        GameObject dashEffect = Instantiate(dashEffectPrefab, dashPoint.position, Quaternion.identity, dashPoint);
+        Vector3 effectScale = dashEffect.transform.localScale;
+        dashEffect.transform.localScale = new Vector3(Mathf.Abs(effectScale.x) * dir, effectScale.y, effectScale.z);
 
         //대쉬 중일 땐 중력 0 으로설정해서 밑으로 내려가지 않도록
         rb.gravityScale = 0f;
@@ -51,5 +70,15 @@ public class PlayerDash : MonoBehaviour
 
         //대쉬 사용가능
         canDash = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        //대쉬 포인트  Gizmos
+        if (dashPoint != null)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(dashPoint.position, dashSize);
+        }
     }
 }
