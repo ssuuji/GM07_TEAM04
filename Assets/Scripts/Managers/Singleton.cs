@@ -1,14 +1,22 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     // 실제 싱글톤 객체를 저장하는 변수
     private static T instance;
+    // 에디터가 강제 종료가 되는 중인지 판단하기 위한 변수
+    private static bool isQuitting = false;
     // 외부제서 접근할 프로퍼티
     public static T Instance
     {
         get
         {
+            // 에디터가 종료중이라면 중지
+            if (isQuitting)
+            {
+                return null;
+            }
             // 객체가 없다면
             if (instance == null)
             {
@@ -46,6 +54,19 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 // 새로 만들어지는 객체 제거
                 Destroy(gameObject);
             }
+        }
+    }
+    // 프로그램이 종료되는 중일 때
+    protected virtual void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
+    // 객체가 파괴될 때
+    protected virtual void OnDestroy()
+    {
+        if (instance == this)
+        {
+            isQuitting = true;
         }
     }
 

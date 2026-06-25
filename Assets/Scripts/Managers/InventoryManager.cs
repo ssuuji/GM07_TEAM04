@@ -45,8 +45,9 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
+
     /*=============== Method ===============*/
-    
+
     // 아이템 획득 메서드
     // 아이템 획득 성공 시 true 반환
     // 아이템 획득 실패 시 false 반환
