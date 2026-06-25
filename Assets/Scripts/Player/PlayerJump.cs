@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEngine.InputSystem;
+using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class PlayerJump : MonoBehaviour
     [Header("점프 이펙트")]
     [SerializeField] private GameObject jumpEffectPrefab;
     [SerializeField] private Transform jumpEffectPoint;
+
+    [Header("체공 설정")]
+    [SerializeField] private float floatGravity = 0.5f;
+    [SerializeField] private float normalGravity = 3f;
+    [SerializeField] private float minFallSpeed = -2f;
 
     private Rigidbody2D rb;
     private bool isGround; //바닥 체크
@@ -79,6 +85,26 @@ public class PlayerJump : MonoBehaviour
             {
                 spumAnimator.enabled = true;
             }
+        }
+    }
+
+    public void Hovering()
+    {
+        var kb = Keyboard.current;
+        if (kb == null) return;
+
+        if (kb.spaceKey.isPressed && !isGround && rb.linearVelocity.y < 0)
+        {
+            rb.gravityScale = floatGravity;
+
+            if (rb.linearVelocity.y < minFallSpeed)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, minFallSpeed);
+            }
+        }
+        else
+        {
+            rb.gravityScale = normalGravity;
         }
     }
 
