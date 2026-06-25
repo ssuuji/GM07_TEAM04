@@ -6,7 +6,7 @@ using UnityEngine;
 public class ConsumableItem : Item
 {
     [Header("Item Effects")]
-    [SerializeField] private List<ItemEffect> effects;
+    [SerializeField] private List<ItemEffect> effects;  // 아이템 사용 시 발생할 효과들 목록
 
     // 프로퍼티
     public List<ItemEffect> Effects => effects;

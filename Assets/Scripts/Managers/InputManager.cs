@@ -27,6 +27,13 @@ public class InputManager : MonoBehaviour
     // Add I Input
     public static bool IsOpenInventory { get; private set; } = false;
     private InputAction openInventoryAction;
+    // Add NumberKey 1~3 Input
+    public static bool IsQuickSlot1 { get; private set; }
+    public static bool IsQuickSlot2 { get; private set; }
+    public static bool IsQuickSlot3 { get; private set; }
+    private InputAction quickSlot1;
+    private InputAction quickSlot2;
+    private InputAction quickSlot3;
 
     private void Awake()
     {
@@ -45,6 +52,19 @@ public class InputManager : MonoBehaviour
         {
             openInventoryAction = InputSystem.actions.FindAction("Inventory");
         }
+        // Add NumberKey 1~3 Input
+        if (quickSlot1 == null)
+        {
+            quickSlot1 = InputSystem.actions.FindAction("QuickSlot1");
+        }
+        if (quickSlot2 == null)
+        {
+            quickSlot2 = InputSystem.actions.FindAction("QuickSlot2");
+        }
+        if (quickSlot3 == null)
+        {
+            quickSlot3 = InputSystem.actions.FindAction("QuickSlot3");
+        }
     }
 
     private void Update()
@@ -61,5 +81,9 @@ public class InputManager : MonoBehaviour
         // Inventory Part
         // Add I Input
         IsOpenInventory = openInventoryAction.WasPressedThisFrame();
+        // Add NumberKey 1~3 Input
+        IsQuickSlot1 = quickSlot1.WasPressedThisFrame();
+        IsQuickSlot2 = quickSlot2.WasPressedThisFrame();
+        IsQuickSlot3 = quickSlot3.WasPressedThisFrame();
     }
 }

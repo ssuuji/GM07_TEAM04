@@ -7,15 +7,15 @@ public class InventoryItemInfoUI : MonoBehaviour
 {
     // 출력할 정보 UI 설정
     [Header("Info Panel Setting")]
-    [SerializeField] private Image iconImage;
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private Image iconImage;                   // 출력할 아이템 아이콘
+    [SerializeField] private TextMeshProUGUI nameText;          // 출력할 아이템 이름
+    [SerializeField] private TextMeshProUGUI descriptionText;   // 출력할 아이템 설명
     // UI가 생성될 위치 설정
     [Header("Panel Settings")]
-    [SerializeField] private Vector2 cursorOffset = new Vector2(15f, -15f);
-    private RectTransform rectTransform;
-    private RectTransform parentRectTransform;
-    private Canvas parentCanvas;
+    [SerializeField] private Vector2 cursorOffset = new Vector2(15f, -15f);     // 커서 기준 나타날 위치값 조정
+    private RectTransform rectTransform;            // UI는 RectTransform으로 위치값을 사용함
+    private RectTransform parentRectTransform;      // 부모 위치값 저장용
+    private Canvas parentCanvas;                    // 최상위 캔버스 저장용
 
     private void Awake()
     {
@@ -82,7 +82,7 @@ public class InventoryItemInfoUI : MonoBehaviour
             }
         }
     }
-    // 
+    // 커서 따라가기 메서드
     private void FollowCursor()
     {
         if (parentRectTransform == null || parentCanvas == null) return; 

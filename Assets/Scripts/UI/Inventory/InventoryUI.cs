@@ -15,7 +15,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private InventoryItemInfoUI inventoryItemInfoUI;   // 인벤토리 아이템 정보 출력 UI
     // UI에 표시될 슬롯들 관리
     [Header("Inventory Slot UI")]
-    [SerializeField] private List<InventorySlotUI> slotUIList = new List<InventorySlotUI>();    // 생성할 SlotUI들 리스트로 관리
+    [SerializeField] private List<InventorySlotUI> slotUIList = new List<InventorySlotUI>();                            // 생성할 SlotUI들 리스트로 관리
     [SerializeField] private List<InventoryEquipmentSlotUI> equipSlotUIList = new List<InventoryEquipmentSlotUI>();     // 장착 중인 아이템 출력 슬롯 UI
 
     private void Awake()
