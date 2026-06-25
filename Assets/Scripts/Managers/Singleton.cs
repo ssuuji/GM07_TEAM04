@@ -12,7 +12,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            // 에디터가 종료중이라면 중지
+            // 에디터가 종료중이라면 널 반환
             if (isQuitting)
             {
                 return null;
