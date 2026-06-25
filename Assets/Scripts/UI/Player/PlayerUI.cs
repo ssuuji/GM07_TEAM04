@@ -35,6 +35,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Image invinCooldownImage;
     [SerializeField] private TextMeshProUGUI invinCooldownText;
     [SerializeField] private Image invinLockImage;
+    [SerializeField] private Image useInvinImage;
+    [SerializeField] private TextMeshProUGUI useInvinText;
 
     [Header("레벨 UI")]
     [SerializeField] private TextMeshProUGUI levelText;
@@ -86,8 +88,8 @@ public class PlayerUI : MonoBehaviour
         UpdateCooldownUI(playerAttack.BuffCooldownRemain, buffCooldownImage, buffCooldownText);
         UpdateCooldownUI(playerAttack.InvinCooldownRemain, invinCooldownImage, invinCooldownText);
         
-        //공격버프 사용중 UI갱신
-        UpdateUseBuffUI();
+        //버프 사용중 UI갱신 (공격버프, 무적기)
+        UpdateUseSkillUI();
     }
     private void UpdateCooldownUI(float remainTime, Image cooldownImage, TextMeshProUGUI text)
     {
@@ -107,24 +109,40 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    private void UpdateUseBuffUI()
+    private void UpdateUseSkillUI()
     {
-        //공격버프 남은 지속시간
-        float remainTime = playerAttack.BuffDurationRemain;
+        float buffRemainTime = playerAttack.BuffDurationRemain;   //공격버프 남은 지속시간
+        float invinRemainTime = playerAttack.InvinDurationRemain; //무적기 남은 지속시간
 
         //공격버프가 사용중이면 상단에 버프 UI표시
-        if (remainTime > 0)
+        if (buffRemainTime > 0)
         {
             useBuffImage.gameObject.SetActive(true);
             useBuffText.gameObject.SetActive(true);
 
-            useBuffText.text = Mathf.CeilToInt(remainTime).ToString();
+            useBuffText.text = Mathf.CeilToInt(buffRemainTime).ToString();
         }
         //공격버프 끝나면 버프UI 비활성화
         else
         {
             useBuffImage.gameObject.SetActive(false);
             useBuffText.gameObject.SetActive(false);
+        }
+
+
+        //무적기가 사용중이면 상단에 무적기 UI표시
+        if (invinRemainTime > 0)
+        {
+            useInvinImage.gameObject.SetActive(true);
+            useInvinText.gameObject.SetActive(true);
+
+            useInvinText.text = Mathf.CeilToInt(invinRemainTime).ToString();
+        }
+        //무적기 끝나면 무적기UI 비활성화
+        else
+        {
+            useInvinImage.gameObject.SetActive(false);
+            useInvinText.gameObject.SetActive(false);
         }
     }
 

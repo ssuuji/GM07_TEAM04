@@ -3956,6 +3956,7 @@ GameObject:
   - component: {fileID: 5455065636315629270}
   - component: {fileID: 3222966571479983774}
   - component: {fileID: 6402676659148977247}
+  - component: {fileID: 1812497205764133109}
   - component: {fileID: 4670083524366363232}
   m_Layer: 0
   m_Name: Player
@@ -4266,6 +4267,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   isInShop: 0
   isInSmith: 0
+  isInChest: 0
+  isInPortal: 0
 --- !u!114 &6788831975828478449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4349,6 +4352,18 @@ MonoBehaviour:
   wallJumpPower: {x: 7, y: 10}
   wallJumpTime: 0.2
   spumAnimator: {fileID: 0}
+--- !u!114 &1812497205764133109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2832478524417347878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2678f7cfb46b44397e46ed98cd5028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
 --- !u!82 &4670083524366363232
 AudioSource:
   m_ObjectHideFlags: 0
