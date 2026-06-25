@@ -2,11 +2,14 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 // 마우스 클릭 이벤트를 위한 상속
 
-public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class InventorySlotUI : MonoBehaviour, 
+    IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler,    // 마우스 클릭, 커서가 겹칠 때, 커서가 나갈 때
+    IBeginDragHandler,IDragHandler, IEndDragHandler                     // 드래그 시작, 드래그, 드래그 끝
 {
     [Header("Item Data Binding")]
     [SerializeField] private Image iconImage;               // 아이템 아이콘에 나타날 이미지
@@ -16,10 +19,24 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
     // UI 칸에서 현재 보여지고 있는 아이템의 실제 데이터
     private InventoryItem currentItem;
 
+    // UI가 생성될 위치 설정
+    [Header("Panel Settings")]
+    private RectTransform rectTransform;
+    private Vector2 originPosition; 
+
+    // 프로퍼티
+    public InventoryItem CurrentItem => currentItem;
+
     // 슬롯을 다른 곳에도 쓰기 위해 부모 UI를 직접 설정하는 방식에서 이벤트 형식으로 변경
     private Action<InventoryItem> onClickAction;    // 슬롯이 클릭될 때
     private Action<InventoryItem> onEnterAction;    // 슬롯 위로 커서가 올라올 때
     private Action onExitAction;                    // 슬롯에서 커서가 나갈 때
+
+    private void Awake()
+    {
+        // 컴포넌트 받아오기
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     /*=============== Method ===============*/
 
@@ -127,5 +144,39 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnte
         // 아이템 정보 UI 비활성화
         // 커서가 슬롯 밖으로 나갔다는 이벤트 알림
         onExitAction?.Invoke();
+    }
+    // 드래그 시작
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        // 아이템이 존재하지 않다면 리턴
+        if (currentItem == null) return;
+        // 드래그 완료 후 UI가 돌아올 위치 저장
+        originPosition = rectTransform.anchoredPosition;
+    }
+    // 드래그 중
+    public void OnDrag(PointerEventData eventData)
+    {
+        // UI 이동
+        FollowCursor();
+    }
+    // 드레그 종료
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        // 원래 위치로 이동
+        SetOriginPosition();
+    }
+    // 커서를 따라 이동하는 메서드
+    private void FollowCursor()
+    {
+        // InputSystem을 통해 구한 마우스 위치값
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+        // 위치값 전달
+        rectTransform.position = mousePos;
+    }
+    // 저장되어있는 기본 위치로 이동하는 메서드
+    private void SetOriginPosition()
+    {
+        // 초기 위치값으로 변경
+        rectTransform.anchoredPosition = originPosition;
     }
 }

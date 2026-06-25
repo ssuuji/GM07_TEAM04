@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ public class InventoryManager : Singleton<InventoryManager>
     public int MaxSize => maxSize;
     public List<InventoryItem> StartingItems => startingItems;
     public Dictionary<int, InventoryItem> InventoryDictionary => inventoryDictionary;
+
+    // 이벤트
+    public event Action OnInventoryChanged;     // 인벤토리 데이터 갱신 시 변경될 UI를 위한 이벤트
 
     private void Start()
     {
@@ -80,6 +84,8 @@ public class InventoryManager : Singleton<InventoryManager>
                     Debug.Log($"[Get New ConsumableItem] | [{newItem.ItemName}] + {item.Value.Amount}");
                     // 인벤토리 UI 갱신
                     inventoryUI.RefreshUI();
+                    // 획득 했으니 이벤트 발송
+                    OnInventoryChanged?.Invoke();
                     // 아이템 획득 성공
                     return true;
                 }
@@ -111,6 +117,8 @@ public class InventoryManager : Singleton<InventoryManager>
         Debug.Log($"[Get New EquippableItem] | [{newItem.ItemName}] +{count}");
         // 인벤토리 UI 갱신
         inventoryUI.RefreshUI();
+        // 획득 했으니 이벤트 발송
+        OnInventoryChanged?.Invoke();
         // 아이템 획득 성공
         return true;
     }
@@ -144,6 +152,8 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             inventoryUI.RefreshUI();
         }
+        // 제거 했으니 이벤트 발송
+        OnInventoryChanged?.Invoke();
     }
     // 인벤토리 확장 메서드
     public void ExpandInventory(int amount)
@@ -152,5 +162,17 @@ public class InventoryManager : Singleton<InventoryManager>
         maxSize += amount;
         // 최대 크기 증가 확인 디버그
         Debug.Log($"Inventory Size Up! + {amount} | Max : {maxSize}");
+    }
+    public int GetConsumableItemAmount(int itemID)
+    {
+        // 인벤토리에 매개변수로 입력된 ID를 가진 아이템이 없다면 리턴
+        if (!inventoryDictionary.ContainsKey(itemID)) return 0;
+        // 입력된 ID를가진 아이템 생성 및 저장
+        InventoryItem targetItem = inventoryDictionary[itemID];
+        if (targetItem.Amount <= 0)
+        {
+            return 0;
+        }
+        return targetItem.Amount;
     }
 }
