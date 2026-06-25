@@ -11,6 +11,10 @@ public class MonsterIdleMove : MonoBehaviour
     [SerializeField] private float moveTimeMin = 2f;
     [SerializeField] private float moveTimeMax = 5f;
     [SerializeField] private GroundChecker groundChecker;
+    [SerializeField] private Monster monster;
+
+    [SerializeField] DogAnimation dogAnimation;
+
     private Rigidbody2D rb;
     private float jumpCoolTime;
 
@@ -21,6 +25,7 @@ public class MonsterIdleMove : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        monster = GetComponent<Monster>();
     }
 
 
@@ -42,6 +47,7 @@ public class MonsterIdleMove : MonoBehaviour
             if (moveTime <= 0)
             {
                 ChangeDirection();
+                dogAnimation.SetIdle();
                 MoveTimeSet();
                 WaitTimeSet();
 
@@ -51,9 +57,28 @@ public class MonsterIdleMove : MonoBehaviour
             else 
             {
                 moveTime -= Time.deltaTime;
-
+                
                 IdleMove();
                 IdleJump();
+
+                if(rb.linearVelocity ==  Vector2.zero)
+                {
+                    dogAnimation.SetIdle();
+                }
+                else
+                {
+                    if (groundChecker.IsGrounded())
+                    {
+                        dogAnimation.SetWalk();
+                    }
+
+                    else
+                    {
+                        dogAnimation.SetJump();
+                    }
+                }
+
+                
 
                 yield return null;
             }
@@ -63,8 +88,9 @@ public class MonsterIdleMove : MonoBehaviour
     private void IdleMove()
     {
         // 우
-        if(dir == 0)
+        if (dir == 0)
         {
+            
             rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
         }
 
@@ -89,6 +115,11 @@ public class MonsterIdleMove : MonoBehaviour
     private void ChangeDirection()
     {
         dir = Random.Range(0, 2);
+        if(dir == 0)
+        {
+            monster.SetDirection(true);
+        }
+        else monster.SetDirection(false);
     }
 
     // 이동시간

@@ -12,18 +12,19 @@ public class Monster : MonoBehaviour, IDamageable
 
     [Header("몬스터 상태")]
     [SerializeField] private int maxHealth = 10;
+    [SerializeField] private int currentHealth;
     [SerializeField] private float knockbackTime = 1.0f;
     [SerializeField] private MonsterIdleMove monsterIdleMove;
     [SerializeField] private MonsterAngryMove monsterAngryMove;
     [SerializeField] private MonsterUI monsterUI;
     [SerializeField] private MonsterKnockBack monsterKnockBack;
 
+
     private float flairTime = 3;
     private float knockbackTimer;
     private float attackTimer;
     public bool IsDead { get; private set; } = false;
     public bool Direction { get; private set; } = true;
-    private int currentHealth;
     
     
 
@@ -45,7 +46,9 @@ public class Monster : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        
+        Debug.Log("MonDir = " + Direction);
+
+
         StateManage();
         
     }
@@ -85,6 +88,8 @@ public class Monster : MonoBehaviour, IDamageable
         monsterAngryMove.enabled = currentState == MonsterState.Angry;
         monsterKnockBack.enabled = currentState == MonsterState.Knockback;
     }
+
+    
 
 
 

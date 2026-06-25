@@ -10,6 +10,8 @@ public class MonsterAttack : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Monster monster;
 
+    [SerializeField] private DogAnimation dogAnimation;
+
     private float currentCoolTime;
 
     private void Update()
@@ -17,6 +19,7 @@ public class MonsterAttack : MonoBehaviour
         if (currentCoolTime <= 0)
         {
             Attack();
+            
             currentCoolTime = attackCoolTime;
         }
 
@@ -29,7 +32,7 @@ public class MonsterAttack : MonoBehaviour
     private void Attack()
     {
         SetAttackDirection();
-
+        dogAnimation.Attack();
         Collider2D player = Physics2D.OverlapBox(
             attackPoint.position,
             attackSize,
