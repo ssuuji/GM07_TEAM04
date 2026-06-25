@@ -7,13 +7,13 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] GameObject player;
 
     [SerializeField] private int maxHealth = 500;
-
+    [SerializeField] private int currentHealth;
     [SerializeField] Cloning cloning;
 
+    [SerializeField] private bool flair;
     //테스트용
     private float flairTime = 1.0f;
 
-    private int currentHealth;
     public bool IsFake = false;
     public bool Direction = false;
 
@@ -35,8 +35,12 @@ public class Boss : MonoBehaviour, IDamageable
     {
         UpdateDirection();
 
-        //테스트용
-        Flair();
+        if(flair)
+        {
+            //테스트용
+            Flair();
+        }
+        
     }
 
     private void UpdateDirection()

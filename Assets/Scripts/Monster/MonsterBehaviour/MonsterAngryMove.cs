@@ -7,6 +7,9 @@ public class MonsterAngryMove : MonoBehaviour
     [SerializeField] MonsterAttack attack;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float attackRange = 1f;
+
+    [SerializeField] DogAnimation dogAnimation;
+
     private Rigidbody2D rb;
     private bool dir;
     private bool AttackableRange = false;
@@ -15,7 +18,7 @@ public class MonsterAngryMove : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        dogAnimation = GetComponent<DogAnimation>();
     }
 
     private void OnEnable()
@@ -33,10 +36,13 @@ public class MonsterAngryMove : MonoBehaviour
         {
             attack.enabled = false;
             Move();
+
+            dogAnimation.SetWalk();
         }
         else
         {
             attack.enabled = true;
+            dogAnimation.SetIdle();
         }
     }
 

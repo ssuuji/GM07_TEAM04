@@ -7,6 +7,7 @@ public class DroppingPoint : MonoBehaviour
     [SerializeField] private Boss boss;
     [SerializeField] private float movingSpeed = 5f;
     [SerializeField] private float movingLength = 8.0f;
+    
 
     private Rigidbody2D rb;
     private bool moveDirection;
