@@ -48,12 +48,9 @@ public class PlayerJump : MonoBehaviour
     {
         //최대점프횟수 까지만 점프 가능
         if (jumpCount >= maxJumpCount) return;
-
-        //x속도는 유지하고 y속도만 점프힘으로 변경
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-
-        jumpCount++;      //점프 횟수 증가
-        isGround = false; //점프 했으니까 아직 공중상태 유지
+        
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower); //x속도는 유지하고 y속도만 점프힘으로 변경
+        jumpCount++; //점프 횟수 증가
 
         //사운드
         audioSource.PlayOneShot(jumpSound);
@@ -72,11 +69,13 @@ public class PlayerJump : MonoBehaviour
 
     public void CheckGround()
     {
+        bool wasGround = isGround; //이전 프레임의 바닥체크 저장
+
         // 바닥 체크
         isGround = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer);
 
-        // 바닥에 닿아 있으면 점프 횟수 초기화
-        if (isGround)
+        // 공중상태 + 아래로 내려가는 중 + 바닥에 착지한 순간 : 점프 횟수 초기화
+        if (!wasGround && rb.linearVelocity.y <= 0f && isGround)
         {
             jumpCount = 0;
 
@@ -88,6 +87,7 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
+    //체공
     public void Hovering()
     {
         var kb = Keyboard.current;
