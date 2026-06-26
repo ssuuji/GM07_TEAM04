@@ -58,7 +58,7 @@ public class ConsumableQuickSlotUI : MonoBehaviour, IDropHandler, IPointerClickH
         }
         // 슬롯에 아이템이 존재하지 않는다면 비우기
         itemIcon.sprite = null;
-        itemIcon.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        itemIcon.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         amountText.text = "";
     }
     // 인벤토리에서 드래그 해온 아이템 UI가 드랍될 때
