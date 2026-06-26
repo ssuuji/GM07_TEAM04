@@ -16,6 +16,7 @@ public class SmithUI : Singleton<SmithUI>
     [SerializeField] private SmithSlotUI upgradeSlot;                   // 선택된 강화할 아이템 표시할 슬롯
     [SerializeField] private Button upgradeButton;                      // 강화를 진행할 버튼
     [SerializeField] private TextMeshProUGUI itemUpgradePriceText;      // 강화 소모 재화 표시 텍스트
+    [SerializeField] private GameObject goldUI;             // 골드 UI 오브젝트
 
     [Header("Slot UI")]
     [SerializeField] private List<InventorySlotUI> slotUIList = new List<InventorySlotUI>();    // 소지한 장비 아이템 표시할 슬롯들을 관리할 List
@@ -74,6 +75,7 @@ public class SmithUI : Singleton<SmithUI>
     public void ToggleSmithUI()
     {
         if (smithUI == null) return;
+        if (goldUI == null) return;
         // 인벤토리 패널이 켜져있는지 검사
         bool isActive = smithUI.activeSelf;
         // 인벤토리의 현 상태의 반대 상태로 전환
@@ -81,6 +83,7 @@ public class SmithUI : Singleton<SmithUI>
         smithUIPanel.SetActive(!isActive);
         smithInventoryUIPanel.SetActive(!isActive);
         itemUpgradePriceText.gameObject.SetActive(!isActive);
+        goldUI.SetActive(!isActive);
 
         if (!isActive)
         {
@@ -201,6 +204,11 @@ public class SmithUI : Singleton<SmithUI>
         if (itemUpgradePriceText != null)
         {
             itemUpgradePriceText.gameObject.SetActive(false);
+        }
+        // 골드 출력 UI 끄기
+        if (goldUI != null)
+        {
+            goldUI.SetActive(false);
         }
     }
 }
