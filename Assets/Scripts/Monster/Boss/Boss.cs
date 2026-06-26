@@ -1,4 +1,5 @@
 using Assets.PixelFantasy.PixelMonsters.Common.Scripts;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,16 +12,22 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] Cloning cloning;
 
     [SerializeField] private bool flair;
+
+    [SerializeField] private BossAnimation bossAnimation;
+
     //테스트용
     private float flairTime = 1.0f;
 
     public bool IsFake = false;
     public bool Direction = false;
 
+    public bool IsDead;
+
     private void Awake()
     {
         currentHealth = maxHealth;
         cloning = GetComponent<Cloning>();  
+        bossAnimation = GetComponent<BossAnimation>();
     }
 
     private void Start()
@@ -51,7 +58,7 @@ public class Boss : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        bossAnimation.Hit();
 
         if (currentHealth % 35 == 0 && IsFake == false)
         {
@@ -82,6 +89,16 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if (IsDead) return;
+        IsDead = true;
+        StartCoroutine(DieCo());
+    }
+
+    IEnumerator DieCo()
+    {
+        bossAnimation.Die();
+
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 

@@ -7,6 +7,7 @@ public class PoisonBall : MonoBehaviour
     [SerializeField] private float throwingPowerMax = 5.0f;
     [SerializeField] private Boss boss;
     [SerializeField] private GameObject floorPrefab;
+    [SerializeField] private GameObject hitFxPrefab;
 
     private float throwingPower;
     private Rigidbody2D rb;
@@ -49,6 +50,7 @@ public class PoisonBall : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ground"))
         {
+            Instantiate(hitFxPrefab, transform.position, Quaternion.identity);
             Instantiate(floorPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
