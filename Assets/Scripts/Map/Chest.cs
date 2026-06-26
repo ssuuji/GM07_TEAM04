@@ -15,6 +15,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private int minGold = 0;       //min ~ max 사이의 골드를 랜덤으로 지급
     [SerializeField] private int maxGold = 100;
 
+    private MessageUI messageUI;
     private void Start()
     {
         //우선 닫힌 상자 모습으로 보이게끔 애니메이션 비활성화
@@ -22,6 +23,7 @@ public class Chest : MonoBehaviour
         {
             chestAnim.enabled = false;
         }
+        messageUI = FindFirstObjectByType<MessageUI>();
     }
 
     //상자 오픈 : Chest 애니메이션 활성화
@@ -60,6 +62,7 @@ public class Chest : MonoBehaviour
 
         //보상 지급
         Instantiate(rewardPrefab, rewardPoint.position, Quaternion.identity, rewardPoint);
+        messageUI.ShowMessage($"{rewardPrefab.name} 획득!");
     }
 
     private void RandGold()
@@ -71,7 +74,7 @@ public class Chest : MonoBehaviour
         if (GoldManager.Instance != null)
         {
             GoldManager.Instance.AddGold(randomGold);
-            Debug.Log($"골드 {randomGold} 획득!");
+            messageUI.ShowMessage($"{randomGold}G 획득!");
         }
     }
 

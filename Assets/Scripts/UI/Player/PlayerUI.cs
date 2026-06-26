@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Collections;
+using System.Linq.Expressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,6 +45,11 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Slider expSlider;
     [SerializeField] private TextMeshProUGUI expText;
 
+    [Header("레벨업 UI")]
+    [SerializeField] private TextMeshProUGUI levelUpText;
+    [SerializeField] private float levelUpinterval = 1.5f;
+    private Coroutine levelUpCo;
+
     private void Start()
     {
         playerStatus = player.GetComponent<PlayerStatus>();
@@ -51,6 +58,7 @@ public class PlayerUI : MonoBehaviour
         playerSkill = player.GetComponent<PlayerSkill>();
 
         InitUI(); //UI 초기 설정
+        levelUpText.gameObject.SetActive(false); //레벨업 텍스트 비활성화
     }
     private void Update()
     {
@@ -75,7 +83,7 @@ public class PlayerUI : MonoBehaviour
     {
         hpSlider.maxValue = playerStatus.CurrentMaxHp; 
         mpSlider.maxValue = playerStatus.CurrentMaxMp; 
-        hpSlider.value = playerStatus.CurrentHp; //현재 HP반영
+        hpSlider.value = playerStatus.CurrentHp; //현재 HP반영dkwl
         mpSlider.value = playerStatus.CurrentMp; //현재 MP반영
 
         hpText.text = $"{playerStatus.CurrentHp} / {playerStatus.CurrentMaxHp}";
@@ -155,6 +163,27 @@ public class PlayerUI : MonoBehaviour
 
         levelText.text = $"Lv. {playerLevel.Level}";                       //레벨 텍스트 표시
         expText.text = $"{playerLevel.CurrentExp} / {playerLevel.MaxExp}"; //경험치 슬라이더바 위에 텍스트 표시
+    }
+
+    public void ShowLevelUp(int level)
+    {
+        if (levelUpCo != null)
+        {
+            StopCoroutine(levelUpCo);
+        }
+
+        levelUpCo = StartCoroutine(LevelUpCo(level));
+    }
+
+    IEnumerator LevelUpCo(int level)
+    {
+        levelUpText.gameObject.SetActive(true);
+        levelUpText.text = $"Level Up!\nLv. {level}";
+
+        yield return new WaitForSeconds(levelUpinterval);
+
+        levelUpText.gameObject.SetActive(false);
+        levelUpCo = null;
     }
 
     private void UpdateSkillUnlock()
