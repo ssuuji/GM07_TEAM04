@@ -81,7 +81,25 @@ public abstract class EquippableItem : Item
         bool isUpgrade = GoldManager.Instance.SpendGold(upgradePrice);
         // 소지 골드가 부족할 경우
         if (!isUpgrade) return false;
-        // 강화 수치 증가
+        // 플레이어 받아오기
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return false;
+        PlayerEquipment playerEquipment = player.GetComponent<PlayerEquipment>();
+        if (playerEquipment == null) return false;
+        // 무기 비교 (무기가 장착되어 있고, 장착되어 있는 아이템의 ID값이 검사하는 슬롯의 아이템 ID값과 같다면 true)
+        if ((playerEquipment.WeaponItem != null && playerEquipment.WeaponItem.ItemID == this.ItemID) ||
+            (playerEquipment.ArmorItem != null && playerEquipment.ArmorItem.ItemID == this.ItemID))
+        {
+            // 장착 해제
+            UnEquip(player);
+            // 강화 수치 증가
+            upgradeLevel++;
+            // 업그레이드 된 능력치로 장착
+            Equip(player);
+            Debug.Log($"강화 성공! | {ItemName} +{upgradeLevel}");
+            // 강화 성공
+            return true;
+        }
         upgradeLevel++;
         Debug.Log($"강화 성공! | {ItemName} +{upgradeLevel}");
         // 강화 성공
