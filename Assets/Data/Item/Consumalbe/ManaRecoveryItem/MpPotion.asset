@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef64d82cacf031d47a3f6dbbeaee52d2, type: 3}
-  m_Name: HpPotion
+  m_Name: MpPotion
   m_EditorClassIdentifier: Assembly-CSharp::ConsumableItem
-  itemID: 101
+  itemID: 102
   itemType: 1
   itemPrefab: {fileID: 6030996329513890968, guid: 29e048347ff237d4ead34393008bdb27, type: 3}
   itemPrice: 10
-  itemName: HpPotion
-  itemIcon: {fileID: 21300000, guid: 88056ea574e054e0f9b7a780d8fd5641, type: 3}
+  itemName: 
+  itemIcon: {fileID: 21300000, guid: c56ecff87d3024239b350580276bb9d0, type: 3}
   maxAmount: 99
   effects:
-  - {fileID: 11400000, guid: 18a9688cbca9f8d47a3f862306f2a4be, type: 2}
+  - {fileID: 11400000, guid: 7bc3a4f16bfbaf14a8bf2a48af3b7fde, type: 2}
