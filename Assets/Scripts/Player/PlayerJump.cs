@@ -52,31 +52,30 @@ public class PlayerJump : MonoBehaviour
     {
         bool canCoyoteJump = coyoteTimeCounter > 0f && jumpCount == 0;
 
-    if (canCoyoteJump)
-    {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-        jumpCount = 1;
-        coyoteTimeCounter = 0f;
-        PlayJumpEffect();
-    }
-    else if (jumpCount < maxJumpCount)
-    {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-        jumpCount++;
-        coyoteTimeCounter = 0f;
-        PlayJumpEffect();
-    }
+        if (canCoyoteJump)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            jumpCount = 1;
+            coyoteTimeCounter = 0f;
+            PlayJumpEffect();
+        }
+        else if (jumpCount < maxJumpCount)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            jumpCount++;
+            coyoteTimeCounter = 0f;
+            PlayJumpEffect();
+        }
     }
 
     private void PlayJumpEffect()
     {
-    audioSource.PlayOneShot(jumpSound);
-    if (spumAnimator != null)
+        audioSource.PlayOneShot(jumpSound);
+        Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
+
+        if (spumAnimator != null)
         {
-          Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
-          spumAnimator.Play("IDLE", 0, 0f);
-          spumAnimator.Update(0f);
-          spumAnimator.enabled = false;
+            spumAnimator.SetBool("6_Jump", true);
         }
     }
 
@@ -87,9 +86,9 @@ public class PlayerJump : MonoBehaviour
         // 바닥 체크
         isGround = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer);
 
-           if (isGround)
+        if (isGround)
             coyoteTimeCounter = coyoteTime;
-           else
+        else
             coyoteTimeCounter -= Time.deltaTime;
 
         // 공중상태 + 아래로 내려가는 중 + 바닥에 착지한 순간 : 점프 횟수 초기화
@@ -97,10 +96,9 @@ public class PlayerJump : MonoBehaviour
         {
             jumpCount = 0;
 
-            // Animator 다시 활성화
-            if (spumAnimator != null && !spumAnimator.enabled)
+            if (spumAnimator != null)
             {
-                spumAnimator.enabled = true;
+                spumAnimator.SetBool("6_Jump", false);
             }
         }
     }

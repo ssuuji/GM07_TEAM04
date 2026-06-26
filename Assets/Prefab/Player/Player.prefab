@@ -3450,7 +3450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6482824260393418039}
   m_Layer: 0
-  m_Name: DashPoint
+  m_Name: DashEffectPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3465,7 +3465,7 @@ Transform:
   m_GameObject: {fileID: 2261299921566192818}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.4, y: 3.9, z: 0}
+  m_LocalPosition: {x: -6.4, y: 3.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4164,7 +4164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73a61e2bc71a5764c8b929523f5fcf93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
+  moveSpeed: 7
   spumAnimator: {fileID: 6987284825911416808}
   audioSource: {fileID: 0}
   moveSound: {fileID: 8300000, guid: 0f97509dcee5a024f98f2cb3f986cb53, type: 3}
@@ -4231,11 +4231,12 @@ MonoBehaviour:
   spumAnimator: {fileID: 0}
   audioSource: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 9e4a241481509fa4785581ee757913b4, type: 3}
-  jumpEffectPrefab: {fileID: 9203438506646207666, guid: 8269a693e99d1474f9225e8d39edb34f, type: 3}
+  jumpEffectPrefab: {fileID: 9203438506646207666, guid: 63d4f1ed8273f244e9915ea86b1a77c3, type: 3}
   jumpEffectPoint: {fileID: 4200473906353506656}
   floatGravity: 0.5
   normalGravity: 3
   minFallSpeed: -2
+  coyoteTime: 0.15
 --- !u!114 &5928616671076496107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12513,7 +12514,7 @@ Transform:
   m_GameObject: {fileID: 5737573643327227367}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3, y: 3.79, z: 0}
+  m_LocalPosition: {x: 10.7, y: 3.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
