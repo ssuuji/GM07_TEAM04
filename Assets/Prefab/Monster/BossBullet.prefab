@@ -180,5 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossBullet
   boss: {fileID: 0}
+  player: {fileID: 0}
+  damage: 10
   bulletSpeed: 2
   lifeTime: 5
+  hitFxPrefab: {fileID: 4306488877223958017, guid: ecb38e0319a6ad44cbca52d7b5add7a6, type: 3}

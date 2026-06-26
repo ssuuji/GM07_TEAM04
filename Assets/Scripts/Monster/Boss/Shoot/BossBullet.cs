@@ -8,6 +8,7 @@ public class BossBullet : MonoBehaviour
     [SerializeField] private int damage = 10;
     [SerializeField] private float bulletSpeed = 2.0f;
     [SerializeField] private float lifeTime = 5.0f;
+    [SerializeField] private GameObject hitFxPrefab;
 
     private Rigidbody2D rb;
     private bool direction;
@@ -68,6 +69,7 @@ public class BossBullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            Instantiate(hitFxPrefab, transform.position, Quaternion.identity);
             player.TakeDamage(damage);
         }
     }

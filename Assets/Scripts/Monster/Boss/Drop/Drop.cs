@@ -6,6 +6,8 @@ public class Drop : MonoBehaviour
     [SerializeField] private float dropSpeed = 5.0f;
     [SerializeField] private float lifeTime = 5.0f;
     [SerializeField] private PlayerHealth player;
+    [SerializeField] private GameObject hitFxPrefab;
+    [SerializeField] private GameObject GroundFxPrefab;
     private Rigidbody2D rb;
     private float currentLifeTime;
 
@@ -57,11 +59,13 @@ public class Drop : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            Instantiate(GroundFxPrefab, transform.position, Quaternion.identity);
             Die();
         }
 
         if (collision.gameObject.CompareTag("Player"))
         {
+            Instantiate(hitFxPrefab, transform.position, Quaternion.identity);
             player.TakeDamage(damage);
         }
     }

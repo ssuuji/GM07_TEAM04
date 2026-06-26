@@ -6,13 +6,16 @@ public class BossMove : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private Boss boss;
     [SerializeField] private GameObject player;
+
+    [SerializeField] private BossAnimation bossAnimation;
+
     private Rigidbody2D rb;
 
     private void Awake()
     {
         boss = GetComponent<Boss>();
         rb = GetComponent<Rigidbody2D>();
-        
+        bossAnimation = GetComponent<BossAnimation>();
     }
 
     private void Start()
@@ -27,10 +30,11 @@ public class BossMove : MonoBehaviour
 
     private void Move()
     {
+        if (rb.linearVelocity == Vector2.zero) bossAnimation.EndMove();
         VerticalMove();
         if (Reach())
         {
-            HorizontalMove(1);
+            //HorizontalMove(1);
         }
         else
         {
