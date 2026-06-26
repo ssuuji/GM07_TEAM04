@@ -28,6 +28,10 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private float normalGravity = 3f;
     [SerializeField] private float minFallSpeed = -2f;
 
+    [Header("코요테 타임")]
+    [SerializeField] private float coyoteTime = 0.15f;
+    private float coyoteTimeCounter;
+
     private Rigidbody2D rb;
     private bool isGround; //바닥 체크
     private int jumpCount; //현재 점프 횟수
@@ -44,39 +48,52 @@ public class PlayerJump : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void Jump()
+    public void Jump() // 코요테 타임 적용을 위해 수정함
     {
-        //최대점프횟수 까지만 점프 가능
-        if (jumpCount >= maxJumpCount) return;
+        bool canCoyoteJump = coyoteTimeCounter > 0f && jumpCount == 0;
 
-        //x속도는 유지하고 y속도만 점프힘으로 변경
+    if (canCoyoteJump)
+    {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+        jumpCount = 1;
+        coyoteTimeCounter = 0f;
+        PlayJumpEffect();
+    }
+    else if (jumpCount < maxJumpCount)
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+        jumpCount++;
+        coyoteTimeCounter = 0f;
+        PlayJumpEffect();
+    }
+    }
 
-        jumpCount++;      //점프 횟수 증가
-        isGround = false; //점프 했으니까 아직 공중상태 유지
-
-        //사운드
-        audioSource.PlayOneShot(jumpSound);
-
-        //점프애니메이션이 없어서 Idle 이미지(?)로 대체
-        if (spumAnimator != null)
+    private void PlayJumpEffect()
+    {
+    audioSource.PlayOneShot(jumpSound);
+    if (spumAnimator != null)
         {
-            //이펙트
-            Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
-
-            spumAnimator.Play("IDLE", 0, 0f); //Idle 상태를 BaseLayer(0) 에서 재생시간(0f) 부터 실행
-            spumAnimator.Update(0f);          //위에 Play()로 바꾼 상태를 프레임에 바로 반영 
-            spumAnimator.enabled = false;     //잠시 애니메이션 비활성화
+          Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
+          spumAnimator.Play("IDLE", 0, 0f);
+          spumAnimator.Update(0f);
+          spumAnimator.enabled = false;
         }
     }
 
     public void CheckGround()
     {
+        bool wasGround = isGround; //이전 프레임의 바닥체크 저장
+
         // 바닥 체크
         isGround = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer);
 
-        // 바닥에 닿아 있으면 점프 횟수 초기화
-        if (isGround)
+           if (isGround)
+            coyoteTimeCounter = coyoteTime;
+           else
+            coyoteTimeCounter -= Time.deltaTime;
+
+        // 공중상태 + 아래로 내려가는 중 + 바닥에 착지한 순간 : 점프 횟수 초기화
+        if (!wasGround && rb.linearVelocity.y <= 0f && isGround)
         {
             jumpCount = 0;
 
@@ -88,6 +105,7 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
+    //체공
     public void Hovering()
     {
         var kb = Keyboard.current;
@@ -116,5 +134,11 @@ public class PlayerJump : MonoBehaviour
             Gizmos.color = isGround ? Color.green : Color.red;
             Gizmos.DrawWireCube(groundCheck.position, checkSize);
         }
+    }
+
+    private void OnGUI() // 코요테 타임 확인용 gui 
+    {
+        GUI.color = coyoteTimeCounter > 0f ? Color.green : Color.red;
+        GUI.Label(new Rect(10, 10, 200, 30), $"CoyoteTime: {coyoteTimeCounter:F2}");
     }
 }
