@@ -16,6 +16,8 @@ public class MonsterKnockBack : MonoBehaviour
     }
     public void Knockback()
     {
+
+
         dogAnimation.Hit();
         if(monster.Direction)
         {
