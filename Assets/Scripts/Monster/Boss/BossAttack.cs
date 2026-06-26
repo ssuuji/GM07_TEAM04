@@ -16,6 +16,8 @@ public class BossAttack : MonoBehaviour
     [SerializeField] private Drop dropPrefab;
     [SerializeField] private PoisonBall poisonBallPrefab;
 
+    [SerializeField] private BossAnimation bossAnimation;
+
     private int randomInt;
     private Coroutine currentAttack;
 
@@ -24,6 +26,7 @@ public class BossAttack : MonoBehaviour
     private void Awake()
     {
         boss = GetComponent<Boss>();
+        bossAnimation = GetComponent<BossAnimation>();
         shootingPoint = transform.Find("ShootingPoint");
         droppingPoint = transform.Find("DroppingPoint");
     }
@@ -37,6 +40,7 @@ public class BossAttack : MonoBehaviour
     {
         while (true)
         {
+            bossAnimation.Attack();
             randomInt = Random.Range(0, 3);
             StartAttack(randomInt);
             yield return new WaitForSeconds(attackDuration);
