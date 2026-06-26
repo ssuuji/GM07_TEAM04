@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GoldItem
   itemID: 0
   itemType: 2
-  itemPrefab: {fileID: 7757719396099809731, guid: 33289bd394d54d34e90d317bba5bb376, type: 3}
+  itemPrefab: {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  itemPrice: 0
   itemName: Gold_10
   itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   maxAmount: 0

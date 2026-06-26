@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArmorItem
   itemID: 302
   itemType: 0
-  itemPrefab: {fileID: 9133713294082040688, guid: 24eb9f9f9e149234ca02f9e20d86f106, type: 3}
+  itemPrefab: {fileID: 5274319405678176285, guid: 7735c9d28733a004bb3c77f53e3e705e, type: 3}
   itemPrice: 100
   itemName: Armor02
-  itemIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  itemIcon: {fileID: 21300000, guid: a086f54e00018463da476436eb69aa0c, type: 3}
   maxAmount: 1
   equipType: 1
   upgradeLevel: 0
