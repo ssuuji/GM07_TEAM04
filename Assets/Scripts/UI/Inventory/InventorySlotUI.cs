@@ -149,7 +149,7 @@ public class InventorySlotUI : MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
         // 아이템이 존재하지 않다면 리턴
-        if (currentItem == null) return;
+        //if (currentItem == null) return;
         // 드래그 완료 후 UI가 돌아올 위치 저장
         originPosition = rectTransform.anchoredPosition;
     }

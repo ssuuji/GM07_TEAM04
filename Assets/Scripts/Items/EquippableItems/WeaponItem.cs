@@ -35,4 +35,17 @@ public class WeaponItem : EquippableItem
         PlayerEquipment playerEquipment = target.GetComponent<PlayerEquipment>();
         playerEquipment.UnEquipWeapon();
     }
+
+    //public override bool UpgradeItem()
+    //{
+    //    if (!base.UpgradeItem()) return false;
+
+    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    //    if (player == null) return false;
+
+    //    Debug.Log("장비 장착 해제");
+    //    Equip(player);
+    //    Debug.Log("장비 재장착");
+    //    return true;
+    //}
 }
