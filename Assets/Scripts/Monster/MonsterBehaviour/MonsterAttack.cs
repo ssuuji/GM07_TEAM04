@@ -14,6 +14,11 @@ public class MonsterAttack : MonoBehaviour
 
     private float currentCoolTime;
 
+    private void Awake()
+    {
+        currentCoolTime = attackCoolTime;
+    }
+
     private void Update()
     {
         if (currentCoolTime <= 0)
@@ -31,6 +36,7 @@ public class MonsterAttack : MonoBehaviour
 
     private void Attack()
     {
+        Debug.Log("몬스터의 Attack");
         SetAttackDirection();
         dogAnimation.Attack();
         Collider2D player = Physics2D.OverlapBox(
