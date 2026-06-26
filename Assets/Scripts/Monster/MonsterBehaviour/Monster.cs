@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Monster : MonoBehaviour, IDamageable
@@ -18,15 +19,18 @@ public class Monster : MonoBehaviour, IDamageable
     [SerializeField] private MonsterAngryMove monsterAngryMove;
     [SerializeField] private MonsterUI monsterUI;
     [SerializeField] private MonsterKnockBack monsterKnockBack;
+    [SerializeField] private DogAnimation dogAnimation;
 
 
     private float flairTime = 3;
     private float knockbackTimer;
-    private float attackTimer;
     public bool IsDead { get; private set; } = false;
     public bool Direction { get; private set; } = true;
-    
-    
+
+    private void Awake()
+    {
+        dogAnimation = GetComponent<DogAnimation>();
+    }
 
     private void OnEnable()
     {
@@ -46,7 +50,6 @@ public class Monster : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        Debug.Log("MonDir = " + Direction);
 
 
         StateManage();
@@ -56,17 +59,21 @@ public class Monster : MonoBehaviour, IDamageable
     //피해
     public void TakeDamage(int damage)
     {
+        if (IsDead) return;
+
         currentHealth -= damage;
+
+        if (monsterUI != null)
+        {
+            monsterUI.SetHP(currentHealth);
+        }
 
         if (currentHealth <= 0)
         {
             Die();
+            return;
         }
 
-        if (monsterUI!=null)
-        {
-            monsterUI.SetHP(currentHealth);
-        }
         SetState(MonsterState.Knockback);
         monsterKnockBack.Knockback();
     }
@@ -74,7 +81,16 @@ public class Monster : MonoBehaviour, IDamageable
     //죽음
     private void Die()
     {
+        if(IsDead) return; 
         IsDead = true;
+        StartCoroutine(DieCo());
+    }
+
+    IEnumerator DieCo()
+    {
+        dogAnimation.Die();
+
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 
@@ -82,19 +98,25 @@ public class Monster : MonoBehaviour, IDamageable
     //상태
     private void SetState(MonsterState state)
     {
+
+        if (IsDead) return;
         currentState = state;
 
         monsterIdleMove.enabled = currentState == MonsterState.Idle;
         monsterAngryMove.enabled = currentState == MonsterState.Angry;
         monsterKnockBack.enabled = currentState == MonsterState.Knockback;
+
     }
 
-    
+
 
 
 
     private void StateManage()
     {
+
+        
+
         if (currentState == MonsterState.Knockback)
         {
             knockbackTimer -= Time.deltaTime;

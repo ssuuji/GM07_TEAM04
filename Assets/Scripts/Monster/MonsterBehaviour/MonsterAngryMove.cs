@@ -69,7 +69,8 @@ public class MonsterAngryMove : MonoBehaviour
     // 공격가능 거리판단
     private void RangeMeasure()
     {
-        AttackableRange = Mathf.Abs(target.transform.position.x - transform.position.x) < attackRange ? true : false;
+        AttackableRange = Mathf.Abs(target.transform.position.x - transform.position.x) < attackRange
+            && Mathf.Abs(target.transform.position.y - transform.position.y) < attackRange ? true : false;
     }
 
     public void OffIsAttack()
