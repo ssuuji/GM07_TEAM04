@@ -73,6 +73,8 @@ public class PlayerUI : MonoBehaviour
     // HP/MP UI갱신
     private void UpdateStats()
     {
+        hpSlider.maxValue = playerStatus.CurrentMaxHp; 
+        mpSlider.maxValue = playerStatus.CurrentMaxMp; 
         hpSlider.value = playerStatus.CurrentHp; //현재 HP반영
         mpSlider.value = playerStatus.CurrentMp; //현재 MP반영
 
