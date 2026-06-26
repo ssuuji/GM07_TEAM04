@@ -15,7 +15,7 @@ public class InventorySlotUI : MonoBehaviour,
     [SerializeField] private Image iconImage;               // 아이템 아이콘에 나타날 이미지
     [SerializeField] private TextMeshProUGUI amountText;    // 아이템 수량을 표시할 텍스트
     [SerializeField] private GameObject equipMark;          // 장비 아이템의 장착 여부 표시 마크
-
+    [SerializeField] private GameObject selectedIcon;       // 선택 중인 슬롯 강조 이미지
     // UI 칸에서 현재 보여지고 있는 아이템의 실제 데이터
     private InventoryItem currentItem;
 
@@ -35,7 +35,8 @@ public class InventorySlotUI : MonoBehaviour,
     private void Awake()
     {
         // 컴포넌트 받아오기
-        rectTransform = GetComponent<RectTransform>();
+        rectTransform = iconImage.GetComponent<RectTransform>();
+        selectedIcon.SetActive(false);
     }
 
     /*=============== Method ===============*/
@@ -137,6 +138,7 @@ public class InventorySlotUI : MonoBehaviour,
         // 아이템 정보 UI 활성화
         // 커서가 슬롯 위로 올라왔다는 이벤트 알림
         onEnterAction?.Invoke(currentItem);
+        selectedIcon.SetActive(true);
     }
     // 마우스가 떠났을 때
     public void OnPointerExit(PointerEventData eventData)
@@ -144,6 +146,7 @@ public class InventorySlotUI : MonoBehaviour,
         // 아이템 정보 UI 비활성화
         // 커서가 슬롯 밖으로 나갔다는 이벤트 알림
         onExitAction?.Invoke();
+        selectedIcon.SetActive(false);
     }
     // 드래그 시작
     public void OnBeginDrag(PointerEventData eventData)

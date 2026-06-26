@@ -36,6 +36,7 @@ public class InventoryItemInfoUI : MonoBehaviour
     // 아이템 정보 설정
     public void SetItemInfo(InventoryItem item)
     {
+        if (item.ItemData == null) return;
         // 아이콘 갱신
         iconImage.sprite = item.ItemData.ItemIcon;
         // 아이템 이름 갱신

@@ -4233,6 +4233,9 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 9e4a241481509fa4785581ee757913b4, type: 3}
   jumpEffectPrefab: {fileID: 9203438506646207666, guid: 8269a693e99d1474f9225e8d39edb34f, type: 3}
   jumpEffectPoint: {fileID: 4200473906353506656}
+  floatGravity: 0.5
+  normalGravity: 3
+  minFallSpeed: -2
 --- !u!114 &5928616671076496107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4316,6 +4319,8 @@ MonoBehaviour:
   maxExp: 100
   levelUpHp: 10
   levelUpMp: 5
+  audioSource: {fileID: 0}
+  levelUpSound: {fileID: 8300000, guid: ebda181a14a02774dbd5d1bcdb29b3c5, type: 3}
 --- !u!114 &3222966571479983774
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponItem
   itemID: 202
   itemType: 0
-  itemPrefab: {fileID: 6030996329513890968, guid: 29e048347ff237d4ead34393008bdb27, type: 3}
+  itemPrefab: {fileID: 1739929545937747509, guid: e814ae17c61191944873721f6db1bb09, type: 3}
   itemPrice: 200
   itemName: Weapon02
-  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  itemIcon: {fileID: 21300000, guid: 826d5e3da13494f519cb553be58241e6, type: 3}
   maxAmount: 1
   equipType: 0
   upgradeLevel: 0
