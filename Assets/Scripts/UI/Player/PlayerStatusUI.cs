@@ -38,6 +38,12 @@ public class PlayerStatusUI : MonoBehaviour
             OpenStatusUI();
         }
 
+        //스탯창 닫기 : Esc키 or 버튼클릭
+        if (InputManager.IsEsc)
+        {
+            CloseStatusUI();
+        }
+
         //스탯창이 열려있는 동안 정보 업데이트
         if (isOpen)
         {
