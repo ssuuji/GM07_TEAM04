@@ -69,9 +69,9 @@ public class PlayerStatusUI : MonoBehaviour
     private void UpdateStatusUI()
     {
         levelText.text = $"Lv. {playerLevel.Level}";
-        hpText.text = $"HP     {playerStatus.CurrentHp} / {playerStatus.CurrentMaxHp}";
-        mpText.text = $"MP     {playerStatus.CurrentMp} / {playerStatus.CurrentMaxMp}";
-        atkText.text = $"ATK    {playerStatus.CurrentAttack}";
-        defText.text = $"DEF    {playerStatus.CurrentDefense}";
+        hpText.text = $"{playerStatus.CurrentHp} / {playerStatus.CurrentMaxHp}";
+        mpText.text = $"{playerStatus.CurrentMp} / {playerStatus.CurrentMaxMp}";
+        atkText.text = $"{playerStatus.CurrentAttack}";
+        defText.text = $"{playerStatus.CurrentDefense}";
     }
 }
