@@ -7,17 +7,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 7.0f;
 
     [Header("애니메이션 설정")]
-    [SerializeField] private Animator spumAnimator;
+    private Animator playerAnim;
 
     [Header("이동 사운드")]
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource audioSource;
     [SerializeField] private AudioClip moveSound;
     [SerializeField] private float moveSoundInterval = 0.4f; //발소리 재생간격
     private Coroutine SoundCo;
 
     private PlayerJump playerJump;
     private PlayerDash playerDash;
-
     private Rigidbody2D rb;
     private Vector3 originScale;  // 플레이어 기존 크기 저장
     private float checkDir = 1f;  // 플레이어가 바라보는 방향 저장
@@ -28,7 +27,14 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         originScale = transform.localScale;
-        audioSource = GetComponent<AudioSource>();
+        if (playerAnim == null)
+        {
+            playerAnim = GetComponentInChildren<Animator>();
+        }
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
         playerJump = GetComponent<PlayerJump>();
         playerDash = GetComponent<PlayerDash>();
     }
@@ -61,11 +67,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        //애니메이션
-        if (spumAnimator != null)
+        // Idle / Run 애니메이션 값
+        if (playerAnim != null)
         {
-            //true : MOVE / flase : Idle
-            spumAnimator.SetBool("1_Move", isMove);
+            playerAnim.SetBool("IsMoving", isMove);
         }
     }
 
@@ -93,7 +98,10 @@ public class PlayerMovement : MonoBehaviour
         //움직이는 동안 계속 사운드 반복
         while (true)
         {
-            audioSource.PlayOneShot(moveSound);
+            if (audioSource != null)
+            {
+                audioSource.PlayOneShot(moveSound);
+            }
 
             yield return new WaitForSeconds(moveSoundInterval);
         }

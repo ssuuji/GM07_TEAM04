@@ -13,10 +13,10 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("애니메이션 설정")]
-    [SerializeField] private Animator spumAnimator;
+    [SerializeField] private Animator playerAnim;
 
     [Header("사운드 설정")]
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource audioSource;
     [SerializeField] private AudioClip jumpSound;
 
     [Header("점프 이펙트")]
@@ -41,11 +41,24 @@ public class PlayerJump : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (spumAnimator == null)
+        if (playerAnim == null)
         {
-            spumAnimator = GetComponentInChildren<Animator>();
+            playerAnim = GetComponentInChildren<Animator>();
         }
-        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
+
+    private void Update()
+    {
+        //Jump / Fall 상태확인
+        if (playerAnim != null)
+        {
+            playerAnim.SetBool("IsGrounded", isGround);
+            playerAnim.SetFloat("VerticalSpeed", rb.linearVelocity.y);
+        }
     }
 
     public void Jump() // 코요테 타임 적용을 위해 수정함
@@ -70,12 +83,20 @@ public class PlayerJump : MonoBehaviour
 
     private void PlayJumpEffect()
     {
-        audioSource.PlayOneShot(jumpSound);
-        Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
-
-        if (spumAnimator != null)
+        //오디오
+        if (audioSource != null)
         {
-            spumAnimator.SetBool("6_Jump", true);
+            audioSource.PlayOneShot(jumpSound);
+        }
+        //이펙트
+        if (jumpEffectPrefab != null && jumpEffectPoint != null)
+        {
+            Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
+        }
+        //애니메이션
+        if (playerAnim != null)
+        {
+            playerAnim.SetTrigger("Jump");
         }
     }
 
@@ -95,11 +116,6 @@ public class PlayerJump : MonoBehaviour
         if (!wasGround && rb.linearVelocity.y <= 0f && isGround)
         {
             jumpCount = 0;
-
-            if (spumAnimator != null)
-            {
-                spumAnimator.SetBool("6_Jump", false);
-            }
         }
     }
 
