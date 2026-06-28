@@ -4150,7 +4150,7 @@ Transform:
   m_GameObject: {fileID: 365020764}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -117.08, y: -12.45, z: -10}
+  m_LocalPosition: {x: -217.2, y: -19.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5287,11 +5287,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3969658732764825109, guid: b428a84304c06324282db1844e99f956, type: 3}
   m_PrefabInstance: {fileID: 1668849351}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &462093554 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5167063749251243189, guid: b428a84304c06324282db1844e99f956, type: 3}
-  m_PrefabInstance: {fileID: 1668849351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &462093556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4249978691531976304, guid: b428a84304c06324282db1844e99f956, type: 3}
@@ -5878,7 +5873,7 @@ Transform:
   m_GameObject: {fileID: 508786699}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -124.37104, y: -12.449997, z: -10}
+  m_LocalPosition: {x: -216.0816, y: -19.100002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15964,11 +15959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4249978691531976304, guid: b428a84304c06324282db1844e99f956, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -117.08
+      value: -217.2
       objectReference: {fileID: 0}
     - target: {fileID: 4249978691531976304, guid: b428a84304c06324282db1844e99f956, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.45
+      value: -19.1
       objectReference: {fileID: 0}
     - target: {fileID: 4249978691531976304, guid: b428a84304c06324282db1844e99f956, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16006,10 +16001,6 @@ PrefabInstance:
       propertyPath: fadeImage
       value: 
       objectReference: {fileID: 733035123}
-    - target: {fileID: 7722737042370928143, guid: b428a84304c06324282db1844e99f956, type: 3}
-      propertyPath: spumAnimator
-      value: 
-      objectReference: {fileID: 462093554}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
