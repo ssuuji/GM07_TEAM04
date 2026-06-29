@@ -31,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         //상점NPC 범위라면
-        if (IsInShop)
+        if (IsInShop && !InventoryManager.Instance.IsInventoryUIOpened)
         {
             Debug.Log("상점 오픈");
             if (ShopManager.Instance != null)
@@ -41,13 +41,13 @@ public class PlayerInteraction : MonoBehaviour
         }
         else
         {
-            if (ShopManager.Instance != null && ShopManager.Instance.IsShopOpend())
+            if (ShopManager.Instance != null && ShopManager.Instance.IsShopOpened())
             {
                 ShopManager.Instance.ToggleShop();
             }
         }
         // 대장간 NPC와 상호작용이 가능한 상태라면
-        if (IsInSmith)
+        if (IsInSmith && !InventoryManager.Instance.IsInventoryUIOpened)
         {
             Debug.Log("대장간 오픈");
             if (SmithUI.Instance != null)

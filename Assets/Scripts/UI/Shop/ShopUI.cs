@@ -69,11 +69,13 @@ public class ShopUI : MonoBehaviour
         // 인벤토리의 현 상태의 반대 상태로 전환
         shopUIPanel.SetActive(!isActive);
         goldUI.SetActive(!isActive);
+        InventoryManager.Instance.OtherUICheck(!isActive);
 
         if (!isActive)
         {
             // 인벤토리가 켜질 때 데이터 갱신
             RefreshUI();
+            InventoryManager.Instance.OtherUICheck(!isActive);
         }
     }
     // 상점 데이터 갱신

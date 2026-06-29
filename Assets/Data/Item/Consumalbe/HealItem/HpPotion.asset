@@ -19,5 +19,9 @@ MonoBehaviour:
   itemName: HpPotion
   itemIcon: {fileID: 21300000, guid: 88056ea574e054e0f9b7a780d8fd5641, type: 3}
   maxAmount: 99
+  collectedSFX: {fileID: 8300000, guid: b60d5f607e4cd1d4d9580619900526c1, type: 3}
+  collectedVFX: {fileID: 0}
   effects:
   - {fileID: 11400000, guid: 18a9688cbca9f8d47a3f862306f2a4be, type: 2}
+  useSFX: {fileID: 8300000, guid: 8cdde9b20f6c9f94d8cc88b23f26a4f7, type: 3}
+  useVFX: {fileID: 2504457565880169854, guid: 70c3a06a6c50d45d69c130d77e992a74, type: 3}

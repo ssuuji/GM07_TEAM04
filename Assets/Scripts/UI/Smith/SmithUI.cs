@@ -84,11 +84,13 @@ public class SmithUI : Singleton<SmithUI>
         smithInventoryUIPanel.SetActive(!isActive);
         itemUpgradePriceText.gameObject.SetActive(!isActive);
         goldUI.SetActive(!isActive);
+        InventoryManager.Instance.OtherUICheck(!isActive);
 
         if (!isActive)
         {
             // UI가 켜질 때 데이터 갱신
             RefreshUI();
+            InventoryManager.Instance.OtherUICheck(!isActive);
         }
         else
         {

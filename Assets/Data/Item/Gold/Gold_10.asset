@@ -19,4 +19,6 @@ MonoBehaviour:
   itemName: Gold_10
   itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   maxAmount: 0
+  collectedSFX: {fileID: 8300000, guid: b60d5f607e4cd1d4d9580619900526c1, type: 3}
+  collectedVFX: {fileID: 0}
   goldAmount: 10

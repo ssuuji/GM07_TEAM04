@@ -161,7 +161,7 @@ public class ShopManager : Singleton<ShopManager>
         shopUI.ToggleShopUI();
     }
     // 상점이 열려있는지 판단할 메서드
-    public bool IsShopOpend()
+    public bool IsShopOpened()
     {
         ShopUI shopUI = FindFirstObjectByType<ShopUI>();
         if (shopUI == null) return false;
