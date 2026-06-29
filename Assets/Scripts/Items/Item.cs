@@ -14,6 +14,9 @@ public class Item : ScriptableObject
     [SerializeField] private string itemName;       // 아이템 이름
     [SerializeField] private Sprite itemIcon;       // 아이템 아이콘
     [SerializeField] private int maxAmount;         // 아이템 최대 소지 개수
+    [Header("Item Collected Feedback")]
+    [SerializeField] private AudioClip collectedSFX;    // 아이템 획득 시 출력할 사운드
+    [SerializeField] private GameObject collectedVFX;   // 아이템 획득 시 출력할 이펙트
 
     // 출력 메세지 --> 이걸 어떻게 잘 써먹을지를 모르겠네...
     [Header("Message")]
@@ -47,5 +50,18 @@ public class Item : ScriptableObject
     protected void SetItemType(ItemType type)
     {
         this.itemType = type;
+    }
+    // 아이템 사용 피드백 효과 재생 메서드
+    public void PlayCollectedFeedback(GameObject player)
+    {
+        if (collectedSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(collectedSFX, player.transform.position);
+        }
+
+        if (collectedVFX != null)
+        {
+            Instantiate(collectedVFX, player.transform.position, Quaternion.identity);
+        }
     }
 }

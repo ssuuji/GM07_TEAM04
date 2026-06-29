@@ -10,6 +10,8 @@ public abstract class EquippableItem : Item
     [Header("Upgrade Data")]
     [SerializeField] private int upgradeLevel = 0;      // 아이템 강화 수치
     [SerializeField] private int maxUpgradeLevel = 5;   // 아이템 최대 강화 수치
+    [Header("Use Feedback")]
+    [SerializeField] private AudioClip useSFX;
 
     // 프로퍼티
     public EquipmentType EquipType => equipType;
@@ -53,6 +55,7 @@ public abstract class EquippableItem : Item
             // 장착 중이 아니면 새로 장착
             this.Equip(target);
         }
+        PlayFeedback(target);
     }
 
     // 장착/해제 시 효과를 작성할 추상 메서드
@@ -104,5 +107,13 @@ public abstract class EquippableItem : Item
         Debug.Log($"강화 성공! | {ItemName} +{upgradeLevel}");
         // 강화 성공
         return true;
+    }
+    // 아이템 사용 피드백 효과 재생 메서드
+    private void PlayFeedback(GameObject player)
+    {
+        if (useSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(useSFX, player.transform.position);
+        }
     }
 }

@@ -19,7 +19,10 @@ MonoBehaviour:
   itemName: Armor01
   itemIcon: {fileID: 21300000, guid: 466b1cc3852524f549e58e8916a4e7ce, type: 3}
   maxAmount: 1
+  collectedSFX: {fileID: 8300000, guid: b60d5f607e4cd1d4d9580619900526c1, type: 3}
+  collectedVFX: {fileID: 0}
   equipType: 1
   upgradeLevel: 0
   maxUpgradeLevel: 5
+  useSFX: {fileID: 8300000, guid: 52978e5f233f2d0439262558cfd7ec4c, type: 3}
   baseDefPower: 5

@@ -8,6 +8,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private GameObject shopUIPanel;        // 상점 전체 UI패널
     [SerializeField] private Transform slotParent;          // 상점 슬롯 생성 시 들어갈 위치
     [SerializeField] private GameObject slotPrefab;         // 상점 한 칸을 담당할 슬롯 프리팹
+    [SerializeField] private GameObject goldUI;             // 골드 UI 오브젝트
 
     private List<ShopSlotUI> slotUIList = new List<ShopSlotUI>(); // 생성할 SlotUI들 리스트로 관리
 
@@ -20,6 +21,11 @@ public class ShopUI : MonoBehaviour
         if (shopUIPanel != null)
         {
             shopUIPanel.SetActive(false);
+        }
+        // 골드 출력 UI 끄기
+        if (goldUI != null)
+        {
+            goldUI.SetActive(false);
         }
     }
 
@@ -57,15 +63,19 @@ public class ShopUI : MonoBehaviour
     {
         // 예외 처리
         if (shopUIPanel == null) return;
+        if (goldUI == null) return;
         // 인벤토리 패널이 켜져있는지 검사
         bool isActive = shopUIPanel.activeSelf;
         // 인벤토리의 현 상태의 반대 상태로 전환
         shopUIPanel.SetActive(!isActive);
+        goldUI.SetActive(!isActive);
+        InventoryManager.Instance.OtherUICheck(!isActive);
 
         if (!isActive)
         {
             // 인벤토리가 켜질 때 데이터 갱신
             RefreshUI();
+            InventoryManager.Instance.OtherUICheck(!isActive);
         }
     }
     // 상점 데이터 갱신

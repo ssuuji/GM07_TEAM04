@@ -3,7 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
+public class ShopSlotUI : MonoBehaviour, 
+    IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Item Data Binding")]
     [SerializeField] private Image iconImage;                   // 아이템 아이콘에 나타날 이미지
@@ -11,7 +12,7 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TextMeshProUGUI nameText;          // 아이템 이름 텍스트
     [SerializeField] private TextMeshProUGUI priceText;         // 아이템 가격 텍스트
     [SerializeField] private TextMeshProUGUI descriptionText;   // 아이템 정보 텍스트
-
+    [SerializeField] private GameObject selectedIcon;       // 선택 중인 슬롯 강조 이미지
     // UI 칸에서 현재 보여지고 있는 아이템의 실제 데이터
     private InventoryItem currentItem;
 
@@ -119,5 +120,17 @@ public class ShopSlotUI : MonoBehaviour, IPointerClickHandler
         {
             Debug.Log("RightClick");
         }
+    }
+    // 마우스가 들어왔을 때
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        // 빈 칸일 시 리턴
+        if (currentItem == null) return;
+        selectedIcon.SetActive(true);
+    }
+    // 마우스가 떠났을 때
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        selectedIcon.SetActive(false);
     }
 }

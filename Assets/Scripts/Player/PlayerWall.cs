@@ -10,6 +10,8 @@ public class PlayerWall : MonoBehaviour
     [Header("슬라이드")]
     [SerializeField] private float wallSlideSpeed = 0.5f;                 //벽 슬라이드 속도
     private bool isWall;                                                  //벽에 닿아있는지 확인여부
+    private bool isWallSliding;                                           //슬라이드중인지 확인여부
+
 
     [Header("벽 점프")]
     [SerializeField] private Vector2 wallJumpPower = new Vector2(7f, 10f);//벽 점프 힘(반대방향 힘, 위쪽방향 힘)
@@ -17,9 +19,7 @@ public class PlayerWall : MonoBehaviour
     private bool isWallJump;                                              //현재 벽 점프중인지 확인
     private float wallJumpTimer;                                          //벽 점프중 상태유지 시간
 
-    [Header("애니메이션 설정")]
-    [SerializeField] private Animator spumAnimator;
-
+    private Animator playerAnim;
     private Rigidbody2D rb;
     private PlayerJump playerJump;
     private PlayerMovement playerMovement;
@@ -32,44 +32,43 @@ public class PlayerWall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerJump = GetComponent<PlayerJump>();
         playerMovement = GetComponent<PlayerMovement>();
-        
-        //애니메이션
-        if (spumAnimator == null)
+        if (playerAnim == null)
         {
-            spumAnimator = GetComponentInChildren<Animator>();
+            playerAnim = GetComponentInChildren<Animator>();
         }
     }
 
     //벽에 닿아있는지 체크
     public void CheckWall()
     {
+        if (wallCheck == null) return;
         isWall = Physics2D.OverlapBox(wallCheck.position, checkSize, 0f, wallLayer);
     }
 
     //벽 슬라이드
     public void WallSlide()
     {
-        if (!isWall) return;             //벽에 닿아있지 않으면 실행 X
-        if (playerJump.IsGround) return; //플레이어가 바닥에 있으면 실행 X
+        isWallSliding = false;
 
-        //현재 좌우 입력값
-        float moveX = InputManager.Movement.x;
-
-        //플레이어가 바라보는 방향
-        float dir = playerMovement.CheckDirValue;
-
-        //벽 방향으로 방향키를 누르고 있는지 확인
-        bool isInputWall = moveX != 0 && Mathf.Sign(moveX) == dir;
-        if (isInputWall)
+        if (!isWall || playerJump.IsGround)
         {
-            //벽타기 애니메이션이 없으므로.. 일단 Idle 상태로 처리
-            if (spumAnimator != null)
-            {
-                spumAnimator.SetBool("1_Move", false);
-            }
+            UpdateWallSlideAnimation();
+            return;
+        }
 
-            //천천히 내려오기
-            rb.linearVelocity = new Vector2(0f, -wallSlideSpeed);
+        //천천히 내려오기
+        isWallSliding = true;
+        rb.linearVelocity = new Vector2(0f, -wallSlideSpeed); 
+
+        UpdateWallSlideAnimation();
+    }
+
+    //슬라이딩 애니메이션
+    private void UpdateWallSlideAnimation()
+    {
+        if (playerAnim != null)
+        {
+            playerAnim.SetBool("IsWallSliding", isWallSliding);
         }
     }
 
@@ -78,16 +77,16 @@ public class PlayerWall : MonoBehaviour
         if (!isWall) return;             //벽에 닿아있지 않으면 X
         if (playerJump.IsGround) return; //바닥에 있으면 X
 
-        //벽점프 상태 시작
-        isWallJump = true;
-        //벽점프 상태 유지시간 설정
-        wallJumpTimer = wallJumpTime;
+        isWallJump = true;                                                           //벽점프 상태 시작
+        wallJumpTimer = wallJumpTime;                                                //벽점프 상태 유지시간 설정
+        float jumpDir = -playerMovement.CheckDirValue;                               //현재 바라보는 방향 반대로 점프하기
+        rb.linearVelocity = new Vector2(jumpDir * wallJumpPower.x, wallJumpPower.y); //x축은 벽 반대방향 y축은 위로 점프파워적용
 
-        //현재 바라보는 방향 반대로 점프하기
-        float jumpDir = -playerMovement.CheckDirValue;
-
-        //x축은 벽 반대방향 y축은 위로 점프파워적용
-        rb.linearVelocity = new Vector2(jumpDir * wallJumpPower.x, wallJumpPower.y);
+        //애니메이션
+        if (playerAnim != null)
+        {
+            playerAnim.SetTrigger("Jump");
+        }
     }
 
     //벽점프 이후 이동입력 막기

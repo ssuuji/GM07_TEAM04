@@ -167,6 +167,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "fa8812ce-cc4b-4e7a-bef5-2c02033c6215",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -651,6 +660,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "QuickSlot3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff41985e-6fab-47ec-963c-bbbfb97b61a0",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -20,6 +20,8 @@ public class InventoryManager : Singleton<InventoryManager>
     public int MaxSize => maxSize;
     public List<InventoryItem> StartingItems => startingItems;
     public Dictionary<int, InventoryItem> InventoryDictionary => inventoryDictionary;
+    public bool IsInventoryUIOpened { get; private set; } = false;
+    public bool IsOtherUIOpened { get; private set; } = false;
 
     // 이벤트
     public event Action OnInventoryChanged;     // 인벤토리 데이터 갱신 시 변경될 UI를 위한 이벤트
@@ -175,5 +177,13 @@ public class InventoryManager : Singleton<InventoryManager>
             return 0;
         }
         return targetItem.Amount;
+    }
+    public void ThisUICheck(bool check)
+    {
+        IsInventoryUIOpened = check;
+    }
+    public void OtherUICheck(bool check)
+    {
+        IsOtherUIOpened = check;
     }
 }

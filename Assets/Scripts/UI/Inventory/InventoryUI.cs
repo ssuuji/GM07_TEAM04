@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
     private void Update()
     {
         // I 키 입력 시 인벤토리 토글
-        if (InputManager.IsOpenInventory)
+        if (InputManager.IsOpenInventory && !InventoryManager.Instance.IsOtherUIOpened)
         {
             // 인벤토리 토글 메서드
             ToggleInventoryUI();
@@ -130,11 +130,13 @@ public class InventoryUI : MonoBehaviour
         inventoryUIPanel.SetActive(!isActive);
         inventoryGoldUI.SetActive(!isActive);
         InventoryEquipmentUIPanel.SetActive(!isActive);
+        InventoryManager.Instance.ThisUICheck(!isActive);
 
         if (!isActive)
         {
             // 인벤토리가 켜질 때 데이터 갱신
             RefreshUI();
+            InventoryManager.Instance.ThisUICheck(!isActive);
         }
         else
         {
