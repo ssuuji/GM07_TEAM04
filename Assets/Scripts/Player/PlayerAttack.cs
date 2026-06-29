@@ -20,7 +20,11 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("기본공격 설정")]
     [SerializeField] private float attackCooldown = 0.5f;    //기본공격 쿨타임
+    [SerializeField] private float comboResetTime = 0.7f;    //콤보공격 리셋
+    [SerializeField] private int maxComboCount = 3;          //최대콤보
     private bool canAttack = true;
+    private int comboStep;
+    private Coroutine comboResetCo;
 
     [Header("범위공격 설정")]
     [SerializeField] private int areaAttackMpCost = 10;       //범위공격 소모 MP
@@ -46,10 +50,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
 
     [Header("애니메이션 설정")]
-    [SerializeField] private Animator spumAnimator;
+    private Animator playerAnim;
 
     [Header("스킬 사운드")]
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource audioSource;
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private AudioClip areaAttackSound;
     [SerializeField] private AudioClip buffSound;
@@ -78,8 +82,14 @@ public class PlayerAttack : MonoBehaviour
         playerMove = GetComponent<PlayerMovement>();
         playerHealth = GetComponent<PlayerHealth>();
         playerSkill = GetComponent<PlayerSkill>();
-        spumAnimator = GetComponentInChildren<Animator>();
-        audioSource = GetComponent<AudioSource>();
+        if (playerAnim == null)
+        {
+            playerAnim = GetComponentInChildren<Animator>();
+        }
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     #region 기본공격
@@ -88,17 +98,35 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!canAttack) return;
 
-        //쿨타임 : 너무 빠르게 재사용 할 수 없도록..
+        //쿨타임
         StartCoroutine(AttackCooldownCo());
 
-        //애니메이션 : 몬스터가 없어도 공격모션이 나오게끔
-        if (spumAnimator != null)
+        //콤보증가
+        comboStep++;
+        if (comboStep > maxComboCount)
         {
-            spumAnimator.SetTrigger("2_Attack");
+            comboStep = 1;
         }
 
+        //애니메이션
+        if (playerAnim != null)
+        {
+            playerAnim.SetTrigger("Attack");
+            playerAnim.SetInteger("ComboStep", comboStep);
+        }
+
+        //콤보리셋후에는 1타부터 다시
+        if (comboResetCo != null)
+        {
+            StopCoroutine(comboResetCo);
+        }
+        comboResetCo = StartCoroutine(ComboResetCo());
+
         //사운드 
-        audioSource.PlayOneShot(attackSound);
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(attackSound);
+        }
 
         //이펙트
         Instantiate(attackEffectPrefab, slashEffectPoint.position, Quaternion.identity, slashEffectPoint);
@@ -120,6 +148,29 @@ public class PlayerAttack : MonoBehaviour
         }
 
         Debug.Log($"{target.name} 공격");
+    }
+
+    private IEnumerator AttackCooldownCo()
+    {
+        canAttack = false;
+
+        yield return new WaitForSeconds(attackCooldown);
+
+        canAttack = true;
+    }
+
+    private IEnumerator ComboResetCo()
+    {
+        yield return new WaitForSeconds(comboResetTime);
+
+        comboStep = 0;
+
+        if (playerAnim != null)
+        {
+            playerAnim.SetInteger("ComboStep", 0);
+        }
+
+        comboResetCo = null;
     }
 
     private Collider2D GetTarget(Collider2D[] hits)
@@ -152,12 +203,6 @@ public class PlayerAttack : MonoBehaviour
         return targetMonster;
     }
 
-    IEnumerator AttackCooldownCo()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(attackCooldown);
-        canAttack = true;
-    }
     #endregion
 
     #region 범위공격
@@ -169,13 +214,17 @@ public class PlayerAttack : MonoBehaviour
         if (!playerStatus.UseMp(areaAttackMpCost)) return; //MP가 부족하면 X
 
         //애니메이션 
-        if (spumAnimator != null)
+        if (playerAnim != null)
         {
-            spumAnimator.SetTrigger("2_Attack");
+            playerAnim.SetInteger("ComboStep", 1); //기본공격의 첫번째모션과 동일하게
+            playerAnim.SetTrigger("Attack");
         }
 
         //사운드 
-        audioSource.PlayOneShot(areaAttackSound);
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(areaAttackSound);
+        }
 
         //이펙트
         Instantiate(areaAttackEffectPrefab, slashEffectPoint.position, Quaternion.identity, slashEffectPoint);
@@ -230,9 +279,9 @@ public class PlayerAttack : MonoBehaviour
         if (!playerStatus.UseMp(buffMpCost)) return; //MP가 부족하면 X
 
         //애니메이션
-        if (spumAnimator != null)
+        if (playerAnim != null)
         {
-            spumAnimator.SetTrigger("5_Buff");
+            playerAnim.SetTrigger("Cast");
         }
 
         //사운드 
@@ -304,9 +353,9 @@ public class PlayerAttack : MonoBehaviour
         if (!playerStatus.UseMp(invinMpCost)) return; //MP가 부족하면 X
 
         //애니메이션
-        if (spumAnimator != null)
+        if (playerAnim != null)
         {
-            spumAnimator.SetTrigger("5_Buff");
+            playerAnim.SetTrigger("Cast");
         }
 
         //사운드 

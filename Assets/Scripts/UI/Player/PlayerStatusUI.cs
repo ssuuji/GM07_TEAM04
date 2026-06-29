@@ -38,6 +38,12 @@ public class PlayerStatusUI : MonoBehaviour
             OpenStatusUI();
         }
 
+        //스탯창 닫기 : Esc키 or 버튼클릭
+        if (InputManager.IsEsc)
+        {
+            CloseStatusUI();
+        }
+
         //스탯창이 열려있는 동안 정보 업데이트
         if (isOpen)
         {
@@ -69,9 +75,9 @@ public class PlayerStatusUI : MonoBehaviour
     private void UpdateStatusUI()
     {
         levelText.text = $"Lv. {playerLevel.Level}";
-        hpText.text = $"HP     {playerStatus.CurrentHp} / {playerStatus.CurrentMaxHp}";
-        mpText.text = $"MP     {playerStatus.CurrentMp} / {playerStatus.CurrentMaxMp}";
-        atkText.text = $"ATK    {playerStatus.CurrentAttack}";
-        defText.text = $"DEF    {playerStatus.CurrentDefense}";
+        hpText.text = $"{playerStatus.CurrentHp} / {playerStatus.CurrentMaxHp}";
+        mpText.text = $"{playerStatus.CurrentMp} / {playerStatus.CurrentMaxMp}";
+        atkText.text = $"{playerStatus.CurrentAttack}";
+        defText.text = $"{playerStatus.CurrentDefense}";
     }
 }

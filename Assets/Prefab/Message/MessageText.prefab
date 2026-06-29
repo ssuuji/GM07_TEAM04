@@ -66,9 +66,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u314D\n"
+  m_text: "\uD14C\uC2A4\uD2B8"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5278705597aab3c41ba70b0e8f9524a1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e370abd12d736a246a5ca74d9b447873, type: 2}
   m_sharedMaterial: {fileID: 8623078618439313755, guid: 21a5fd57c8c888d44ab11a871c740c02, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

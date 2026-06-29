@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using DG.Tweening;
 
 public class Chest : MonoBehaviour
 {
     [Header("상자 애니메이션")]
     [SerializeField] private Animator chestAnim;
+    [SerializeField] private float rewardJumpPower = 1.2f;
+    [SerializeField] private float rewardPopDuration = 0.4f; // 튀는 시간
+
     private bool isOpen;
 
     [Header("보상")] // 랜덤무기, 랜덤골드, 랜덤능력치?
@@ -14,8 +18,9 @@ public class Chest : MonoBehaviour
     [SerializeField] private List<GameObject> rewardPrefabs = new List<GameObject>(); //보상 리스트
     [SerializeField] private int minGold = 0;       //min ~ max 사이의 골드를 랜덤으로 지급
     [SerializeField] private int maxGold = 100;
-
+    
     private MessageUI messageUI;
+    
     private void Start()
     {
         //우선 닫힌 상자 모습으로 보이게끔 애니메이션 비활성화
@@ -56,13 +61,30 @@ public class Chest : MonoBehaviour
     {
         if (rewardPrefabs.Count == 0 || rewardPoint == null) return;
 
-        // 랜덤보상뽑기
+        //랜덤으로 보상뽑기
         int randomReward = Random.Range(0, rewardPrefabs.Count);
         GameObject rewardPrefab = rewardPrefabs[randomReward];
 
-        //보상 지급
-        Instantiate(rewardPrefab, rewardPoint.position, Quaternion.identity, rewardPoint);
-        messageUI.ShowMessage($"{rewardPrefab.name} 획득!");
+        //보상 생성
+        GameObject rewardObject = Instantiate(rewardPrefab, transform.position, Quaternion.identity, rewardPoint);
+
+        //Collider 잠시 비활성화
+        Collider2D rewardCollider = rewardObject.GetComponentInChildren<Collider2D>();
+        if (rewardCollider != null) rewardCollider.enabled = false;
+
+        //보상이 작게 생성되고 -> 원래 크기로 커지도록
+        Vector3 originScale = rewardObject.transform.localScale;
+        rewardObject.transform.localScale = originScale * 0.3f; //먼저 작은크기로 설정
+
+        //시퀀스
+        Sequence rewardSequence = DOTween.Sequence();
+        rewardSequence.Join(rewardObject.transform.DOJump(rewardPoint.position, rewardJumpPower, 1, rewardPopDuration).SetEase(Ease.OutQuad)); //위로 튀어나오면서 상자 앞에 떨어짐
+        rewardSequence.Join(rewardObject.transform.DOScale(originScale, rewardPopDuration * 0.5f).SetEase(Ease.OutBack));                      //튀어나오면서 원래 크기로 커지기
+        rewardSequence.OnComplete(() => 
+        {
+            if (rewardCollider != null) rewardCollider.enabled = true; 
+        });
+
     }
 
     private void RandGold()
