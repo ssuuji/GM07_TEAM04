@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623e923fe47ebc74bb79f2b19fad4e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
-  jumpPower: 12
+  jumpPower: 15
   maxJumpCount: 2
   groundCheck: {fileID: 7953070292527022474}
   checkSize: {x: 1.09, y: -0.16}

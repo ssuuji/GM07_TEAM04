@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 6921468742504701833}
   - component: {fileID: 5021180830675267301}
   - component: {fileID: 7203418688499677383}
+  - component: {fileID: 2682666437073267677}
   m_Layer: 7
   m_Name: Monster
   m_TagString: Monster
@@ -538,6 +539,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DogAnimation
   animator: {fileID: 4965152445867266674}
+--- !u!114 &2682666437073267677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750971951054956214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56368657ab886d468d17dba171339f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterReward
+  rewardPrefabs:
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  expReward: 10
 --- !u!1 &2120694980969924854
 GameObject:
   m_ObjectHideFlags: 0
