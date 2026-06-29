@@ -1,15 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossMove : MonoBehaviour
 {
     [SerializeField] private float reach = 10.0f;
-    [SerializeField] private float speed = 1.0f;
+    [SerializeField] private float speed = 0.5f;
     [SerializeField] private Boss boss;
     [SerializeField] private GameObject player;
 
     [SerializeField] private BossAnimation bossAnimation;
 
     private Rigidbody2D rb;
+
+    private int randomHeight;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class BossMove : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
+        StartCoroutine(RandomPosCo());
     }
 
     private void Update()
@@ -56,17 +60,24 @@ public class BossMove : MonoBehaviour
 
     private void VerticalMove()
     {
-        if (player.transform.position.y > transform.position.y)
+        if (player.transform.position.y + randomHeight > transform.position.y)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, speed);
         }
 
-        if (player.transform.position.y < transform.position.y)
+        if (player.transform.position.y + randomHeight < transform.position.y)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -speed);
         }
     }
-
+    IEnumerator RandomPosCo()
+    {
+        while (true)
+        {
+            randomHeight = (Random.Range(0, 2) + 1) * 3;
+            yield return new WaitForSeconds(3.0f);
+        }
+    }
     private bool Reach()
     {
         if(Mathf.Abs(player.transform.position.x - transform.position.x) < reach)

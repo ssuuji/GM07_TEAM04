@@ -13,6 +13,7 @@ public class BossBullet : MonoBehaviour
     private Rigidbody2D rb;
     private bool direction;
     private float currentLifeTime;
+    private Vector2 dir;
 
     public void Init(Boss boss)
     {
@@ -30,6 +31,7 @@ public class BossBullet : MonoBehaviour
     private void OnEnable()
     {
         currentLifeTime = lifeTime;
+        dir = (player.transform.position - transform.position).normalized;
     }
 
     private void Update()
@@ -44,15 +46,8 @@ public class BossBullet : MonoBehaviour
 
     private void Move()
     {
-        if (direction)
-        {
-            rb.linearVelocity = new Vector2 (bulletSpeed, 0);
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2 (-bulletSpeed, 0);
-        }
-        bulletSpeed += 0.2f;
+        rb.linearVelocity = dir * bulletSpeed;
+        bulletSpeed += 0.1f;
     }
 
     private void Aging()
@@ -65,12 +60,16 @@ public class BossBullet : MonoBehaviour
         }
     }
 
+    
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
             Instantiate(hitFxPrefab, transform.position, Quaternion.identity);
             player.TakeDamage(damage);
+            Destroy(gameObject);
         }
     }
 }

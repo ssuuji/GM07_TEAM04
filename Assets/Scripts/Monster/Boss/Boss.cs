@@ -11,12 +11,18 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private int currentHealth;
     [SerializeField] Cloning cloning;
 
+    [SerializeField] private BossUI bossUI;
+
+    [SerializeField] private GameObject diePrefab;
+
     [SerializeField] private bool flair;
 
     [SerializeField] private BossAnimation bossAnimation;
 
     //테스트용
     private float flairTime = 1.0f;
+
+    private int cloningCount = 2;
 
     public bool IsFake = false;
     public bool Direction = false;
@@ -26,8 +32,10 @@ public class Boss : MonoBehaviour, IDamageable
     private void Awake()
     {
         currentHealth = maxHealth;
-        cloning = GetComponent<Cloning>();  
+        cloning = GetComponent<Cloning>();
         bossAnimation = GetComponent<BossAnimation>();
+        bossUI = GetComponent<BossUI>();
+        bossUI.Initialize(maxHealth);
     }
 
     private void Start()
@@ -55,14 +63,22 @@ public class Boss : MonoBehaviour, IDamageable
         Direction = (transform.position.x <= player.transform.position.x) ? true : false;
     }
 
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         bossAnimation.Hit();
 
-        if (currentHealth % 35 == 0 && IsFake == false)
+        if (currentHealth <= maxHealth * 0.8f  && IsFake == false && cloningCount == 2)
         {
             cloning.UseCloning();
+            cloningCount--;
+        }
+
+        else if(currentHealth <= maxHealth * 0.4f && IsFake == false && cloningCount == 1)
+        {
+            cloning.UseCloning();
+            cloningCount--;
         }
 
         if (currentHealth <= 0)
@@ -70,10 +86,10 @@ public class Boss : MonoBehaviour, IDamageable
             Die();
         }
 
-        //if (bossUI != null)
-        //{
-        //    bossUI.SetHP(currentHealth);
-        //}
+        if (bossUI != null)
+        {
+            bossUI.SetHP(currentHealth);
+        }
     }
 
     public void SetHp(int hp)
@@ -81,10 +97,7 @@ public class Boss : MonoBehaviour, IDamageable
         currentHealth = hp;
     }
 
-    public int GetHpInfo()
-    {
-        return currentHealth;
-    }
+   
 
 
     private void Die()
@@ -99,6 +112,7 @@ public class Boss : MonoBehaviour, IDamageable
         bossAnimation.Die();
 
         yield return new WaitForSeconds(1);
+        Instantiate(diePrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

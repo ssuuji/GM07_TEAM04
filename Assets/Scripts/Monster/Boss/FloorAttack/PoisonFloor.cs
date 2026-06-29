@@ -6,6 +6,7 @@ public class PoisonFloor : MonoBehaviour
     [SerializeField] private int damage = 5;
     [SerializeField] private float damegeCoclTime = 1.0f;
     [SerializeField] private float lifeTime = 5.0f;
+    [SerializeField] private GameObject hitFxPrefab;
 
     private float currentCoolTime;
 
@@ -36,6 +37,7 @@ public class PoisonFloor : MonoBehaviour
 
             if(currentCoolTime <= 0)
             {
+                Instantiate(hitFxPrefab, player.transform.position, Quaternion.identity);
                 player.TakeDamage(damage);
                 currentCoolTime = damegeCoclTime;
             }
