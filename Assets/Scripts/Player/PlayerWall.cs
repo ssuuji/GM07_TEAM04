@@ -56,17 +56,9 @@ public class PlayerWall : MonoBehaviour
             return;
         }
 
-        float moveX = InputManager.Movement.x;    //현재 좌우 입력값
-        float dir = playerMovement.CheckDirValue; //플레이어가 바라보는 방향
-
-        //벽 방향으로 방향키를 누르고 있는지 확인
-        bool isInputWall = moveX != 0 && Mathf.Sign(moveX) == dir;
-        if (isInputWall)
-        {
-            isWallSliding = true;
-            
-            rb.linearVelocity = new Vector2(0f, -wallSlideSpeed); //천천히 내려오기
-        }
+        //천천히 내려오기
+        isWallSliding = true;
+        rb.linearVelocity = new Vector2(0f, -wallSlideSpeed); 
 
         UpdateWallSlideAnimation();
     }

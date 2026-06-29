@@ -1,4 +1,5 @@
-using System.Collections;
+﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Monster : MonoBehaviour, IDamageable
@@ -20,7 +21,7 @@ public class Monster : MonoBehaviour, IDamageable
     [SerializeField] private MonsterUI monsterUI;
     [SerializeField] private MonsterKnockBack monsterKnockBack;
     [SerializeField] private DogAnimation dogAnimation;
-
+    private MonsterReward monsterReward;
 
     private float flairTime = 3;
     private float knockbackTimer;
@@ -45,6 +46,7 @@ public class Monster : MonoBehaviour, IDamageable
         {
             monsterUI.Initialize(maxHealth);
         }
+        monsterReward = GetComponent<MonsterReward>();
     }
 
 
@@ -92,6 +94,8 @@ public class Monster : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+
+        monsterReward.DropReward();
     }
 
 
