@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -13,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject attackEffectPrefab;
     [SerializeField] private GameObject areaAttackEffectPrefab;
     [SerializeField] private Transform slashEffectPoint;
+    private CinemachineImpulseSource impulseSource;
 
     [Header("버프 이펙트")]
     [SerializeField] private GameObject buffEffectPrefab;
@@ -90,6 +92,10 @@ public class PlayerAttack : MonoBehaviour
         {
             audioSource = GetComponent<AudioSource>();
         }
+        if (impulseSource == null)
+        {
+            impulseSource = GetComponent<CinemachineImpulseSource>();
+        }
     }
 
     #region 기본공격
@@ -145,9 +151,10 @@ public class PlayerAttack : MonoBehaviour
         {
             //데미지 적용
             damageable.TakeDamage(playerStatus.CurrentAttack);
-        }
 
-        Debug.Log($"{target.name} 공격");
+            //화면 흔들림 연출
+            impulseSource?.GenerateImpulse();
+        }
     }
 
     private IEnumerator AttackCooldownCo()
@@ -237,6 +244,7 @@ public class PlayerAttack : MonoBehaviour
         if (hits.Length == 0) return;
 
         //해당 범위의 모든 몬스터들 공격
+        bool isHit = false;
         foreach (Collider2D hit in hits)
         {
             IDamageable damageable = hit.GetComponentInParent<IDamageable>();
@@ -244,9 +252,14 @@ public class PlayerAttack : MonoBehaviour
             if (damageable != null)
             {
                 damageable.TakeDamage(playerStatus.CurrentAttack);
-            }
 
-            Debug.Log($"{hit.name} 공격");
+                isHit = true;
+            }
+        }
+
+        if (isHit)
+        {
+            impulseSource?.GenerateImpulse();
         }
     }
     IEnumerator AreaAttackCooldownCo()
@@ -416,6 +429,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log("무적기 사용가능");
     }
     #endregion
+
 
     private void OnDrawGizmos()
     {
