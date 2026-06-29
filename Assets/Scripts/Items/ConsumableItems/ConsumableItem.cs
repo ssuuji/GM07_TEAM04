@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewConsumableItem", menuName = "Data/Item/Consumable")]
@@ -7,6 +8,9 @@ public class ConsumableItem : Item
 {
     [Header("Item Effects")]
     [SerializeField] private List<ItemEffect> effects;  // 아이템 사용 시 발생할 효과들 목록
+    [Header("Use Feedback")]
+    [SerializeField] private AudioClip useSFX;      // 아이템 사용 시 출력할 사운드
+    [SerializeField] private GameObject useVFX;     // 아이템 사용 시 출력할 이펙트
 
     // 프로퍼티
     public List<ItemEffect> Effects => effects;
@@ -39,6 +43,8 @@ public class ConsumableItem : Item
         {
             if (!effect.ExecuteEffect(target)) return;
         }
+        // 아이템 사용 피드백 재생
+        PlayFeedback(target);
         // 메시지가 작성되어 있다면 출력
         if (!string.IsNullOrEmpty(MessageWhenUsed))
         {
@@ -49,6 +55,19 @@ public class ConsumableItem : Item
         if (InventoryManager.Instance != null)
         {
             InventoryManager.Instance.RemoveItem(itemID, 1);
+        }
+    }
+    // 아이템 사용 피드백 효과 재생 메서드
+    private void PlayFeedback(GameObject player)
+    {
+        if (useSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(useSFX, player.transform.position);
+        }
+
+        if (useVFX != null)
+        {
+            Instantiate(useVFX, player.transform.position, Quaternion.identity);
         }
     }
 }

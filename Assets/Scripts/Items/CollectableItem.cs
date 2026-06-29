@@ -37,9 +37,10 @@ public class CollectableItem : MonoBehaviour
         if (HasCollected || !other.CompareTag("Player")) return;
 
         // 매니저에 아이템 정보 전달
-        bool isGetItem = InventoryManager.Instance.AddItem(item, 1);
+        bool isGetItem = InventoryManager.Instance.AddItem(item);
         // 예외 처리
         if (!isGetItem) return;  // 아이템 획득 실패 시 종료
+        item.PlayCollectedFeedback(other.gameObject);
 
         // 아이템 수집 성공
         OnItemCollected?.Invoke();  // 아이템 수집 이벤트 호출
@@ -49,7 +50,14 @@ public class CollectableItem : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         // 다이얼로그에 아이템 수집 메세지 전달
+
+        // 메시지가 작성되어 있다면 출력
+        if (!string.IsNullOrEmpty(item.MessageWhenCollected))
+        {
+            // 최상위 부모 클래스 Item에 있는 아이템 사용 메세지 출력
+            Debug.Log(item.MessageWhenCollected);
+        }
     }
 }
