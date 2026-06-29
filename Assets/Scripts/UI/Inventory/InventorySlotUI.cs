@@ -161,6 +161,7 @@ public class InventorySlotUI : MonoBehaviour,
     {
         // UI 이동
         FollowCursor();
+        onExitAction?.Invoke();
     }
     // 드레그 종료
     public void OnEndDrag(PointerEventData eventData)
