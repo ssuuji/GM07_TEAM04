@@ -13,6 +13,8 @@ public class PoisonFloor : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+
+        SFXManager.Instance.PlayPoisonField();
     }
 
     private void Update()
@@ -37,6 +39,7 @@ public class PoisonFloor : MonoBehaviour
 
             if(currentCoolTime <= 0)
             {
+                SFXManager.Instance.PlayPoisonFieldHit();
                 Instantiate(hitFxPrefab, player.transform.position, Quaternion.identity);
                 player.TakeDamage(damage);
                 currentCoolTime = damegeCoclTime;

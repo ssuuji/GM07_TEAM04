@@ -10,6 +10,7 @@ public class BossBullet : MonoBehaviour
     [SerializeField] private float lifeTime = 5.0f;
     [SerializeField] private GameObject hitFxPrefab;
 
+
     private Rigidbody2D rb;
     private bool direction;
     private float currentLifeTime;
@@ -26,6 +27,7 @@ public class BossBullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+        SFXManager.Instance.PlayBullet();
     }
 
     private void OnEnable()
@@ -67,6 +69,7 @@ public class BossBullet : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            SFXManager.Instance.PlayBulletHit();
             Instantiate(hitFxPrefab, transform.position, Quaternion.identity);
             player.TakeDamage(damage);
             Destroy(gameObject);

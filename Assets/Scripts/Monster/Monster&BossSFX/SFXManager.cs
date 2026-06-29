@@ -10,15 +10,19 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioClip hit;
     [SerializeField] private AudioClip magic;
     [SerializeField] private AudioClip bullet;
+    [SerializeField] private AudioClip bulletHit;
     [SerializeField] private AudioClip poisonBall;
     [SerializeField] private AudioClip poisonField;
+    [SerializeField] private AudioClip poisonFieldHit;
     [SerializeField] private AudioClip drop;
+    [SerializeField] private AudioClip dropHit;
     [SerializeField] private AudioClip explode;
     [SerializeField] private AudioClip cloning;
     [SerializeField] private AudioClip bossDie;
 
     [Header("Monster")]
     [SerializeField] private AudioClip monsterAttack;
+    [SerializeField] private AudioClip monsterAttackHit;
     [SerializeField] private AudioClip monsterHit;
     [SerializeField] private AudioClip monsterDie;
 
@@ -49,15 +53,19 @@ public class SFXManager : MonoBehaviour
     public void PlayHit() => Play(hit);
     public void PlayMagic() => Play(magic);
     public void PlayBullet() => Play(bullet);
+    public void PlayBulletHit() => Play(bulletHit);
     public void PlayPoisonBall() => Play(poisonBall);
     public void PlayPoisonField() => Play(poisonField);
+    public void PlayPoisonFieldHit() => Play(poisonFieldHit);
     public void PlayDrop() => Play(drop);
+    public void PlayDropHit() => Play(dropHit);
     public void PlayExplode() => Play(explode);
     public void PlayCloning() => Play(cloning);
     public void PlayBossDie() => Play(bossDie);
 
     // Monster
     public void PlayMonsterAttack() => Play(monsterAttack);
+    public void PlayMonsterAttackHit() => Play(monsterAttackHit);
     public void PlayMonsterHit() => Play(monsterHit);
     public void PlayMonsterDie() => Play(monsterDie);
 

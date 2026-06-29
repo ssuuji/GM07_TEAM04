@@ -19,6 +19,8 @@ public class Boss : MonoBehaviour, IDamageable
 
     [SerializeField] private BossAnimation bossAnimation;
 
+    [SerializeField] private SFXManager sfxManager;
+
     //테스트용
     private float flairTime = 1.0f;
 
@@ -36,6 +38,7 @@ public class Boss : MonoBehaviour, IDamageable
         bossAnimation = GetComponent<BossAnimation>();
         bossUI = GetComponent<BossUI>();
         bossUI.Initialize(maxHealth);
+
     }
 
     private void Start()
@@ -66,6 +69,8 @@ public class Boss : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        SFXManager.Instance.PlayHit();
+
         currentHealth -= damage;
         bossAnimation.Hit();
 
@@ -102,6 +107,8 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        SFXManager.Instance.PlayBossDie();
+
         if (IsDead) return;
         IsDead = true;
         StartCoroutine(DieCo());

@@ -20,6 +20,7 @@ public class BossAttack : MonoBehaviour
 
     [SerializeField] private GameObject magicCreatePrefab;
 
+
     private int randomInt;
     private Coroutine currentAttack;
 
@@ -31,6 +32,7 @@ public class BossAttack : MonoBehaviour
         bossAnimation = GetComponent<BossAnimation>();
         shootingPoint = transform.Find("ShootingPoint");
         droppingPoint = transform.Find("DroppingPoint");
+
     }
 
     private void Start()
@@ -124,11 +126,13 @@ public class BossAttack : MonoBehaviour
 
         if(dir)
         {
+            SFXManager.Instance.PlayMagic();
             Instantiate(dropPrefab, droppingPoint.position + Vector3.right * dropSpace, Quaternion.identity);
             Instantiate(magicCreatePrefab, droppingPoint.position + Vector3.right * dropSpace, Quaternion.identity);
         }
         else
         {
+            SFXManager.Instance.PlayMagic();
             Instantiate(dropPrefab, droppingPoint.position + Vector3.left * dropSpace, Quaternion.identity);
             Instantiate(magicCreatePrefab, droppingPoint.position + Vector3.left * dropSpace, Quaternion.Euler(0, 0, 90));
         }
@@ -144,6 +148,7 @@ public class BossAttack : MonoBehaviour
 
     private void HorizontalMagicCreate()
     {
+        SFXManager.Instance.PlayMagic();
         if (boss.Direction)
         {
             Instantiate(magicCreatePrefab, shootingPoint.position, Quaternion.identity);

@@ -646,10 +646,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
-    - target: {fileID: 1750971951054956214, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9185154086948026643, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6355793
@@ -705,6 +701,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2832478524417347878, guid: 319e04d4cbaac6d4591abe6cd9650feb, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832478524417347878, guid: 319e04d4cbaac6d4591abe6cd9650feb, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5231766338184684316, guid: 319e04d4cbaac6d4591abe6cd9650feb, type: 3}
@@ -764,6 +764,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319e04d4cbaac6d4591abe6cd9650feb, type: 3}
+--- !u!1001 &4099058890837876157
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 93579950695874659, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_Name
+      value: MBSFXManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.18894
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.98347
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 710817424751182237, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 547f72279b67d974480f36a962d6bb07, type: 3}
 --- !u!1001 &8174742804583797646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -782,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4715720945531345204, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4715720945531345204, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -833,3 +890,4 @@ SceneRoots:
   - {fileID: 8174742804583797646}
   - {fileID: 1567286615}
   - {fileID: 1664921405}
+  - {fileID: 4099058890837876157}

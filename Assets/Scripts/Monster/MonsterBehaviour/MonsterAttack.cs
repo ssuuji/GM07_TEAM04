@@ -14,6 +14,9 @@ public class MonsterAttack : MonoBehaviour
 
     private float currentCoolTime;
 
+
+    
+
     private void Update()
     {
         if (currentCoolTime <= 0)
@@ -31,6 +34,8 @@ public class MonsterAttack : MonoBehaviour
 
     private void Attack()
     {
+        SFXManager.Instance.PlayMonsterAttack();
+
         SetAttackDirection();
         dogAnimation.Attack();
         Collider2D player = Physics2D.OverlapBox(
@@ -41,6 +46,7 @@ public class MonsterAttack : MonoBehaviour
 
         if (player != null)
         {
+            SFXManager.Instance.PlayMonsterAttackHit();
             player.GetComponent<PlayerHealth>()?.TakeDamage(damage);
         }
     }

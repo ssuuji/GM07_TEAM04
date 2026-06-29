@@ -17,6 +17,7 @@ public class Cloning : MonoBehaviour
     {
         boss = GetComponent<Boss>();
         randomSpots = new Vector3[cloneCount];
+        
         clones = new Boss[cloneCount];
     }
 
@@ -26,7 +27,7 @@ public class Cloning : MonoBehaviour
         MakeRandomSpot();
         SpawnClones();
         SetAllHp();
-
+        SFXManager.Instance.PlayCloning ();
     }
 
     

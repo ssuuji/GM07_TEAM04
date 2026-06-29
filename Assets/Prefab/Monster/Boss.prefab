@@ -123,6 +123,7 @@ MonoBehaviour:
   diePrefab: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
   flair: 0
   bossAnimation: {fileID: 0}
+  sfxManager: {fileID: 0}
   IsFake: 0
   Direction: 0
   IsDead: 0
