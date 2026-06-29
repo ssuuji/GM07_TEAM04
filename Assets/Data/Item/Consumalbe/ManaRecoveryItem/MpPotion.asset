@@ -24,4 +24,4 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 7bc3a4f16bfbaf14a8bf2a48af3b7fde, type: 2}
   useSFX: {fileID: 8300000, guid: 8cdde9b20f6c9f94d8cc88b23f26a4f7, type: 3}
-  useVFX: {fileID: 231092403508090919, guid: 40389c5feaa35464c97e4301e872386f, type: 3}
+  useVFX: {fileID: 2504457565880169854, guid: 70c3a06a6c50d45d69c130d77e992a74, type: 3}
