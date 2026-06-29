@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     public static bool IsBuff { get; private set; }
     public static bool IsInvin { get; private set; }
     public static bool IsStatus { get; private set; }
+    public static bool IsEsc { get; private set; }
 
     private InputAction moveAction;
     private InputAction jumpAction;
@@ -22,6 +23,7 @@ public class InputManager : MonoBehaviour
     private InputAction buffAction;
     private InputAction invinAction;
     private InputAction statusAction;
+    private InputAction escAction;
 
     // Inventory Part
     // Add I Input
@@ -46,6 +48,7 @@ public class InputManager : MonoBehaviour
         buffAction = InputSystem.actions.FindAction("Buff");
         invinAction = InputSystem.actions.FindAction("Invin");
         statusAction = InputSystem.actions.FindAction("Status");
+        escAction = InputSystem.actions.FindAction("Esc");
         // Inventory Part
         // Add I Input
         if (openInventoryAction == null)
@@ -78,6 +81,7 @@ public class InputManager : MonoBehaviour
         IsBuff = buffAction.WasPressedThisFrame();               //공격버프 : C
         IsInvin = invinAction.WasPressedThisFrame();             //무적기   : V
         IsStatus = statusAction.WasPressedThisFrame();           //스탯창   : Tab
+        IsEsc = escAction.WasPressedThisFrame();                 //닫기     : Esc
         // Inventory Part
         // Add I Input
         IsOpenInventory = openInventoryAction.WasPressedThisFrame();

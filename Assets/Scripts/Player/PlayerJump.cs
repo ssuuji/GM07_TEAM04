@@ -13,10 +13,10 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     [Header("애니메이션 설정")]
-    [SerializeField] private Animator spumAnimator;
+    [SerializeField] private Animator playerAnim;
 
     [Header("사운드 설정")]
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource audioSource;
     [SerializeField] private AudioClip jumpSound;
 
     [Header("점프 이펙트")]
@@ -41,42 +41,62 @@ public class PlayerJump : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (spumAnimator == null)
+        if (playerAnim == null)
         {
-            spumAnimator = GetComponentInChildren<Animator>();
+            playerAnim = GetComponentInChildren<Animator>();
         }
-        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
+
+    private void Update()
+    {
+        //Jump / Fall 상태확인
+        if (playerAnim != null)
+        {
+            playerAnim.SetBool("IsGrounded", isGround);
+            playerAnim.SetFloat("VerticalSpeed", rb.linearVelocity.y);
+        }
     }
 
     public void Jump() // 코요테 타임 적용을 위해 수정함
     {
         bool canCoyoteJump = coyoteTimeCounter > 0f && jumpCount == 0;
 
-    if (canCoyoteJump)
-    {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-        jumpCount = 1;
-        coyoteTimeCounter = 0f;
-        PlayJumpEffect();
-    }
-    else if (jumpCount < maxJumpCount)
-    {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-        jumpCount++;
-        coyoteTimeCounter = 0f;
-        PlayJumpEffect();
-    }
+        if (canCoyoteJump)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            jumpCount = 1;
+            coyoteTimeCounter = 0f;
+            PlayJumpEffect();
+        }
+        else if (jumpCount < maxJumpCount)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            jumpCount++;
+            coyoteTimeCounter = 0f;
+            PlayJumpEffect();
+        }
     }
 
     private void PlayJumpEffect()
     {
-    audioSource.PlayOneShot(jumpSound);
-    if (spumAnimator != null)
+        //오디오
+        if (audioSource != null)
         {
-          Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
-          spumAnimator.Play("IDLE", 0, 0f);
-          spumAnimator.Update(0f);
-          spumAnimator.enabled = false;
+            audioSource.PlayOneShot(jumpSound);
+        }
+        //이펙트
+        if (jumpEffectPrefab != null && jumpEffectPoint != null)
+        {
+            Instantiate(jumpEffectPrefab, jumpEffectPoint.position, Quaternion.identity, jumpEffectPoint);
+        }
+        //애니메이션
+        if (playerAnim != null)
+        {
+            playerAnim.SetTrigger("Jump");
         }
     }
 
@@ -87,21 +107,15 @@ public class PlayerJump : MonoBehaviour
         // 바닥 체크
         isGround = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer);
 
-           if (isGround)
+        if (isGround)
             coyoteTimeCounter = coyoteTime;
-           else
+        else
             coyoteTimeCounter -= Time.deltaTime;
 
         // 공중상태 + 아래로 내려가는 중 + 바닥에 착지한 순간 : 점프 횟수 초기화
         if (!wasGround && rb.linearVelocity.y <= 0f && isGround)
         {
             jumpCount = 0;
-
-            // Animator 다시 활성화
-            if (spumAnimator != null && !spumAnimator.enabled)
-            {
-                spumAnimator.enabled = true;
-            }
         }
     }
 

@@ -9,7 +9,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private float dashCooldown = 1.0f; //대쉬 쿨타임
 
     [Header("사운드 설정")]
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource audioSource;
     [SerializeField] private AudioClip dashSound;
 
     [Header("대쉬 이펙트")]
@@ -17,6 +17,7 @@ public class PlayerDash : MonoBehaviour
     [SerializeField] private Transform dashPoint;
     [SerializeField] private Vector2 dashSize = new Vector2(1.8f, 1.5f);
 
+    private Animator playerAnim;
     private Rigidbody2D rb;
     private float originGravity;  //기존 중력값 저장
     private bool isDash;          //현재 대쉬 중인지 확인여부
@@ -28,7 +29,14 @@ public class PlayerDash : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         originGravity = rb.gravityScale; //대쉬 종료 후 복구할 기존 중력값 저장
-        audioSource = GetComponent<AudioSource>();
+        if (playerAnim == null)
+        {
+            playerAnim = GetComponentInChildren<Animator>();
+        }
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     public void Dash(float dir)
@@ -45,11 +53,19 @@ public class PlayerDash : MonoBehaviour
         canDash = false; //대쉬 사용 불가능(대쉬 쿨타임 시작)
         isDash = true;   //대쉬상태
 
+        //애니메이션
+        if(playerAnim != null)
+        {
+            playerAnim.SetTrigger("Dash");
+        }
+
         //사운드
-        audioSource.PlayOneShot(dashSound);
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(dashSound);
+        }
 
         //이펙트
-        //... 이상하게 얘는 이펙트 반전이 안되는 문제가 있음
         GameObject dashEffect = Instantiate(dashEffectPrefab, dashPoint.position, Quaternion.identity, dashPoint);
         Vector3 effectScale = dashEffect.transform.localScale;
         dashEffect.transform.localScale = new Vector3(Mathf.Abs(effectScale.x) * dir, effectScale.y, effectScale.z);

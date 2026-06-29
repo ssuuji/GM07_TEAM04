@@ -9,7 +9,6 @@ public class CheckPoint : MonoBehaviour
         {
             //현재위치를 체크포인트로
             respawn.SetRespawnPoint(transform);
-            Debug.Log("체크포인트 저장!");
         }
     }
 }
