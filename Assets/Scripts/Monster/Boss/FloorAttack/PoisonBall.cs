@@ -9,6 +9,7 @@ public class PoisonBall : MonoBehaviour
     [SerializeField] private GameObject floorPrefab;
     [SerializeField] private GameObject hitFxPrefab;
 
+
     private float throwingPower;
     private Rigidbody2D rb;
 
@@ -20,6 +21,7 @@ public class PoisonBall : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        SFXManager.Instance.PlayPoisonBall();
     }
 
     

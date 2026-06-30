@@ -8,6 +8,8 @@ public class Drop : MonoBehaviour
     [SerializeField] private PlayerHealth player;
     [SerializeField] private GameObject hitFxPrefab;
     [SerializeField] private GameObject GroundFxPrefab;
+
+
     private Rigidbody2D rb;
     private float currentLifeTime;
 
@@ -16,11 +18,13 @@ public class Drop : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player= GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+        
     }
 
     private void OnEnable()
     {
         currentLifeTime = lifeTime;
+        SFXManager.Instance.PlayDrop();
     }
 
     private void Update()
@@ -59,12 +63,14 @@ public class Drop : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
+            SFXManager.Instance.PlayExplode();
             Instantiate(GroundFxPrefab, transform.position, Quaternion.identity);
             Die();
         }
 
         if (collision.gameObject.CompareTag("Player"))
         {
+            SFXManager.Instance.PlayDropHit();
             Instantiate(hitFxPrefab, transform.position, Quaternion.identity);
             player.TakeDamage(damage);
         }

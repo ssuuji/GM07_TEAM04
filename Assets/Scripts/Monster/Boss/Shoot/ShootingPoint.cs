@@ -24,12 +24,12 @@ public class ShootingPoint : MonoBehaviour
     {
         if( boss.Direction)
         {
-            transform.localPosition = new Vector3(1, 0, 0);
+            transform.localPosition = new Vector3(0.6f, 0.2f, 0);
         }
 
         else
         {
-            transform.localPosition = new Vector3(-1, 0, 0);
+            transform.localPosition = new Vector3(-0.6f, 0.2f, 0);
         }
     }
 }

@@ -157,6 +157,7 @@ MonoBehaviour:
   damage: 5
   damegeCoclTime: 1
   lifeTime: 5
+  hitFxPrefab: {fileID: 2957842864923083962, guid: ace9fc22d4885204fad19db7b31cf379, type: 3}
 --- !u!1001 &2549641305720999559
 PrefabInstance:
   m_ObjectHideFlags: 0
