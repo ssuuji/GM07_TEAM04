@@ -30,15 +30,12 @@ public class ConsumableItem : Item
     public override void Use(GameObject target, int itemID)
     {
         if (target == null) return;
-<<<<<<< Updated upstream
         if (ConsumableQuickSlotManager.Instance != null &&
         ConsumableQuickSlotManager.Instance.IsItemOnCooldown(itemID))
         {
             Debug.Log($"[{ItemName}]은 아직 재사용 대기 중입니다.");
             return;
         }
-=======
->>>>>>> Stashed changes
         // 아이템이 가진 사용 효과 리스트 순회
         foreach (ItemEffect effect in effects)
         {
