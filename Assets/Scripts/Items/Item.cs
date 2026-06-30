@@ -18,7 +18,7 @@ public class Item : ScriptableObject
     [SerializeField] private AudioClip collectedSFX;    // 아이템 획득 시 출력할 사운드
     [SerializeField] private GameObject collectedVFX;   // 아이템 획득 시 출력할 이펙트
 
-    // 출력 메세지 --> 이걸 어떻게 잘 써먹을지를 모르겠네...
+    // 출력 메세지
     [Header("Message")]
     [TextArea(2, 15)]
     private string messageWhenCollected;            // 아이템 획득 시 출력할 메세지

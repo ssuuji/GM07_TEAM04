@@ -8,12 +8,15 @@ public class ConsumableItem : Item
 {
     [Header("Item Effects")]
     [SerializeField] private List<ItemEffect> effects;  // 아이템 사용 시 발생할 효과들 목록
+    [Header("Use Setting")]
+    [SerializeField] private float coolDown;            // 아이템 사용 쿨타임
     [Header("Use Feedback")]
     [SerializeField] private AudioClip useSFX;      // 아이템 사용 시 출력할 사운드
     [SerializeField] private GameObject useVFX;     // 아이템 사용 시 출력할 이펙트
 
     // 프로퍼티
     public List<ItemEffect> Effects => effects;
+    public float CoolDown => coolDown;
 
     private void Awake()
     {
@@ -27,24 +30,24 @@ public class ConsumableItem : Item
     public override void Use(GameObject target, int itemID)
     {
         if (target == null) return;
-        //// 여기에 아이템 별 제한 로직 작성
-        //// Ex) 체럭 포션 사용 시 체력이 가득 찼을 경우 return 등
-        //PlayerStatus playerStatus = target.GetComponent<PlayerStatus>();
-        //if (playerStatus == null) return;
-        //// 플레이어의 체력 상태를 확인 후 체력이 가득 차있다면 리턴
-        //if (playerStatus.CurrentHp >= playerStatus.CurrentMaxHp)
-        //{
-        //    // 체력이 가득 찼다는 디버그
-        //    Debug.Log("이미 체력이 가득 차 있어 사용할 수 없습니다.");
-        //    return;
-        //}
+        if (ConsumableQuickSlotManager.Instance != null &&
+        ConsumableQuickSlotManager.Instance.IsItemOnCooldown(itemID))
+        {
+            // 아이템 쿨타임 확인 후 쿨타임 상태라면 리턴
+            Debug.Log($"[{ItemName}]은 아직 재사용 대기 중입니다.");
+            return;
+        }
         // 아이템이 가진 사용 효과 리스트 순회
         foreach (ItemEffect effect in effects)
         {
             if (!effect.ExecuteEffect(target)) return;
         }
         // 아이템 사용 피드백 재생
-        PlayFeedback(target);
+        PlayFeedback(target); 
+        if (ConsumableQuickSlotManager.Instance != null)
+        {
+            ConsumableQuickSlotManager.Instance.StartItemCooldown(itemID, CoolDown);
+        }
         // 메시지가 작성되어 있다면 출력
         if (!string.IsNullOrEmpty(MessageWhenUsed))
         {
