@@ -8,7 +8,7 @@ public class ConsumableQuickSlotManager : Singleton<ConsumableQuickSlotManager>
     // 1~3번 퀵슬롯에 저장된 소모품 데이터
     public ConsumableItem[] quickSlots = new ConsumableItem[3];
     // 슬롯별 쿨타임 상태 확인
-    private List<int> coolingDownItemIDs = new List<int>();
+    private List<int> coolDownItemIDs = new List<int>();
 
     // 이벤트
     // UI 갱신을 위한 이벤트
@@ -72,25 +72,27 @@ public class ConsumableQuickSlotManager : Singleton<ConsumableQuickSlotManager>
         // UI 업데이트 하라는 이벤트
         OnQuickSlotUpdated?.Invoke();
     }
-
+    // 쿨타임 상태 반환 메서드
     public bool IsItemOnCooldown(int itemID)
     {
-        return coolingDownItemIDs.Contains(itemID);
+        return coolDownItemIDs.Contains(itemID);
     }
+    // 쿨타임 시작 메서드
     public void StartItemCooldown(int itemID, float duration)
     {
-        if (coolingDownItemIDs.Contains(itemID) || duration <= 0f) return;
+        if (coolDownItemIDs.Contains(itemID) || duration <= 0f) return;
         StartCoroutine(ItemCooldownCo(itemID, duration));
     }
+    // 쿨타임 진행 코루틴
     private IEnumerator ItemCooldownCo(int itemID, float duration)
     {
-        coolingDownItemIDs.Add(itemID);
+        coolDownItemIDs.Add(itemID);
 
-        // 
+        // 아이템이 사용 됐으니 쿨타임을 실행하라는 이벤트
         OnItemCooldownStarted?.Invoke(itemID, duration);
 
         yield return new WaitForSeconds(duration);
 
-        coolingDownItemIDs.Remove(itemID);
+        coolDownItemIDs.Remove(itemID);
     }
 }

@@ -33,6 +33,7 @@ public class ConsumableItem : Item
         if (ConsumableQuickSlotManager.Instance != null &&
         ConsumableQuickSlotManager.Instance.IsItemOnCooldown(itemID))
         {
+            // 아이템 쿨타임 확인 후 쿨타임 상태라면 리턴
             Debug.Log($"[{ItemName}]은 아직 재사용 대기 중입니다.");
             return;
         }

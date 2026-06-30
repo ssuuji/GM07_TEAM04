@@ -11,7 +11,7 @@ public class ConsumableQuickSlotUI : MonoBehaviour, IDropHandler, IPointerClickH
     [Header("UI Binding")]
     [SerializeField] private Image itemIcon;                // 슬롯에 등록된 아이템 아이콘
     [SerializeField] private TextMeshProUGUI amountText;    // 슬롯에 등록된 아이템 소지 개수
-    [SerializeField] private SlotCoolDown slotCoolDown;
+    [SerializeField] private SlotCoolDown slotCoolDown;     // 슬롯에 등록된 아이템 쿨타임 상태
 
     private void Start()
     {
@@ -97,11 +97,11 @@ public class ConsumableQuickSlotUI : MonoBehaviour, IDropHandler, IPointerClickH
     }
     private void ItemCooldown(int itemID, float duration)
     {
-        // 
-        ConsumableItem myItem = ConsumableQuickSlotManager.Instance.quickSlots[slotIndex];
+        // 퀵스롯 아이템 가져오기
+        ConsumableItem item = ConsumableQuickSlotManager.Instance.quickSlots[slotIndex];
 
-        // 
-        if (myItem != null && myItem.ItemID == itemID)
+        // 아이템 쿨타임 진행
+        if (item != null && item.ItemID == itemID)
         {
             if (slotCoolDown != null)
             {
