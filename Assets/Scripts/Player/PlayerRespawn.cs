@@ -9,6 +9,12 @@ public class PlayerRespawn : MonoBehaviour
     private void Start()
     {
         messageUI = FindFirstObjectByType<MessageUI>();
+
+        //Retry로 게임씬을 다시 재생한 경우
+        if (GameSceneManager.Instance.IsCheckPointSave)
+        {
+            transform.position = GameSceneManager.Instance.lastCheckPoint;
+        }
     }
 
     //리스폰 위치 변경

@@ -197,6 +197,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: VFX_GreenSmoke
       objectReference: {fileID: 0}
+    - target: {fileID: 5788116982156570393, guid: 8b7d567d530f3d44c92b4d853cd6692f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788116982156570393, guid: 8b7d567d530f3d44c92b4d853cd6692f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1788802581
+      objectReference: {fileID: 0}
     - target: {fileID: 6630012753363629372, guid: 8b7d567d530f3d44c92b4d853cd6692f, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
