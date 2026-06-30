@@ -34,7 +34,7 @@ public class PlayerJump : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGround; //바닥 체크
-    private int jumpCount; //현재 점프 횟수
+    [SerializeField]private int jumpCount; //현재 점프 횟수
 
     public bool IsGround => isGround;
 
@@ -102,20 +102,22 @@ public class PlayerJump : MonoBehaviour
 
     public void CheckGround()
     {
-        bool wasGround = isGround; //이전 프레임의 바닥체크 저장
+        //바닥감지
+        bool checkGround = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer);
+        //위로올라가는중
+        bool isUp = rb.linearVelocity.y > 0.05f;
 
-        // 바닥 체크
-        isGround = Physics2D.OverlapBox(groundCheck.position, checkSize, 0f, groundLayer);
+        //바닥에 닿아있고 위로 올라가는중이 아니라면 : Ground True
+        isGround = checkGround && !isUp;
 
         if (isGround)
-            coyoteTimeCounter = coyoteTime;
-        else
-            coyoteTimeCounter -= Time.deltaTime;
-
-        // 공중상태 + 아래로 내려가는 중 + 바닥에 착지한 순간 : 점프 횟수 초기화
-        if (!wasGround && rb.linearVelocity.y <= 0f && isGround)
         {
             jumpCount = 0;
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter = Mathf.Max(coyoteTimeCounter - Time.deltaTime, 0f);
         }
     }
 
