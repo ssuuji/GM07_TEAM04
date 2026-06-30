@@ -25,6 +25,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private bool isDead;                 //플레이어 사망여부
     private bool isInvin;                //무적상태 확인여부
     public bool IsKnockBack => isKnockBack;
+    public bool IsDead => isDead;
 
     private void Start()
     {

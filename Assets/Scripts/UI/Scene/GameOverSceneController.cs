@@ -11,6 +11,7 @@ public class GameOverSceneController : MonoBehaviour
     //TITLE 버튼 클릭
     public void OnClickTitleButton()
     {
+        GameSceneManager.Instance.ResetCheckPoint();
         GameSceneManager.Instance.LoadScene(SceneType.Title);
     }
 }
