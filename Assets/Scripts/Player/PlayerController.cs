@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (playerHealth.IsDead) return; //사망 후에는 플레이어 입력 차단하기
+
         playerJump.CheckGround();    //바닥 체크
         playerWall.CheckWall();      //벽 체크
         playerWall.UpdateWallJump(); //벽점프상태 체크
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (playerHealth.IsDead) return; //사망 후에는 플레이어 입력 차단하기
         if (playerDash.IsDash) return;        //대쉬 중에는 Move로 속도를 덮지 않도록 
         if (playerWall.IsWallJump) return;    //벽점프 직후에는 X
         if (playerHealth.IsKnockBack) return; //넉백 중에는 X

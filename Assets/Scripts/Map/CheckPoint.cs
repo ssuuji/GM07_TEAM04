@@ -9,6 +9,7 @@ public class CheckPoint : MonoBehaviour
         {
             //현재위치를 체크포인트로
             respawn.SetRespawnPoint(transform);
+            GameSceneManager.Instance.SetCheckPoint(transform.position); //RETRY용 위치저장 
         }
     }
 }

@@ -7,7 +7,7 @@ TagManager:
   - Monster
   - Boss
   - Ground
-  - SkullMan
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -53,6 +53,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 2156826115
+    locked: 0
+  - name: Boss
+    uniqueID: 2506164715
     locked: 0
   - name: Player
     uniqueID: 2117308777

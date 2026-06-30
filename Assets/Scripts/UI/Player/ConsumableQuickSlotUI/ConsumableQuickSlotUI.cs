@@ -11,12 +11,15 @@ public class ConsumableQuickSlotUI : MonoBehaviour, IDropHandler, IPointerClickH
     [Header("UI Binding")]
     [SerializeField] private Image itemIcon;                // 슬롯에 등록된 아이템 아이콘
     [SerializeField] private TextMeshProUGUI amountText;    // 슬롯에 등록된 아이템 소지 개수
+    [SerializeField] private SlotCoolDown slotCoolDown;     // 슬롯에 등록된 아이템 쿨타임 상태
 
     private void Start()
     {
         // 이벤트에 UI 갱신 메서드 등록
         ConsumableQuickSlotManager.Instance.OnQuickSlotUpdated += RefreshUI;
         InventoryManager.Instance.OnInventoryChanged += RefreshUI;
+        // 
+        ConsumableQuickSlotManager.Instance.OnItemCooldownStarted += ItemCooldown;
         // 시작 시 UI 갱신
         RefreshUI();
     }
@@ -28,6 +31,7 @@ public class ConsumableQuickSlotUI : MonoBehaviour, IDropHandler, IPointerClickH
         if (ConsumableQuickSlotManager.Instance != null)
         {
             ConsumableQuickSlotManager.Instance.OnQuickSlotUpdated -= RefreshUI;
+            ConsumableQuickSlotManager.Instance.OnItemCooldownStarted -= ItemCooldown;
         }
         if (InventoryManager.Instance != null)
         {
@@ -76,6 +80,10 @@ public class ConsumableQuickSlotUI : MonoBehaviour, IDropHandler, IPointerClickH
     // 퀵슬롯 UI를 클릭했을 때
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            ConsumableQuickSlotManager.Instance.UseQuickSlotItem(slotIndex);
+        }
         // 우클릭
         if (eventData.button == PointerEventData.InputButton.Right)
         {
@@ -85,6 +93,20 @@ public class ConsumableQuickSlotUI : MonoBehaviour, IDropHandler, IPointerClickH
             if (ConsumableQuickSlotManager.Instance.quickSlots[slotIndex] == null) return;
             // 퀵슬롯에 아이템이 저장되어 있다면 제거
             ConsumableQuickSlotManager.Instance.RemoveSlotItem(slotIndex);
+        }
+    }
+    private void ItemCooldown(int itemID, float duration)
+    {
+        // 퀵스롯 아이템 가져오기
+        ConsumableItem item = ConsumableQuickSlotManager.Instance.quickSlots[slotIndex];
+
+        // 아이템 쿨타임 진행
+        if (item != null && item.ItemID == itemID)
+        {
+            if (slotCoolDown != null)
+            {
+                slotCoolDown.StartCooldown(duration);
+            }
         }
     }
 }
