@@ -16,8 +16,10 @@ public class PlayerWall : MonoBehaviour
     [Header("벽 점프")]
     [SerializeField] private Vector2 wallJumpPower = new Vector2(7f, 10f);//벽 점프 힘(반대방향 힘, 위쪽방향 힘)
     [SerializeField] private float wallJumpTime = 0.2f;                   //벽 점프 후 입력제한 시간
+    [SerializeField] private int maxWallJumpStreak = 2;
     private bool isWallJump;                                              //현재 벽 점프중인지 확인
     private float wallJumpTimer;                                          //벽 점프중 상태유지 시간
+    private int wallJumpStreak;
 
     private Animator playerAnim;
     private Rigidbody2D rb;
@@ -42,7 +44,13 @@ public class PlayerWall : MonoBehaviour
     public void CheckWall()
     {
         if (wallCheck == null) return;
+        bool wasWall = isWall;
         isWall = Physics2D.OverlapBox(wallCheck.position, checkSize, 0f, wallLayer);
+
+        if (wasWall && !isWall)
+        {
+            wallJumpStreak = 0;
+        }
     }
 
     //벽 슬라이드
@@ -52,6 +60,10 @@ public class PlayerWall : MonoBehaviour
 
         if (!isWall || playerJump.IsGround)
         {
+            if (playerJump.IsGround)
+            {
+                wallJumpStreak = 0;
+            }
             UpdateWallSlideAnimation();
             return;
         }
@@ -76,9 +88,11 @@ public class PlayerWall : MonoBehaviour
     {
         if (!isWall) return;             //벽에 닿아있지 않으면 X
         if (playerJump.IsGround) return; //바닥에 있으면 X
+        if (wallJumpStreak >= maxWallJumpStreak) return;
 
         isWallJump = true;                                                           //벽점프 상태 시작
         wallJumpTimer = wallJumpTime;                                                //벽점프 상태 유지시간 설정
+        wallJumpStreak++;
         float jumpDir = -playerMovement.CheckDirValue;                               //현재 바라보는 방향 반대로 점프하기
         rb.linearVelocity = new Vector2(jumpDir * wallJumpPower.x, wallJumpPower.y); //x축은 벽 반대방향 y축은 위로 점프파워적용
 
