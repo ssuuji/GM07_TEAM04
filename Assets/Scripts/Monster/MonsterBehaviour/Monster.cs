@@ -21,6 +21,9 @@ public class Monster : MonoBehaviour, IDamageable
     [SerializeField] private MonsterUI monsterUI;
     [SerializeField] private MonsterKnockBack monsterKnockBack;
     [SerializeField] private DogAnimation dogAnimation;
+
+
+
     private MonsterReward monsterReward;
 
     private float flairTime = 3;
@@ -64,6 +67,8 @@ public class Monster : MonoBehaviour, IDamageable
         if (IsDead) return;
 
         currentHealth -= damage;
+        SFXManager.Instance.PlayMonsterHit();
+
 
         if (monsterUI != null)
         {
@@ -86,12 +91,13 @@ public class Monster : MonoBehaviour, IDamageable
         if(IsDead) return; 
         IsDead = true;
         StartCoroutine(DieCo());
+        
     }
 
     IEnumerator DieCo()
     {
         dogAnimation.Die();
-
+        SFXManager.Instance.PlayMonsterDie();
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
 
