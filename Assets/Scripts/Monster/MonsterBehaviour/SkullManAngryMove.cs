@@ -6,11 +6,14 @@ public class SkullManAngryMove : MonoBehaviour
     [SerializeField] SkullManAttack attack;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float aroundRange = 1f;
+    [SerializeField] private float attackRange = 3f;
 
     [SerializeField] DogAnimation dogAnimation;
 
     [SerializeField] private Transform groundBase;
     [SerializeField] private Transform player;
+
+    
 
     private Rigidbody2D rb;
     private bool dir;
@@ -19,7 +22,6 @@ public class SkullManAngryMove : MonoBehaviour
 
     private Vector2 moveCenter;
 
-    public bool IsAttack {  get; private set; } = false;
 
     private void Awake()
     {
@@ -62,7 +64,7 @@ public class SkullManAngryMove : MonoBehaviour
 
     private void SkullManInput()
     {
-        moveCenter = groundBase.position + Vector3.up * 2;
+        moveCenter = groundBase.position + Vector3.up * 3;
         if(transform.position.x < moveCenter.x - 2)
         {
             moveHor = true;
@@ -72,7 +74,7 @@ public class SkullManAngryMove : MonoBehaviour
             moveHor = false;
         }
 
-        if (Mathf.Abs(transform.position.y - moveCenter.y) > 0.1f)
+        if (Mathf.Abs(transform.position.y - moveCenter.y) > 0.5f)
         {
             if(transform.position.y < moveCenter.y)
             {
@@ -84,18 +86,25 @@ public class SkullManAngryMove : MonoBehaviour
             }
         }
 
-        
+        if(InRange())
+        {
+            attack.enabled = true;
+        }
+        else
+        {
+            attack.enabled = false;
+        }
     }
 
     private void VertiMove(bool dir)
     {
         if (dir)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0.3f);
         }
         else
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -moveSpeed);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -0.3f);
         }
     }
 
@@ -120,11 +129,13 @@ public class SkullManAngryMove : MonoBehaviour
             moveSpeed * Time.deltaTime);
     }
 
-
-    
-
-    public void OffIsAttack()
+    private bool InRange()
     {
-        IsAttack = false;
+        if (Mathf.Abs(transform.position.x - player.transform.position.x) < attackRange)
+        {
+            return true;
+        }
+        else return false;
     }
+
 }

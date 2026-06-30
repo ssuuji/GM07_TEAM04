@@ -5,17 +5,22 @@ public class SkullManAttack : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
     [SerializeField] private float attackCoolTime = 1f;
+    
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private Vector2 attackSize = new Vector2(2f, 1f);
-    [SerializeField] private LayerMask playerLayer;
     [SerializeField] private SkullMan skullMan;
+    [SerializeField] private PlayerHealth player;
 
+    [SerializeField] private GameObject skullManAttackHitPrefab;
+    [SerializeField] private GameObject skullManAttackPrefab;
     [SerializeField] private DogAnimation dogAnimation;
 
     private float currentCoolTime;
 
+    private void Awake()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+    }
 
-    
 
     private void Update()
     {
@@ -34,38 +39,10 @@ public class SkullManAttack : MonoBehaviour
 
     private void Attack()
     {
-        //SFXManager.Instance.PlayMonsterAttack();
-
-        SetAttackDirection();
-        dogAnimation.Attack();
-        Collider2D player = Physics2D.OverlapBox(
-            attackPoint.position,
-            attackSize,
-            0f,
-            playerLayer);
-
-        if (player != null)
-        {
-            SFXManager.Instance.PlayMonsterAttackHit();
-            player.GetComponent<PlayerHealth>()?.TakeDamage(damage);
-        }
-    }
-
-    public void SetAttackDirection()
-    {
-        if (!skullMan.Direction)
-        {
-            attackPoint.localPosition = new Vector3(-1f, 0, 0f);
-        }
-        else
-        {
-            attackPoint.localPosition = new Vector3(1f, 0f, 0f);
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(attackPoint.position, attackSize);
+            //dogAnimation.Attack();
+            //SFXManager.Instance.PlayMonsterAttack();
+            Instantiate(skullManAttackPrefab, attackPoint.position, Quaternion.identity);
+            Instantiate(skullManAttackHitPrefab, player.transform.position + Vector3.up * 2, Quaternion.identity);
+            player.TakeDamage(damage);
     }
 }

@@ -555,61 +555,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1464698546 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7203418688499677383, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-  m_PrefabInstance: {fileID: 692782841913366323}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9c56faf91e43c542b687908df205f13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DogAnimation
---- !u!114 &1464698548 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6921468742504701833, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-  m_PrefabInstance: {fileID: 692782841913366323}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13dd3feb2f5742446952834f69feba7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterUI
---- !u!114 &1464698558 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6679383160137704299, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-  m_PrefabInstance: {fileID: 692782841913366323}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d58005759bfe1d44f8b3b5f67a3adf85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkullManKnockBack
---- !u!114 &1464698559 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6711868435325574413, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-  m_PrefabInstance: {fileID: 692782841913366323}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cbf3ecd2dadcd41b8e6ae478b8db66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkullManAngryMove
---- !u!114 &1464698560 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9194420067283927894, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-  m_PrefabInstance: {fileID: 692782841913366323}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96a14774297863479c87215d7dcab2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkullManIdleMove
 --- !u!1 &1567286612
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,6 +634,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1664391819
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 934213630550234656, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_Name
+      value: MBSFXManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.1281514
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.59055
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2994829211663786464, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5275e1eca696b3642be95a0937ab09fd, type: 3}
 --- !u!1001 &1664921405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -831,50 +833,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1526558212104884102, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1750971951054956214, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
       propertyPath: m_Name
       value: SkullMan
       objectReference: {fileID: 0}
-    - target: {fileID: 6446436252772775240, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6711868435325574413, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6711868435325574413, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6711868435325574413, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: dogAnimation
-      value: 
-      objectReference: {fileID: 1464698546}
-    - target: {fileID: 8641314886089494734, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: monsterUI
-      value: 
-      objectReference: {fileID: 1464698548}
-    - target: {fileID: 8641314886089494734, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: dogAnimation
-      value: 
-      objectReference: {fileID: 1464698546}
-    - target: {fileID: 8641314886089494734, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: skullManIdleMove
-      value: 
-      objectReference: {fileID: 1464698560}
-    - target: {fileID: 8641314886089494734, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: skullManAngryMove
-      value: 
-      objectReference: {fileID: 1464698559}
-    - target: {fileID: 8641314886089494734, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: skullManKnockBack
-      value: 
-      objectReference: {fileID: 1464698558}
     - target: {fileID: 9185154086948026643, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -915,19 +877,68 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9194420067283927894, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9194420067283927894, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
+--- !u!1001 &6723545149644886383
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.10586
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.09486
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174567263662631555, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_Name
+      value: SkullManSpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
 --- !u!1001 &8174742804583797646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1002,3 +1013,5 @@ SceneRoots:
   - {fileID: 1567286615}
   - {fileID: 1664921405}
   - {fileID: 692782841913366323}
+  - {fileID: 1664391819}
+  - {fileID: 6723545149644886383}

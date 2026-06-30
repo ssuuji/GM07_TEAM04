@@ -4,7 +4,7 @@ using UnityEngine;
 public class SkullManKnockBack : MonoBehaviour
 {
     [SerializeField] private float knockbackPower = 1.0f;
-    [SerializeField] private Monster monster;
+    [SerializeField] private SkullMan skullMan;
     [SerializeField] private DogAnimation dogAnimation;
     private Rigidbody2D rb;
     
@@ -13,13 +13,14 @@ public class SkullManKnockBack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         dogAnimation = GetComponent<DogAnimation>();
+        skullMan = GetComponent<SkullMan>();
     }
     public void Knockback()
     {
 
 
         dogAnimation.Hit();
-        if(monster.Direction)
+        if(skullMan.Direction)
         {
             rb.linearVelocity = new Vector2(-knockbackPower, knockbackPower);
         }
