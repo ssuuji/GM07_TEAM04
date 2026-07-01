@@ -16,7 +16,10 @@ public class Teleport : MonoBehaviour
 
     private void Start()
     {
-        confiner = cinemachineCamera.GetComponent<CinemachineConfiner2D>();
+        if (cinemachineCamera != null)
+        {
+            confiner = cinemachineCamera.GetComponent<CinemachineConfiner2D>();
+        }
     }
 
     public void TeleportPlayer(Transform player)

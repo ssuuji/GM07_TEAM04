@@ -530,8 +530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15061d4a2a2ffc4b88472034608e57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameClearSceneController
-  playerTime: {fileID: 0}
-  monsterCount: {fileID: 0}
+  playerTime: {fileID: 1984469981}
+  monsterCount: {fileID: 1452693432}
 --- !u!1 &625660580
 GameObject:
   m_ObjectHideFlags: 0
