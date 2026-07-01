@@ -123,8 +123,39 @@ public class Boss : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(1);
         Instantiate(diePrefab, transform.position, Quaternion.identity);
 
-        clearPortal.SetActive(true); //보스 클리어 후 포탈 활성화
+        //분신이면 포탈을 열지 않고 그냥 제거
+        if (IsFake)
+        {
+            Destroy(gameObject);
+            yield break;
+        }
+
+        //보스라면 살아있는 분신이 전부 사라질 때까지 대기
+        while (HasAliveClone())
+        {
+            yield return null;
+        }
+
+        //모두 제거 했다면 포탈 활성화
+        clearPortal.SetActive(true);
+
         Destroy(gameObject);
+    }
+
+    //분신 체크용
+    private bool HasAliveClone()
+    {
+        Boss[] bosses = FindObjectsByType<Boss>(FindObjectsSortMode.None);
+
+        foreach (Boss boss in bosses)
+        {
+            if (boss != this && boss.IsFake && !boss.IsDead)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //테스트용
