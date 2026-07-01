@@ -291,7 +291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Evil Dog
+  m_text: High Evil Dog
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 3038831987599714569}
   - component: {fileID: 2656887358656896826}
   - component: {fileID: 2184813802721003441}
+  - component: {fileID: 3608782115915793514}
   m_Layer: 7
   m_Name: GreenMonster
   m_TagString: Monster
@@ -637,6 +638,7 @@ MonoBehaviour:
   monsterUI: {fileID: 5159004596532958316}
   monsterKnockBack: {fileID: 3038831987599714569}
   dogAnimation: {fileID: 0}
+  ui: {fileID: 0}
 --- !u!114 &8340754824336716322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,6 +757,19 @@ MonoBehaviour:
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
   expReward: 10
+--- !u!114 &3608782115915793514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5531088571717667857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe12266f8ca1b24eac3a54c1c6fb606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIAppearance
+  ui: {fileID: 719944453737237371}
 --- !u!1 &7619061843139917511
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class Monster : MonoBehaviour, IDamageable
     [SerializeField] private MonsterKnockBack monsterKnockBack;
     [SerializeField] private DogAnimation dogAnimation;
 
-
+    [SerializeField] private UIAppearance ui;
 
     private MonsterReward monsterReward;
 
@@ -34,6 +34,7 @@ public class Monster : MonoBehaviour, IDamageable
     private void Awake()
     {
         dogAnimation = GetComponent<DogAnimation>();
+        ui = GetComponent<UIAppearance>();
     }
 
     private void OnEnable()
@@ -82,6 +83,7 @@ public class Monster : MonoBehaviour, IDamageable
         }
 
         SetState(MonsterState.Knockback);
+        ui.Appear();
         monsterKnockBack.Knockback();
     }
 
@@ -143,6 +145,7 @@ public class Monster : MonoBehaviour, IDamageable
         if (currentHealth < maxHealth)
         {
             SetState(MonsterState.Angry);
+            
         }
 
         else
