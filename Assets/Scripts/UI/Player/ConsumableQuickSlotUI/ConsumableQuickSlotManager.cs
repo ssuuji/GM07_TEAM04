@@ -46,6 +46,8 @@ public class ConsumableQuickSlotManager : Singleton<ConsumableQuickSlotManager>
         if (InventoryManager.Instance.GetConsumableItemAmount(currentItem.ItemID) <= 0)
         {
             Debug.Log($"[{currentItem.ItemName}] 아이템 소지 개수가 부족합니다!");
+            MessageUI message = FindFirstObjectByType<MessageUI>();
+            message.ShowMessage($"[{currentItem.ItemName}] 아이템 소지 개수가 부족합니다!");
             return;
         }
 
