@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ad7b20ce1984849a0c73f83ffc9c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSpawner
-  monsterPrefab: {fileID: 1750971951054956214, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-  monsterCountMax: 10
-  countPerWave: 4
-  waveCount: 4
-  waveCoolTime: 10
+  monsterPrefab: {fileID: 8427493216937825215, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
+  monsterCountMax: 2
+  countPerWave: 1
+  waveCount: 100
+  waveCoolTime: 2
   widthMin: -10
   widthMax: 10
   heightMin: 0

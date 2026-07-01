@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ad7b20ce1984849a0c73f83ffc9c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterSpawner
-  monsterPrefab: {fileID: 5531088571717667857, guid: 48ff09c8210c28241aeca863e81c7fd6, type: 3}
+  monsterPrefab: {fileID: 6989522278930503029, guid: 48ff09c8210c28241aeca863e81c7fd6, type: 3}
   monsterCountMax: 10
   countPerWave: 4
   waveCount: 4

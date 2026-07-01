@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject monsterPrefab;
+    [SerializeField] private Monster monsterPrefab;
     [SerializeField] private int monsterCountMax = 10;
     [SerializeField] private int countPerWave = 4;
     [SerializeField] private int waveCount = 4;
@@ -46,7 +46,12 @@ public class MonsterSpawner : MonoBehaviour
         for (int i = 0; i < countPerWave; i++)
         {
             SetRandomPosition();
-            Instantiate(monsterPrefab, randomPosition, Quaternion.identity);
+            Monster monster = Managers.Pool.GetPool(monsterPrefab);
+
+            monster.transform.position = randomPosition;
+            monster.transform.rotation = Quaternion.identity;
+
+            monster.Initialize();
         }
         
     }
@@ -62,6 +67,8 @@ public class MonsterSpawner : MonoBehaviour
 
     private int CountMonster()
     {
-        return GameObject.FindGameObjectsWithTag("Monster").Length; 
+        
+        return GameObject.FindGameObjectsWithTag("Monster").Length;
+        
     }
 }

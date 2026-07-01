@@ -87,15 +87,26 @@ public class SkullManIdleMove : MonoBehaviour
         // 우
         if (dir == 0)
         {
-            rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+            
             GBrb.linearVelocity = new Vector2(moveSpeed, 0);
+            rb.linearVelocity = new Vector2(GBrb.linearVelocity.x, rb.linearVelocity.y);
+            if(Mathf.Abs(GBrb.position.x - transform.position.x) > 0.1f)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
         }
 
         // 좌
         else
         {
-            rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
+            
             GBrb.linearVelocity = new Vector2(-moveSpeed, 0);
+            rb.linearVelocity = new Vector2(GBrb.linearVelocity.x, rb.linearVelocity.y);
+
+            if (Mathf.Abs(GBrb.position.x - transform.position.x) > 0.1f)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
         }
     }
 

@@ -5,6 +5,10 @@ using UnityEngine;
 public class Monster : MonoBehaviour, IDamageable
 {
     
+
+
+    
+
     enum MonsterState
     {
         None = -1, Idle, Angry, Knockback
@@ -24,6 +28,8 @@ public class Monster : MonoBehaviour, IDamageable
 
     [SerializeField] private UIAppearance ui;
 
+    private Rigidbody2D rb;
+
     private MonsterReward monsterReward;
 
     private float flairTime = 3;
@@ -31,32 +37,36 @@ public class Monster : MonoBehaviour, IDamageable
     public bool IsDead { get; private set; } = false;
     public bool Direction { get; private set; } = true;
 
-    private void Awake()
-    {
-        dogAnimation = GetComponent<DogAnimation>();
-        ui = GetComponent<UIAppearance>();
-    }
+    private bool isReturned = true;
 
-    private void OnEnable()
+    public void Initialize()
     {
         currentHealth = maxHealth;
-        
-        SetKnockbackTime();
-    }
-
-    private void Start()
-    {
+        isReturned = false;
+        IsDead = false;
         if (monsterUI != null)
         {
             monsterUI.Initialize(maxHealth);
         }
+
         monsterReward = GetComponent<MonsterReward>();
+
+        SetKnockbackTime();
+        SetState(MonsterState.Idle);
+        monsterAngryMove.OffIsAttack();
+
+    }
+
+    private void Awake()
+    {
+        dogAnimation = GetComponent<DogAnimation>();
+        ui = GetComponent<UIAppearance>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 
     private void Update()
     {
-
 
         StateManage();
         
@@ -101,9 +111,21 @@ public class Monster : MonoBehaviour, IDamageable
         dogAnimation.Die();
         SFXManager.Instance.PlayMonsterDie();
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        ReturnToPool();
 
         monsterReward.DropReward();
+    }
+
+    private void ReturnToPool()
+    {
+        if (isReturned)
+        {
+            return;
+        }
+        isReturned = true;
+        rb.linearVelocity = Vector2.zero;
+        Managers.Pool.ReturnPool(this);
+
     }
 
 
