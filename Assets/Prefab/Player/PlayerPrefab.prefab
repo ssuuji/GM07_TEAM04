@@ -197,7 +197,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 2117308777
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 20
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4586440546081433099, guid: 4a0fd723d63fe3544a6e934c0c398ef1, type: 3}
@@ -406,7 +406,7 @@ MonoBehaviour:
   jumpPower: 15
   maxJumpCount: 2
   groundCheck: {fileID: 7953070292527022474}
-  checkSize: {x: 1.09, y: -0.16}
+  checkSize: {x: 1.23, y: -0.16}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -418,6 +418,7 @@ MonoBehaviour:
   normalGravity: 3
   minFallSpeed: -2
   coyoteTime: 0.15
+  jumpCount: 0
 --- !u!114 &4318887395456347387
 MonoBehaviour:
   m_ObjectHideFlags: 0
