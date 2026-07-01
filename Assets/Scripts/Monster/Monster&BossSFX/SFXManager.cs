@@ -26,6 +26,12 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioClip monsterHit;
     [SerializeField] private AudioClip monsterDie;
 
+    [Header("SkullMan")]
+    [SerializeField] private AudioClip skullManAttack;
+    [SerializeField] private AudioClip skullManHit;
+    [SerializeField] private AudioClip skullManDie;
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -68,6 +74,12 @@ public class SFXManager : MonoBehaviour
     public void PlayMonsterAttackHit() => Play(monsterAttackHit);
     public void PlayMonsterHit() => Play(monsterHit);
     public void PlayMonsterDie() => Play(monsterDie);
+
+    // SkullMan
+    public void PlaySkullManAttack() => Play(skullManAttack);
+    public void PlaySkullManHit() => Play(skullManHit);
+    public void PlaySkullManDie() => Play(skullManDie);
+
 
     // Volume Overload
     public void PlayHit(float volume) => Play(hit, volume);

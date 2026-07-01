@@ -40,7 +40,7 @@ public class SkullManAttack : MonoBehaviour
     private void Attack()
     {
             //dogAnimation.Attack();
-            //SFXManager.Instance.PlayMonsterAttack();
+            SFXManager.Instance.PlaySkullManAttack();
             Instantiate(skullManAttackPrefab, attackPoint.position, Quaternion.identity);
             Instantiate(skullManAttackHitPrefab, player.transform.position + Vector3.up * 2, Quaternion.identity);
             player.TakeDamage(damage);

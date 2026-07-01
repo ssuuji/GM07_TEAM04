@@ -55,8 +55,8 @@ public class SkullManSpawner : MonoBehaviour
     private void SetRandomPosition()
     {
         randomPosition = new Vector3(
-            Random.Range(widthMin, widthMax),
-            Random.Range(heightMin, heightMax),
+            transform.position.x + Random.Range(widthMin, widthMax),
+            transform.position.y + Random.Range(heightMin, heightMax),
             0f);
     }
 
