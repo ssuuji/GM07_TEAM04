@@ -7,7 +7,8 @@ public class SceneNames
     {
         {SceneType.Title, "TitleScene"},
         {SceneType.Game, "GameScene"}, 
-        {SceneType.GameOver, "GameOverScene"}
+        {SceneType.GameOver, "GameOverScene"},
+        {SceneType.GameClear, "GameClearScene"}
     };
 
     public static string GetSceneName(SceneType sceneType)
