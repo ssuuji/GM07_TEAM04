@@ -104,6 +104,7 @@ public class Monster : MonoBehaviour, IDamageable
         Destroy(gameObject);
 
         monsterReward.DropReward();
+        GameManager.Instance?.AddKillCount();
     }
 
 

@@ -11,6 +11,9 @@ public class Teleport : MonoBehaviour
     [SerializeField] private CinemachineCamera cinemachineCamera; //시네머신
     private CinemachineConfiner2D confiner;                       //시네머신 Confiner2D
 
+    [Header("보스클리어 포탈")]
+    [SerializeField] private bool isClearPortal; //보스클리어 후 등장하는 포탈
+
     private void Start()
     {
         confiner = cinemachineCamera.GetComponent<CinemachineConfiner2D>();
@@ -18,6 +21,14 @@ public class Teleport : MonoBehaviour
 
     public void TeleportPlayer(Transform player)
     {
+        //보스클리어 후 등장하는 포탈
+        if (isClearPortal)
+        {
+            GameManager.Instance.StopTimer();
+            GameSceneManager.Instance.LoadScene(SceneType.GameClear);
+            return;
+        }
+
         if (player == null || target == null) return;
 
         //다음맵 카메라 범위 설정

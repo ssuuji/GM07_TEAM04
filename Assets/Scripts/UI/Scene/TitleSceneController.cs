@@ -53,6 +53,8 @@ public class TitleSceneController : MonoBehaviour
     public void OnClickStartButton()
     {
         GameSceneManager.Instance.LoadScene(SceneType.Game);
+        GameManager.Instance.ResetStats();
+        GameManager.Instance.StartTimer();
     }
 
     //EXIT 버튼 클릭 시 게임 종료

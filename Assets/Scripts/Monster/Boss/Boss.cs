@@ -1,4 +1,4 @@
-using Assets.PixelFantasy.PixelMonsters.Common.Scripts;
+﻿using Assets.PixelFantasy.PixelMonsters.Common.Scripts;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,6 +20,8 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private BossAnimation bossAnimation;
 
     [SerializeField] private SFXManager sfxManager;
+
+    [SerializeField] private GameObject clearPortal; //보스 클리어 후 등장하는 포탈
 
     //테스트용
     private float flairTime = 1.0f;
@@ -120,6 +122,8 @@ public class Boss : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(1);
         Instantiate(diePrefab, transform.position, Quaternion.identity);
+
+        clearPortal.SetActive(true); //보스 클리어 후 포탈 활성화
         Destroy(gameObject);
     }
 
