@@ -67,7 +67,7 @@ public class SkullMan : MonoBehaviour, IDamageable
         if (IsDead) return;
 
         currentHealth -= damage;
-        //SFXManager.Instance.PlayMonsterHit();
+        SFXManager.Instance.PlaySkullManHit();
 
 
         if (monsterUI != null)
@@ -97,7 +97,7 @@ public class SkullMan : MonoBehaviour, IDamageable
     IEnumerator DieCo()
     {
         dogAnimation.Die();
-        //SFXManager.Instance.PlayMonsterDie();
+        SFXManager.Instance.PlaySkullManDie();
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
 
