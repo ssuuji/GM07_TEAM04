@@ -539,6 +539,7 @@ MonoBehaviour:
   wallSlideSpeed: 0.5
   wallJumpPower: {x: 7, y: 10}
   wallJumpTime: 0.2
+  maxWallJumpStreak: 2
 --- !u!114 &2506818311562418612
 MonoBehaviour:
   m_ObjectHideFlags: 0
