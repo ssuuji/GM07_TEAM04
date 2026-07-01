@@ -22,6 +22,7 @@ public class SkullMan : MonoBehaviour, IDamageable
     [SerializeField] private SkullManKnockBack skullManKnockBack;
     [SerializeField] private DogAnimation dogAnimation;
 
+    [SerializeField] private UIAppearance ui;
 
 
     private MonsterReward monsterReward;
@@ -34,6 +35,7 @@ public class SkullMan : MonoBehaviour, IDamageable
     private void Awake()
     {
         dogAnimation = GetComponent<DogAnimation>();
+        ui = GetComponent<UIAppearance>();
     }
 
     private void OnEnable()
@@ -81,6 +83,7 @@ public class SkullMan : MonoBehaviour, IDamageable
             return;
         }
 
+        ui.Appear();
         SetState(SkullManState.Knockback);
         skullManKnockBack.Knockback();
     }
@@ -143,6 +146,7 @@ public class SkullMan : MonoBehaviour, IDamageable
         if (currentHealth < maxHealth)
         {
             SetState(SkullManState.Angry);
+            
         }
 
         else

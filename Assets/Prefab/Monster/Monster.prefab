@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 5021180830675267301}
   - component: {fileID: 7203418688499677383}
   - component: {fileID: 2682666437073267677}
+  - component: {fileID: 5563338930990935385}
   m_Layer: 7
   m_Name: Monster
   m_TagString: Monster
@@ -438,6 +439,7 @@ MonoBehaviour:
   monsterUI: {fileID: 6921468742504701833}
   monsterKnockBack: {fileID: 5021180830675267301}
   dogAnimation: {fileID: 0}
+  ui: {fileID: 0}
 --- !u!114 &3834215680268142598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,6 +558,19 @@ MonoBehaviour:
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
   expReward: 10
+--- !u!114 &5563338930990935385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750971951054956214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe12266f8ca1b24eac3a54c1c6fb606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIAppearance
+  ui: {fileID: 1404928429777328900}
 --- !u!1 &2120694980969924854
 GameObject:
   m_ObjectHideFlags: 0

@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 6711868435325574413}
   - component: {fileID: 6679383160137704299}
   - component: {fileID: 1526558212104884102}
+  - component: {fileID: 2145419628542118137}
   m_Layer: 7
   m_Name: SkullMan
   m_TagString: SkullMan
@@ -378,6 +379,7 @@ MonoBehaviour:
   monsterUI: {fileID: 6921468742504701833}
   skullManKnockBack: {fileID: 6679383160137704299}
   dogAnimation: {fileID: 7203418688499677383}
+  ui: {fileID: 0}
 --- !u!114 &9194420067283927894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +455,19 @@ MonoBehaviour:
   skullManAttackHitPrefab: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
   skullManAttackPrefab: {fileID: 5423850927839111576, guid: f731886ddbc0d5c478c4b2908ad818a4, type: 3}
   dogAnimation: {fileID: 7203418688499677383}
+--- !u!114 &2145419628542118137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750971951054956214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe12266f8ca1b24eac3a54c1c6fb606, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIAppearance
+  ui: {fileID: 2319114123281532708}
 --- !u!1 &2319114123281532708
 GameObject:
   m_ObjectHideFlags: 0
