@@ -154,7 +154,7 @@ public class PlayerJump : MonoBehaviour
 
     private void OnGUI() // 코요테 타임 확인용 gui 
     {
-        GUI.color = coyoteTimeCounter > 0f ? Color.green : Color.red;
-        GUI.Label(new Rect(10, 10, 200, 30), $"CoyoteTime: {coyoteTimeCounter:F2}");
+        //GUI.color = coyoteTimeCounter > 0f ? Color.green : Color.red;
+        //GUI.Label(new Rect(10, 10, 200, 30), $"CoyoteTime: {coyoteTimeCounter:F2}");
     }
 }
