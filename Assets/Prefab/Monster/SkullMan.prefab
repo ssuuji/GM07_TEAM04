@@ -403,10 +403,10 @@ MonoBehaviour:
   moveTimeMin: 2
   moveTimeMax: 5
   wallCheck: {fileID: 1973498335338583831}
-  checkDistance: 1
+  checkDistance: 5
   wallLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   skullMan: {fileID: 8641314886089494734}
   groundBase: {fileID: 1973498335338583831}
   dogAnimation: {fileID: 7203418688499677383}
