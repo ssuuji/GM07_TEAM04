@@ -16,6 +16,11 @@ public class ConsumableQuickSlotManager : Singleton<ConsumableQuickSlotManager>
     // 쿨타임 시작을 UI 슬롯들에게 알리는 이벤트
     public event Action<int, float> OnItemCooldownStarted;
 
+    protected override void Awake()
+    {
+        
+    }
+
     private void Update()
     {
         // 각 숫자 키 입력 시 대응하는 아이템 사용
