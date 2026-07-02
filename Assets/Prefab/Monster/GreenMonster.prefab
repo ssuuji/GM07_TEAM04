@@ -682,10 +682,10 @@ MonoBehaviour:
   groundChecker: {fileID: 4657997214607508714}
   monster: {fileID: 0}
   wallCheck: {fileID: 4111303016810233487}
-  checkDistance: 1
+  checkDistance: 5
   wallLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   dogAnimation: {fileID: 2656887358656896826}
 --- !u!114 &1089563053182050865
 MonoBehaviour:
