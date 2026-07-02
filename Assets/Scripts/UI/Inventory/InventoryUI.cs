@@ -35,7 +35,7 @@ public class InventoryUI : MonoBehaviour
         {
             inventoryItemInfoUI.gameObject.SetActive(false);
         }
-        // 인벤토리 전체 창 (장비창 + 인벤토리) 끄기
+        // 인벤토리 전체 창 (장비창 + 인벤토리 창) 끄기
         if (inventoryMainPanel != null)
         {
             inventoryMainPanel.gameObject.SetActive(false);
