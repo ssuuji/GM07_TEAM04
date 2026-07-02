@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using Unity.Cinemachine;
+using UnityEngine;
 
 public class BossMap : MonoBehaviour
 {
     [SerializeField] private GameObject boss;
+    [SerializeField] private CinemachineCamera cinemachineCamera;
 
     [Header("Boss Map BGM")]
     [SerializeField] private AudioSource audioSource;
@@ -18,6 +20,10 @@ public class BossMap : MonoBehaviour
         audioSource.clip = bossBGM;
         audioSource.loop = true;
         audioSource.Play();
+
+        //보스맵에서 카메라 Follow 끊기
+        cinemachineCamera.Follow = null;
+        cinemachineCamera.PreviousStateIsValid = false;
 
         gameObject.SetActive(false); //포탈 비활성화
     }
