@@ -2,5 +2,6 @@
 {
     Title,
     Game, 
-    GameOver
+    GameOver,
+    GameClear
 }

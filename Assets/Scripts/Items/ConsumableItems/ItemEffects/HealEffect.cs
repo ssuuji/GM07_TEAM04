@@ -24,6 +24,8 @@ public class HealEffect : ItemEffect
         {
             // 체력이 가득 찼다는 디버그
             Debug.Log("이미 체력이 가득 차 있어 사용할 수 없습니다.");
+            MessageUI message = FindFirstObjectByType<MessageUI>();
+            message.ShowMessage("이미 체력이 가득 차 있어 사용할 수 없습니다.");
             return false;
         }
         playerStatus.Heal(healAmount);

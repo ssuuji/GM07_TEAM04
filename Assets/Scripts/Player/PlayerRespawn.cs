@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Demo_Project;
+using System.Collections;
+using Unity.Cinemachine;
+using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -6,14 +9,43 @@ public class PlayerRespawn : MonoBehaviour
     private Transform respawnPoint;
     private MessageUI messageUI;
 
+
+    [SerializeField] private CinemachineCamera cinemachineCamera;
+    private Vector3 warpDistance;
+    private bool isRetryRespawn;
+
+    private void Awake()
+    {
+        // Retry로 게임씬을 다시 재생한 경우
+        if (GameSceneManager.Instance.IsCheckPointSave)
+        {
+            Vector3 beforePos = transform.position;
+            Vector3 checkPointPos = GameSceneManager.Instance.lastCheckPoint;
+
+            transform.position = checkPointPos;
+
+            warpDistance = checkPointPos - beforePos;
+            isRetryRespawn = true;
+        }
+    }
     private void Start()
     {
         messageUI = FindFirstObjectByType<MessageUI>();
 
-        //Retry로 게임씬을 다시 재생한 경우
-        if (GameSceneManager.Instance.IsCheckPointSave)
+        if (isRetryRespawn)
         {
-            transform.position = GameSceneManager.Instance.lastCheckPoint;
+            StartCoroutine(CameraWarpCo());
+        }
+    }
+
+    private IEnumerator CameraWarpCo()
+    {
+        yield return null;
+
+        if (cinemachineCamera != null)
+        {
+            CinemachineCore.OnTargetObjectWarped(transform, warpDistance);
+            cinemachineCamera.PreviousStateIsValid = false;
         }
     }
 

@@ -1,4 +1,4 @@
-using Assets.PixelFantasy.PixelMonsters.Common.Scripts;
+﻿using Assets.PixelFantasy.PixelMonsters.Common.Scripts;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,6 +20,8 @@ public class Boss : MonoBehaviour, IDamageable
     [SerializeField] private BossAnimation bossAnimation;
 
     [SerializeField] private SFXManager sfxManager;
+
+    [SerializeField] private GameObject clearPortal; //보스 클리어 후 등장하는 포탈
 
     //테스트용
     private float flairTime = 1.0f;
@@ -107,10 +109,12 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        SFXManager.Instance.PlayBossDie();
-
         if (IsDead) return;
         IsDead = true;
+
+        SFXManager.Instance.PlayBossDie();
+
+        
         StartCoroutine(DieCo());
     }
 
@@ -120,7 +124,40 @@ public class Boss : MonoBehaviour, IDamageable
 
         yield return new WaitForSeconds(1);
         Instantiate(diePrefab, transform.position, Quaternion.identity);
+
+        //분신이면 포탈을 열지 않고 그냥 제거
+        if (IsFake)
+        {
+            Destroy(gameObject);
+            yield break;
+        }
+
+        //보스라면 살아있는 분신이 전부 사라질 때까지 대기
+        while (HasAliveClone())
+        {
+            yield return null;
+        }
+
         Destroy(gameObject);
+
+        //모두 제거 했다면 포탈 활성화
+        clearPortal.SetActive(true);
+    }
+
+    //분신 체크용
+    private bool HasAliveClone()
+    {
+        Boss[] bosses = FindObjectsByType<Boss>(FindObjectsSortMode.None);
+
+        foreach (Boss boss in bosses)
+        {
+            if (boss != this && boss.IsFake && !boss.IsDead)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //테스트용

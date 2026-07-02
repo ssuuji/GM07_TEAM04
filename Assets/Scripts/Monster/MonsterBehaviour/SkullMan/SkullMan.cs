@@ -115,6 +115,7 @@ public class SkullMan : MonoBehaviour, IDamageable
         ReturnToPool();
 
         monsterReward.DropReward();
+        GameManager.Instance?.AddKillCount();
     }
 
     private void ReturnToPool()

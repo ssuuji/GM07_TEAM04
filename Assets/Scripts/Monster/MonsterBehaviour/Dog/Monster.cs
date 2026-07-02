@@ -113,6 +113,7 @@ public class Monster : MonoBehaviour, IDamageable
         ReturnToPool();
 
         monsterReward.DropReward();
+        GameManager.Instance?.AddKillCount();
     }
 
     private void ReturnToPool()
