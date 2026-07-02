@@ -26,6 +26,11 @@ public class InventoryManager : Singleton<InventoryManager>
     // 이벤트
     public event Action OnInventoryChanged;     // 인벤토리 데이터 갱신 시 변경될 UI를 위한 이벤트
 
+    protected override void Awake()
+    {
+        
+    }
+
     private void Start()
     {
         // 초기 소지 아이템 지급

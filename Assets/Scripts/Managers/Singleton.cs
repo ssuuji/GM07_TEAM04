@@ -5,17 +5,17 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     // 실제 싱글톤 객체를 저장하는 변수
     private static T instance;
     // 에디터가 강제 종료가 되는 중인지 판단하기 위한 변수
-    private static bool isQuitting = false;
+    //private static bool isQuitting = false;
     // 외부제서 접근할 프로퍼티
     public static T Instance
     {
         get
         {
             // 에디터가 종료중이라면 널 반환
-            if (isQuitting || GameSceneManager.IsSceneLoading)
-            {
-                return null;
-            }
+            //if (isQuitting || GameSceneManager.IsSceneLoading)
+            //{
+            //    return null;
+            //}
             // 객체가 없다면
             if (instance == null)
             {
@@ -37,7 +37,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        isQuitting = false;
+        //isQuitting = false;
 
         // 아직 싱글톤 객체가 없다면
         if (instance == null)
@@ -60,7 +60,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     // 프로그램이 종료되는 중일 때
     protected virtual void OnApplicationQuit()
     {
-        isQuitting = true;
+        //isQuitting = true;
     }
     // 객체가 파괴될 때
     protected virtual void OnDestroy()
