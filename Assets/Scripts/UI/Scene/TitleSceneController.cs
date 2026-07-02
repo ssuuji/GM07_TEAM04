@@ -10,8 +10,11 @@ public class TitleSceneController : MonoBehaviour
     [Header("타이틀 등장 연출")]
     [SerializeField] private RectTransform titleText;      // 타이틀 위치/크기 제어용
     [SerializeField] private CanvasGroup titleCanvasGroup; // 타이틀 페이드 처리용
+    private Vector2 titleOriginPos;
 
-    private Vector2 titleOriginPos; 
+    [Header("타이틀 배경음")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip titleBGM;
 
     private void Awake()
     {
@@ -22,6 +25,14 @@ public class TitleSceneController : MonoBehaviour
     {
         PlayScreenFadeIn();
         PlayTitleIntro();
+        PlayBGM();
+    }
+
+    private void PlayBGM()
+    {
+        audioSource.clip = titleBGM;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     // 검은 화면에서 타이틀 화면이 서서히 보이도록 처리
@@ -52,9 +63,10 @@ public class TitleSceneController : MonoBehaviour
     //START 버튼 클릭
     public void OnClickStartButton()
     {
-        GameSceneManager.Instance.LoadScene(SceneType.Game);
         GameManager.Instance.ResetStats();
         GameManager.Instance.StartTimer();
+
+        GameSceneManager.Instance.LoadScene(SceneType.Game);
     }
 
     //EXIT 버튼 클릭 시 게임 종료
