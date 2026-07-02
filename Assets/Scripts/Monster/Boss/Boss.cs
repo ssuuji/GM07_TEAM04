@@ -48,6 +48,7 @@ public class Boss : MonoBehaviour, IDamageable
         if (player == null)
         {
             player = GameObject.FindWithTag("Player");
+            
         }
     }
 
@@ -97,7 +98,7 @@ public class Boss : MonoBehaviour, IDamageable
             Die();
         }
 
-        if (bossUI != null)
+        if (bossUI != null&& !IsFake)
         {
             bossUI.SetHP(currentHealth);
         }
