@@ -16,6 +16,13 @@ public class PlayerRespawn : MonoBehaviour
 
     private void Awake()
     {
+        GameSceneManager gameSceneManager = GameSceneManager.Instance;
+
+        if (gameSceneManager == null)
+        {
+            return;
+        }
+
         // Retry로 게임씬을 다시 재생한 경우
         if (GameSceneManager.Instance.IsCheckPointSave)
         {

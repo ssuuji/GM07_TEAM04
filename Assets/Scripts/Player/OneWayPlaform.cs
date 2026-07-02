@@ -18,6 +18,11 @@ public class OneWayPlatform : MonoBehaviour
 
     void Update()
     {
+        if (!isPlayer || isDropping || playerCollider == null)
+        {
+            return;
+        }
+
         var kb = Keyboard.current;
         if (kb == null) return;
 

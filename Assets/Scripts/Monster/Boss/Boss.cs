@@ -53,6 +53,8 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if (IsDead) return; 
+
         UpdateDirection();
 
         if(flair)
@@ -71,6 +73,8 @@ public class Boss : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        if (IsDead) return;
+
         SFXManager.Instance.PlayHit();
 
         currentHealth -= damage;
