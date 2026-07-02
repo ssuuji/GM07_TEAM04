@@ -44,10 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a18880130440b34c81e91b2c72e030d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GreenSkullManSpawner
-  skullManPrefab: {fileID: 2460881298250016118, guid: 684075e853da88946b971c1661104ece, type: 3}
+  greenSkullManPrefab: {fileID: 2460881298250016118, guid: 684075e853da88946b971c1661104ece, type: 3}
   skullManCountMax: 2
   countPerWave: 2
-  waveCount: 100
   waveCoolTime: 5
   widthMin: -10
   widthMax: 10

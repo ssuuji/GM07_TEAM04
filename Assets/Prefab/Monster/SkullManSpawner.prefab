@@ -47,7 +47,6 @@ MonoBehaviour:
   skullManPrefab: {fileID: 8641314886089494734, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
   skullManCountMax: 2
   countPerWave: 2
-  waveCount: 100
   waveCoolTime: 5
   widthMin: -10
   widthMax: 10
