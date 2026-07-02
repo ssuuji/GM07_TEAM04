@@ -5,6 +5,9 @@ public class GameOverSceneController : MonoBehaviour
     //RETRY 버튼 클릭
     public void OnClickRetryButton()
     {
+        GameManager.Instance.ResetStats();
+        GameManager.Instance.StartTimer();
+
         GameSceneManager.Instance.LoadScene(SceneType.Game);
     }
 

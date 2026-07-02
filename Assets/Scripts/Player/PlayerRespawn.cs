@@ -24,16 +24,16 @@ public class PlayerRespawn : MonoBehaviour
         }
 
         // Retry로 게임씬을 다시 재생한 경우
-        if (GameSceneManager.Instance.IsCheckPointSave)
-        {
-            Vector3 beforePos = transform.position;
-            Vector3 checkPointPos = GameSceneManager.Instance.lastCheckPoint;
+        //if (GameSceneManager.Instance.IsCheckPointSave)
+        //{
+        //    Vector3 beforePos = transform.position;
+        //    Vector3 checkPointPos = GameSceneManager.Instance.lastCheckPoint;
 
-            transform.position = checkPointPos;
+        //    transform.position = checkPointPos;
 
-            warpDistance = checkPointPos - beforePos;
-            isRetryRespawn = true;
-        }
+        //    warpDistance = checkPointPos - beforePos;
+        //    isRetryRespawn = true;
+        //}
     }
     private void Start()
     {
