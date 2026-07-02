@@ -14346,6 +14346,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1788802581
       objectReference: {fileID: 0}
+    - target: {fileID: 876148112294372427, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
+      propertyPath: hpFillImage
+      value: 
+      objectReference: {fileID: 47384202}
     - target: {fileID: 2415728123137437664, guid: d6a403107b224a2418d86019c6d411a1, type: 3}
       propertyPath: m_SortingLayer
       value: 4
