@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a34c9d301a2eccf4bb47d99ee9a1d244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
-  inventoryUIPanel: {fileID: 1552870389}
+  inventoryUIPanel: {fileID: 496291115}
   slotParent: {fileID: 2136975818}
   slotPrefab: {fileID: 5143232711759639836, guid: 5936ed5594af1bc4a932118f6c075c11, type: 3}
   inventoryGoldUI: {fileID: 2138561606}

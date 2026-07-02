@@ -18,6 +18,11 @@ public class ShopManager : Singleton<ShopManager>
     public List<InventoryItem> ShopItem => shopItems;
     public Dictionary<int, InventoryItem> ShopDictionary => shopDictionary;
 
+    protected override void Awake()
+    {
+
+    }
+
     private void Start()
     {
         // 상점 판매 아이템 세팅
