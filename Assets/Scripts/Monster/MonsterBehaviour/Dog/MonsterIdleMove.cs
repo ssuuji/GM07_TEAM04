@@ -13,12 +13,17 @@ public class MonsterIdleMove : MonoBehaviour
     [SerializeField] private GroundChecker groundChecker;
     [SerializeField] private Monster monster;
 
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private float checkDistance = 0.2f;
+    [SerializeField] private LayerMask wallLayer;
+
     [SerializeField] DogAnimation dogAnimation;
 
     private Rigidbody2D rb;
     private float jumpCoolTime;
 
-    private int dir = 0;
+    private bool dir;
+    private Vector2 direction;
     private float moveTime = 0;
     private float waitTime = 0;
 
@@ -46,7 +51,7 @@ public class MonsterIdleMove : MonoBehaviour
         {   // 정지
             if (moveTime <= 0)
             {
-                ChangeDirection();
+                RandomDirection();
                 dogAnimation.SetIdle();
                 MoveTimeSet();
                 WaitTimeSet();
@@ -60,6 +65,7 @@ public class MonsterIdleMove : MonoBehaviour
                 
                 IdleMove();
                 IdleJump();
+                EscapeWall();
 
                 if(rb.linearVelocity ==  Vector2.zero)
                 {
@@ -84,13 +90,37 @@ public class MonsterIdleMove : MonoBehaviour
             }
         }
     }
+    private void EscapeWall()
+    {
+        if (IsWall())
+        {
+            ChangeDirection();
+        }
+    }
 
+    private void ChangeDirection()
+    {
+        dir = !dir;
+        monster.SetDirection(dir);
+    }
+
+
+    private void Direction() => direction = dir ? Vector2.right : Vector2.left;
+
+    private bool IsWall()
+    {
+        Direction();
+        return Physics2D.Raycast(
+            wallCheck.position,
+            direction,
+            checkDistance,
+            wallLayer);
+    }
     private void IdleMove()
     {
         // 우
-        if (dir == 0)
+        if (dir)
         {
-            
             rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
         }
 
@@ -111,15 +141,13 @@ public class MonsterIdleMove : MonoBehaviour
         }
     }
 
+    
+
     // 방향설정
-    private void ChangeDirection()
+    private void RandomDirection()
     {
-        dir = Random.Range(0, 2);
-        if(dir == 0)
-        {
-            monster.SetDirection(true);
-        }
-        else monster.SetDirection(false);
+        dir = Random.Range(0, 2) == 0;
+        monster.SetDirection(dir);
     }
 
     // 이동시간

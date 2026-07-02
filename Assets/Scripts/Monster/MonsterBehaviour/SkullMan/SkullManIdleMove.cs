@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SkullManIdleMove : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class SkullManIdleMove : MonoBehaviour
     [SerializeField] private float waitTimeMax = 5f;
     [SerializeField] private float moveTimeMin = 2f;
     [SerializeField] private float moveTimeMax = 5f;
+
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private float checkDistance = 0.2f;
+    [SerializeField] private LayerMask wallLayer;
+
     [SerializeField] private SkullMan skullMan;
 
     [SerializeField] private Transform groundBase;
@@ -17,10 +23,10 @@ public class SkullManIdleMove : MonoBehaviour
 
     private Rigidbody2D rb;
     private Rigidbody2D GBrb;
-    private float jumpCoolTime;
 
     private bool verti;
-    private int dir = 0;
+    private bool dir;
+    private Vector2 direction;
     private float moveTime = 0;
     private float waitTime = 0;
 
@@ -51,7 +57,7 @@ public class SkullManIdleMove : MonoBehaviour
             {
                 rb.linearVelocity = Vector2.zero;
                 GBrb.linearVelocity = Vector2.zero;
-                ChangeDirection();
+                RandomDirection();
                 dogAnimation.SetIdle();
                 MoveTimeSet();
                 WaitTimeSet();
@@ -62,10 +68,11 @@ public class SkullManIdleMove : MonoBehaviour
             else 
             {
                 moveTime -= Time.deltaTime;
-                
+
                 IdleMove();
                 IdleFly();
-
+                EscapeWall();
+                
                 if(GBrb.linearVelocity ==  Vector2.zero)
                 {
                     dogAnimation.SetIdle();
@@ -82,20 +89,43 @@ public class SkullManIdleMove : MonoBehaviour
         }
     }
 
+    private void EscapeWall()
+    {
+        if (IsWall())
+        {
+            ChangeDirection();
+            transform.position = new Vector3(groundBase.position.x, transform.position.y, transform.position.z);
+        }
+    }
+
+    private void Direction() => direction = dir ? Vector2.right : Vector2.left;
+
+    private bool IsWall()
+    {
+        Direction();
+        return Physics2D.Raycast(
+            wallCheck.position,
+            direction,
+            checkDistance,
+            wallLayer);
+    }
+
     private void IdleMove()
     {
         // 우
-        if (dir == 0)
+        if (dir)
         {
-            rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+            
             GBrb.linearVelocity = new Vector2(moveSpeed, 0);
+            rb.linearVelocity = new Vector2(GBrb.linearVelocity.x, rb.linearVelocity.y);
         }
 
         // 좌
         else
         {
-            rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
+            
             GBrb.linearVelocity = new Vector2(-moveSpeed, 0);
+            rb.linearVelocity = new Vector2(GBrb.linearVelocity.x, rb.linearVelocity.y);
         }
     }
 
@@ -127,14 +157,16 @@ public class SkullManIdleMove : MonoBehaviour
     }
 
     // 방향설정
+    private void RandomDirection()
+    {
+        dir = Random.Range(0, 2) == 0;
+        skullMan.SetDirection(dir);
+    }
+
     private void ChangeDirection()
     {
-        dir = Random.Range(0, 2);
-        if(dir == 0)
-        {
-            skullMan.SetDirection(true);
-        }
-        else skullMan.SetDirection(false);
+        dir = !dir;
+        skullMan.SetDirection(dir);
     }
 
     // 이동시간

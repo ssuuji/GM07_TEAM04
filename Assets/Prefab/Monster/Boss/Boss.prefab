@@ -124,6 +124,7 @@ MonoBehaviour:
   flair: 0
   bossAnimation: {fileID: 0}
   sfxManager: {fileID: 0}
+  clearPortal: {fileID: 0}
   IsFake: 0
   Direction: 0
   IsDead: 0

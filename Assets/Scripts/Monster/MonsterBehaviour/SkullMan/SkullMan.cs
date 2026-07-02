@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.PixelFantasy.PixelMonsters.Common.Scripts;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,9 +19,11 @@ public class SkullMan : MonoBehaviour, IDamageable
     [SerializeField] private float knockbackTime = 1.0f;
     [SerializeField] private SkullManIdleMove skullManIdleMove;
     [SerializeField] private SkullManAngryMove skullManAngryMove;
+    [SerializeField] private SkullManAttack skullManAttack;
     [SerializeField] private MonsterUI monsterUI;
     [SerializeField] private SkullManKnockBack skullManKnockBack;
     [SerializeField] private DogAnimation dogAnimation;
+    [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private UIAppearance ui;
 
@@ -32,28 +35,37 @@ public class SkullMan : MonoBehaviour, IDamageable
     public bool IsDead { get; private set; } = false;
     public bool Direction { get; private set; } = true;
 
-    private void Awake()
-    {
-        dogAnimation = GetComponent<DogAnimation>();
-        ui = GetComponent<UIAppearance>();
-    }
+    private bool isReturned = true;
 
-    private void OnEnable()
+    public void Initialize()
     {
         currentHealth = maxHealth;
-        
-        SetKnockbackTime();
-    }
-
-    private void Start()
-    {
+        isReturned = false;
+        IsDead = false;
         if (monsterUI != null)
         {
             monsterUI.Initialize(maxHealth);
         }
+
+        ui.Disappear();
+
         monsterReward = GetComponent<MonsterReward>();
+
+        SetKnockbackTime();
+        SetState(SkullManState.Idle);
+        skullManAttack.enabled = false;
     }
 
+
+    private void Awake()
+    {
+        dogAnimation = GetComponent<DogAnimation>();
+        ui = GetComponent<UIAppearance>();
+        rb = GetComponent<Rigidbody2D>();
+        skullManAttack = GetComponent<SkullManAttack>();
+    }
+
+   
 
     private void Update()
     {
@@ -99,15 +111,27 @@ public class SkullMan : MonoBehaviour, IDamageable
 
     IEnumerator DieCo()
     {
+        skullManAttack.enabled = false;
         dogAnimation.Die();
         SFXManager.Instance.PlaySkullManDie();
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        ReturnToPool();
 
         monsterReward.DropReward();
         GameManager.Instance?.AddKillCount();
     }
 
+    private void ReturnToPool()
+    {
+        if (isReturned)
+        {
+            return;
+        }
+        isReturned = true;
+        rb.linearVelocity = Vector2.zero;
+        Managers.Pool.ReturnPool(this);
+
+    }
 
     //상태
     private void SetState(SkullManState state)

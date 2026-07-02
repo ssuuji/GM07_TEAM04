@@ -291,7 +291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: High Evil Dog
+  m_text: Lv 3. High Evil Dog
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -318,8 +318,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 3608782115915793514}
   m_Layer: 7
   m_Name: GreenMonster
-  m_TagString: Monster
+  m_TagString: GreenMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b222b0b2644ff4f92676def2ef9665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
-  maxHealth: 60
+  maxHealth: 70
   currentHealth: 0
   knockbackTime: 2
   monsterIdleMove: {fileID: 5872116268876524165}
@@ -638,6 +638,7 @@ MonoBehaviour:
   monsterUI: {fileID: 5159004596532958316}
   monsterKnockBack: {fileID: 3038831987599714569}
   dogAnimation: {fileID: 0}
+  monsterAttack: {fileID: 0}
   ui: {fileID: 0}
 --- !u!114 &8340754824336716322
 MonoBehaviour:
@@ -651,8 +652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692c0ff622cf90143a6880029c8728aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterAttack
-  damage: 20
-  attackCoolTime: 2
+  damage: 10
+  attackCoolTime: 1
   attackPoint: {fileID: 4009157533798641275}
   attackSize: {x: 2, y: 1}
   playerLayer:
@@ -680,6 +681,11 @@ MonoBehaviour:
   moveTimeMax: 3
   groundChecker: {fileID: 4657997214607508714}
   monster: {fileID: 0}
+  wallCheck: {fileID: 4111303016810233487}
+  checkDistance: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
   dogAnimation: {fileID: 2656887358656896826}
 --- !u!114 &1089563053182050865
 MonoBehaviour:
@@ -756,7 +762,16 @@ MonoBehaviour:
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
-  expReward: 10
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
+  expReward: 30
 --- !u!114 &3608782115915793514
 MonoBehaviour:
   m_ObjectHideFlags: 0

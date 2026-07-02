@@ -5,6 +5,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour, IDamageable
 {
     
+
     enum MonsterState
     {
         None = -1, Idle, Angry, Knockback
@@ -21,8 +22,11 @@ public class Monster : MonoBehaviour, IDamageable
     [SerializeField] private MonsterUI monsterUI;
     [SerializeField] private MonsterKnockBack monsterKnockBack;
     [SerializeField] private DogAnimation dogAnimation;
+    [SerializeField] private MonsterAttack monsterAttack;
 
     [SerializeField] private UIAppearance ui;
+
+    private Rigidbody2D rb;
 
     private MonsterReward monsterReward;
 
@@ -31,32 +35,39 @@ public class Monster : MonoBehaviour, IDamageable
     public bool IsDead { get; private set; } = false;
     public bool Direction { get; private set; } = true;
 
-    private void Awake()
-    {
-        dogAnimation = GetComponent<DogAnimation>();
-        ui = GetComponent<UIAppearance>();
-    }
+    private bool isReturned = true;
 
-    private void OnEnable()
+    public void Initialize()
     {
         currentHealth = maxHealth;
-        
-        SetKnockbackTime();
-    }
-
-    private void Start()
-    {
+        isReturned = false;
+        IsDead = false;
         if (monsterUI != null)
         {
             monsterUI.Initialize(maxHealth);
         }
+
+        ui.Disappear();
+
         monsterReward = GetComponent<MonsterReward>();
+        monsterAttack = GetComponent<MonsterAttack>();
+
+        SetKnockbackTime();
+        SetState(MonsterState.Idle);
+        
+        monsterAttack.enabled = false;
+    }
+
+    private void Awake()
+    {
+        dogAnimation = GetComponent<DogAnimation>();
+        ui = GetComponent<UIAppearance>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 
     private void Update()
     {
-
 
         StateManage();
         
@@ -98,13 +109,26 @@ public class Monster : MonoBehaviour, IDamageable
 
     IEnumerator DieCo()
     {
+        monsterAttack.enabled = false;
         dogAnimation.Die();
         SFXManager.Instance.PlayMonsterDie();
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        ReturnToPool();
 
         monsterReward.DropReward();
         GameManager.Instance?.AddKillCount();
+    }
+
+    private void ReturnToPool()
+    {
+        if (isReturned)
+        {
+            return;
+        }
+        isReturned = true;
+        rb.linearVelocity = Vector2.zero;
+        Managers.Pool.ReturnPool(this);
+
     }
 
 

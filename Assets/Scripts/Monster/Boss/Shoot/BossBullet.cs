@@ -67,12 +67,20 @@ public class BossBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             SFXManager.Instance.PlayBulletHit();
             Instantiate(hitFxPrefab, transform.position, Quaternion.identity);
             player.TakeDamage(damage);
             Destroy(gameObject);
         }
+
+        else if (collision.gameObject.CompareTag("Ground"))
+        {
+            SFXManager.Instance.PlayBulletHit();
+            Instantiate(hitFxPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+
     }
 }

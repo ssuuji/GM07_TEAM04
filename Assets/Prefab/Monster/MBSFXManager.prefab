@@ -62,6 +62,9 @@ MonoBehaviour:
   monsterAttackHit: {fileID: 8300000, guid: 7de578e0cbac4684cbac6e919e057ae2, type: 3}
   monsterHit: {fileID: 8300000, guid: 6e817a8da3c02b542b676c00eaa2e1bc, type: 3}
   monsterDie: {fileID: 8300000, guid: a36572a74c3f34664868dad3ccb899c9, type: 3}
+  skullManAttack: {fileID: 8300000, guid: 9a60698c17b9cba4c8d00a90ba942c22, type: 3}
+  skullManHit: {fileID: 8300000, guid: 0f0b0e4a613273b42b05af56b3deb1f0, type: 3}
+  skullManDie: {fileID: 8300000, guid: b20d9d0794d030248a1d5565ead1cfbf, type: 3}
 --- !u!82 &5426695685005485969
 AudioSource:
   m_ObjectHideFlags: 0

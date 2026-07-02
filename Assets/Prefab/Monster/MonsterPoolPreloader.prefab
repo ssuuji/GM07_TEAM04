@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9137471919619085677
+--- !u!1 &8508038091197225383
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7217242582819261022}
-  - component: {fileID: 4756235386070991007}
+  - component: {fileID: 2835534983170427729}
+  - component: {fileID: 6817875157192859520}
   m_Layer: 0
-  m_Name: MonsterSpawner
+  m_Name: MonsterPoolPreloader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7217242582819261022
+--- !u!4 &2835534983170427729
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9137471919619085677}
+  m_GameObject: {fileID: 8508038091197225383}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.57152, y: -0.2197, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4756235386070991007
+--- !u!114 &6817875157192859520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9137471919619085677}
+  m_GameObject: {fileID: 8508038091197225383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7ad7b20ce1984849a0c73f83ffc9c13, type: 3}
+  m_Script: {fileID: 11500000, guid: 74d0cd413606338449eb7b6303fa7d6a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonsterSpawner
+  m_EditorClassIdentifier: Assembly-CSharp::PoolPreloader
   monsterPrefab: {fileID: 8427493216937825215, guid: e892e4db42bd8964fb23384e21fd7a97, type: 3}
-  monsterCountMax: 2
-  countPerWave: 2
-  waveCount: 100
-  waveCoolTime: 5
-  widthMin: -10
-  widthMax: 10
-  heightMin: 0
-  heightMax: 10
+  greenMonsterPrefab: {fileID: 6989522278930503029, guid: 48ff09c8210c28241aeca863e81c7fd6, type: 3}
+  skullManPrefab: {fileID: 8641314886089494734, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
+  greenSkullManPrefab: {fileID: 2460881298250016118, guid: 684075e853da88946b971c1661104ece, type: 3}
+  monsterCount: 2
+  greenMonsterCount: 2
+  skullManCount: 2
+  greenSkullManCount: 2

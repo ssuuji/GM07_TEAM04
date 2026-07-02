@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd3894f4be59c84b82387eb96a3da1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkullManSpawner
-  skullManPrefab: {fileID: 1750971951054956214, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
-  skullManCountMax: 10
-  countPerWave: 4
-  waveCount: 4
-  waveCoolTime: 10
+  skullManPrefab: {fileID: 8641314886089494734, guid: 214f3718526c08c47b78dbd109973be2, type: 3}
+  skullManCountMax: 2
+  countPerWave: 2
+  waveCoolTime: 5
   widthMin: -10
   widthMax: 10
   heightMin: 0

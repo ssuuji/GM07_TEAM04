@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HIgh Skull Man
+  m_text: Lv 4. HIgh Skull Man
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 6492092528693920901}
   m_Layer: 7
   m_Name: GreenSkullMan
-  m_TagString: SkullMan
+  m_TagString: GreenSkullMan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -897,9 +897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterReward
   rewardPrefabs:
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
-  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
-  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
-  expReward: 10
+  expReward: 50
 --- !u!114 &2460881298250016118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,9 +915,11 @@ MonoBehaviour:
   knockbackTime: 1
   skullManIdleMove: {fileID: 5276246790076125702}
   skullManAngryMove: {fileID: 2382062193573952051}
+  skullManAttack: {fileID: 0}
   monsterUI: {fileID: 7496573772418017428}
   skullManKnockBack: {fileID: 5665194450032387041}
   dogAnimation: {fileID: 6440300724942523377}
+  rb: {fileID: 0}
   ui: {fileID: 0}
 --- !u!114 &5276246790076125702
 MonoBehaviour:
@@ -938,6 +938,11 @@ MonoBehaviour:
   waitTimeMax: 5
   moveTimeMin: 2
   moveTimeMax: 5
+  wallCheck: {fileID: 4882666776268051193}
+  checkDistance: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
   skullMan: {fileID: 2460881298250016118}
   groundBase: {fileID: 4882666776268051193}
   dogAnimation: {fileID: 6440300724942523377}
@@ -988,8 +993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781fe73e55e6a7b4cb15d3687585b801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkullManAttack
-  damage: 20
-  attackCoolTime: 1
+  damage: 10
+  attackCoolTime: 0.5
   attackPoint: {fileID: 6227405808560492454}
   skullMan: {fileID: 0}
   player: {fileID: 0}
@@ -1008,7 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe12266f8ca1b24eac3a54c1c6fb606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIAppearance
-  ui: {fileID: 9085458830673531540}
+  ui: {fileID: 8113597691524195670}
 --- !u!1001 &3050396612556907390
 PrefabInstance:
   m_ObjectHideFlags: 0

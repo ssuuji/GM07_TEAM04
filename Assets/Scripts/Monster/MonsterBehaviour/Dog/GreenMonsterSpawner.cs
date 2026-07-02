@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MonsterSpawner : MonoBehaviour
+public class GreenMonsterSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject monsterPrefab;
+    [SerializeField] private Monster monsterPrefab;
     [SerializeField] private int monsterCountMax = 10;
     [SerializeField] private int countPerWave = 4;
-    [SerializeField] private int waveCount = 4;
     [SerializeField] private float waveCoolTime = 10.0f;
     [SerializeField] private float widthMin = -10.0f;
     [SerializeField] private float widthMax = 10.0f;
@@ -24,15 +23,14 @@ public class MonsterSpawner : MonoBehaviour
     // 웨이브 생성
     IEnumerator WaveCo()
     {
-        while (waveCount > 0)
+        while (true)
         {
 
-            while (CountMonster() > monsterCountMax)
+            while (CountGreenMonster() > monsterCountMax)
             {
                 yield return null;
             }
 
-            waveCount--;
 
             CreateWave();
 
@@ -46,7 +44,16 @@ public class MonsterSpawner : MonoBehaviour
         for (int i = 0; i < countPerWave; i++)
         {
             SetRandomPosition();
-            Instantiate(monsterPrefab, randomPosition, Quaternion.identity);
+            Monster monster = Managers.Pool.GetPool(monsterPrefab);
+
+            monster.transform.position = randomPosition;
+            monster.transform.rotation = Quaternion.identity;
+
+            if (monster != null)
+            {
+                
+                monster.Initialize();
+            }
         }
         
     }
@@ -60,8 +67,8 @@ public class MonsterSpawner : MonoBehaviour
             0f);
     }
 
-    private int CountMonster()
+    private int CountGreenMonster()
     {
-        return GameObject.FindGameObjectsWithTag("Monster").Length; 
+        return GameObject.FindGameObjectsWithTag("GreenMonster").Length;
     }
 }
