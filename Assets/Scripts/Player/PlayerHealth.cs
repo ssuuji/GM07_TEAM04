@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private bool isKnockBack;            //넉백 중인지 확인여부
     private bool isDead;                 //플레이어 사망여부
     private bool isInvin;                //무적상태 확인여부
+    private Coroutine currentCo;
     public bool IsKnockBack => isKnockBack;
     public bool IsDead => isDead;
 
@@ -64,6 +65,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
 
         Knockback();
+        DamageColor();
     }
 
     private void Knockback()
@@ -84,6 +86,29 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(knockBackTime);
 
         isKnockBack = false;
+    }
+
+    private void DamageColor()
+    {
+        if (currentCo != null)
+        {
+            StopCoroutine(currentCo);
+        }
+        currentCo = StartCoroutine(ColorCo());
+    }
+
+    IEnumerator ColorCo()
+    {
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        Color originColor = renderer.material.color;
+
+        renderer.material.color = Color.red;
+
+        yield return new WaitForSeconds(0.15f);
+
+        renderer.material.color = originColor;
+
+        currentCo = null;
     }
 
     //플레이어 사망처리
