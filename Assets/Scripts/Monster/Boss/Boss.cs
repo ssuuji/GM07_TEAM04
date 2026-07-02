@@ -109,10 +109,12 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        SFXManager.Instance.PlayBossDie();
-
         if (IsDead) return;
         IsDead = true;
+
+        SFXManager.Instance.PlayBossDie();
+
+        
         StartCoroutine(DieCo());
     }
 
@@ -136,10 +138,10 @@ public class Boss : MonoBehaviour, IDamageable
             yield return null;
         }
 
+        Destroy(gameObject);
+
         //모두 제거 했다면 포탈 활성화
         clearPortal.SetActive(true);
-
-        Destroy(gameObject);
     }
 
     //분신 체크용
