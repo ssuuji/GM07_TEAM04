@@ -1,11 +1,10 @@
-using Assets.PixelFantasy.PixelMonsters.Common.Scripts;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-public class SkullManSpawner : MonoBehaviour
+public class GreenMonsterSpawner : MonoBehaviour
 {
-    [SerializeField] private SkullMan skullManPrefab;
-    [SerializeField] private int skullManCountMax = 10;
+    [SerializeField] private Monster monsterPrefab;
+    [SerializeField] private int monsterCountMax = 10;
     [SerializeField] private int countPerWave = 4;
     [SerializeField] private int waveCount = 4;
     [SerializeField] private float waveCoolTime = 10.0f;
@@ -28,7 +27,7 @@ public class SkullManSpawner : MonoBehaviour
         while (waveCount > 0)
         {
 
-            while (CountSkullMan() > skullManCountMax)
+            while (CountGreenMonster() > monsterCountMax)
             {
                 yield return null;
             }
@@ -47,17 +46,18 @@ public class SkullManSpawner : MonoBehaviour
         for (int i = 0; i < countPerWave; i++)
         {
             SetRandomPosition();
-            SkullMan skullMan = Managers.Pool.GetPool(skullManPrefab);
+            Monster monster = Managers.Pool.GetPool(monsterPrefab);
 
-            skullMan.transform.position = randomPosition;
-            skullMan.transform.rotation = Quaternion.identity;
+            monster.transform.position = randomPosition;
+            monster.transform.rotation = Quaternion.identity;
 
-            if (skullMan != null)
+            if (monster != null)
             {
-                skullMan.Initialize();
+                
+                monster.Initialize();
             }
         }
-
+        
     }
 
     // 범위 내 랜덤한 위치
@@ -69,8 +69,8 @@ public class SkullManSpawner : MonoBehaviour
             0f);
     }
 
-    private int CountSkullMan()
+    private int CountGreenMonster()
     {
-        return GameObject.FindGameObjectsWithTag("SkullMan").Length;
+        return GameObject.FindGameObjectsWithTag("GreenMonster").Length;
     }
 }

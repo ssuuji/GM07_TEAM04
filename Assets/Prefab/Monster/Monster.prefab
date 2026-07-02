@@ -439,6 +439,7 @@ MonoBehaviour:
   monsterUI: {fileID: 6921468742504701833}
   monsterKnockBack: {fileID: 5021180830675267301}
   dogAnimation: {fileID: 0}
+  monsterAttack: {fileID: 0}
   ui: {fileID: 0}
 --- !u!114 &3834215680268142598
 MonoBehaviour:
@@ -481,6 +482,11 @@ MonoBehaviour:
   moveTimeMax: 3
   groundChecker: {fileID: 105005476471898257}
   monster: {fileID: 0}
+  wallCheck: {fileID: 9185154086948026643}
+  checkDistance: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
   dogAnimation: {fileID: 7203418688499677383}
 --- !u!114 &4896938182011083910
 MonoBehaviour:

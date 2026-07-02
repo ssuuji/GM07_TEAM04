@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7157885000977214538}
-  - component: {fileID: 2726594828936254364}
+  - component: {fileID: 3424378227658171894}
   m_Layer: 0
   m_Name: GreenSkullManSpawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2726594828936254364
+--- !u!114 &3424378227658171894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3678766274626114488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cd3894f4be59c84b82387eb96a3da1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a18880130440b34c81e91b2c72e030d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkullManSpawner
-  skullManPrefab: {fileID: 9085458830673531540, guid: 684075e853da88946b971c1661104ece, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::GreenSkullManSpawner
+  skullManPrefab: {fileID: 2460881298250016118, guid: 684075e853da88946b971c1661104ece, type: 3}
   skullManCountMax: 10
   countPerWave: 4
   waveCount: 4

@@ -8,6 +8,9 @@ TagManager:
   - Boss
   - Ground
   - FxTemporaire
+  - SkullMan
+  - GreenMonster
+  - GreenSkullMan
   layers:
   - Default
   - TransparentFX

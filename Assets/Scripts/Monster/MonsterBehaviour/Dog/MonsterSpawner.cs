@@ -51,7 +51,11 @@ public class MonsterSpawner : MonoBehaviour
             monster.transform.position = randomPosition;
             monster.transform.rotation = Quaternion.identity;
 
-            monster.Initialize();
+            if (monster != null)
+            {
+                monster.Initialize();
+            }
+            
         }
         
     }
@@ -67,8 +71,6 @@ public class MonsterSpawner : MonoBehaviour
 
     private int CountMonster()
     {
-        
         return GameObject.FindGameObjectsWithTag("Monster").Length;
-        
     }
 }

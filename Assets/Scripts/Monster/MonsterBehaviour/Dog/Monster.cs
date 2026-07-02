@@ -6,9 +6,6 @@ public class Monster : MonoBehaviour, IDamageable
 {
     
 
-
-    
-
     enum MonsterState
     {
         None = -1, Idle, Angry, Knockback
@@ -25,6 +22,7 @@ public class Monster : MonoBehaviour, IDamageable
     [SerializeField] private MonsterUI monsterUI;
     [SerializeField] private MonsterKnockBack monsterKnockBack;
     [SerializeField] private DogAnimation dogAnimation;
+    [SerializeField] private MonsterAttack monsterAttack;
 
     [SerializeField] private UIAppearance ui;
 
@@ -50,11 +48,12 @@ public class Monster : MonoBehaviour, IDamageable
         }
 
         monsterReward = GetComponent<MonsterReward>();
+        monsterAttack = GetComponent<MonsterAttack>();
 
         SetKnockbackTime();
         SetState(MonsterState.Idle);
-        monsterAngryMove.OffIsAttack();
-
+        
+        monsterAttack.enabled = false;
     }
 
     private void Awake()

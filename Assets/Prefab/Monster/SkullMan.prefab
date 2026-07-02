@@ -376,9 +376,11 @@ MonoBehaviour:
   knockbackTime: 1
   skullManIdleMove: {fileID: 9194420067283927894}
   skullManAngryMove: {fileID: 6711868435325574413}
+  skullManAttack: {fileID: 0}
   monsterUI: {fileID: 6921468742504701833}
   skullManKnockBack: {fileID: 6679383160137704299}
   dogAnimation: {fileID: 7203418688499677383}
+  rb: {fileID: 0}
   ui: {fileID: 0}
 --- !u!114 &9194420067283927894
 MonoBehaviour:
@@ -397,6 +399,11 @@ MonoBehaviour:
   waitTimeMax: 5
   moveTimeMin: 2
   moveTimeMax: 5
+  wallCheck: {fileID: 1973498335338583831}
+  checkDistance: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
   skullMan: {fileID: 8641314886089494734}
   groundBase: {fileID: 1973498335338583831}
   dogAnimation: {fileID: 7203418688499677383}

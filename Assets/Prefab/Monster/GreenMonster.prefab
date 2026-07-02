@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 3608782115915793514}
   m_Layer: 7
   m_Name: GreenMonster
-  m_TagString: Monster
+  m_TagString: GreenMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -638,6 +638,7 @@ MonoBehaviour:
   monsterUI: {fileID: 5159004596532958316}
   monsterKnockBack: {fileID: 3038831987599714569}
   dogAnimation: {fileID: 0}
+  monsterAttack: {fileID: 0}
   ui: {fileID: 0}
 --- !u!114 &8340754824336716322
 MonoBehaviour:
@@ -680,6 +681,11 @@ MonoBehaviour:
   moveTimeMax: 3
   groundChecker: {fileID: 4657997214607508714}
   monster: {fileID: 0}
+  wallCheck: {fileID: 4111303016810233487}
+  checkDistance: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
   dogAnimation: {fileID: 2656887358656896826}
 --- !u!114 &1089563053182050865
 MonoBehaviour:

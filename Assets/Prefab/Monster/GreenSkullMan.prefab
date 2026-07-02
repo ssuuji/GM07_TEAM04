@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 6492092528693920901}
   m_Layer: 7
   m_Name: GreenSkullMan
-  m_TagString: SkullMan
+  m_TagString: GreenSkullMan
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -917,9 +917,11 @@ MonoBehaviour:
   knockbackTime: 1
   skullManIdleMove: {fileID: 5276246790076125702}
   skullManAngryMove: {fileID: 2382062193573952051}
+  skullManAttack: {fileID: 0}
   monsterUI: {fileID: 7496573772418017428}
   skullManKnockBack: {fileID: 5665194450032387041}
   dogAnimation: {fileID: 6440300724942523377}
+  rb: {fileID: 0}
   ui: {fileID: 0}
 --- !u!114 &5276246790076125702
 MonoBehaviour:
@@ -938,6 +940,11 @@ MonoBehaviour:
   waitTimeMax: 5
   moveTimeMin: 2
   moveTimeMax: 5
+  wallCheck: {fileID: 4882666776268051193}
+  checkDistance: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
   skullMan: {fileID: 2460881298250016118}
   groundBase: {fileID: 4882666776268051193}
   dogAnimation: {fileID: 6440300724942523377}

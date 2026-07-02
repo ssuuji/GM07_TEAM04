@@ -1,8 +1,7 @@
-using Assets.PixelFantasy.PixelMonsters.Common.Scripts;
 using System.Collections;
 using UnityEngine;
 
-public class SkullManSpawner : MonoBehaviour
+public class GreenSkullManSpawner : MonoBehaviour
 {
     [SerializeField] private SkullMan skullManPrefab;
     [SerializeField] private int skullManCountMax = 10;
@@ -71,6 +70,6 @@ public class SkullManSpawner : MonoBehaviour
 
     private int CountSkullMan()
     {
-        return GameObject.FindGameObjectsWithTag("SkullMan").Length;
+        return GameObject.FindGameObjectsWithTag("GreenSkullMan").Length;
     }
 }
