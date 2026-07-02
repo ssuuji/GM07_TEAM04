@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewConsumableItem", menuName = "Data/Item/Consumable")]
@@ -35,6 +34,8 @@ public class ConsumableItem : Item
         {
             // 아이템 쿨타임 확인 후 쿨타임 상태라면 리턴
             Debug.Log($"[{ItemName}]은 아직 재사용 대기 중입니다.");
+            MessageUI message = FindFirstObjectByType<MessageUI>();
+            message.ShowMessage($"[{ItemName}]은 아직 재사용 대기 중입니다.");
             return;
         }
         // 아이템이 가진 사용 효과 리스트 순회
