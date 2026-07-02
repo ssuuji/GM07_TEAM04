@@ -15,4 +15,9 @@ public class UIAppearance : MonoBehaviour
         ui.SetActive(true);
 
     }
+
+    public void Disappear()
+    {
+        ui.SetActive(false);
+    }
 }

@@ -6,7 +6,6 @@ public class GreenSkullManSpawner : MonoBehaviour
     [SerializeField] private SkullMan skullManPrefab;
     [SerializeField] private int skullManCountMax = 10;
     [SerializeField] private int countPerWave = 4;
-    [SerializeField] private int waveCount = 4;
     [SerializeField] private float waveCoolTime = 10.0f;
     [SerializeField] private float widthMin = -10.0f;
     [SerializeField] private float widthMax = 10.0f;
@@ -24,7 +23,7 @@ public class GreenSkullManSpawner : MonoBehaviour
     // 웨이브 생성
     IEnumerator WaveCo()
     {
-        while (waveCount > 0)
+        while (true)
         {
 
             while (CountSkullMan() > skullManCountMax)
@@ -32,7 +31,6 @@ public class GreenSkullManSpawner : MonoBehaviour
                 yield return null;
             }
 
-            waveCount--;
 
             CreateWave();
 

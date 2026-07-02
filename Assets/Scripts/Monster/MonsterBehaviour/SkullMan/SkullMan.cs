@@ -47,6 +47,8 @@ public class SkullMan : MonoBehaviour, IDamageable
             monsterUI.Initialize(maxHealth);
         }
 
+        ui.Disappear();
+
         monsterReward = GetComponent<MonsterReward>();
 
         SetKnockbackTime();

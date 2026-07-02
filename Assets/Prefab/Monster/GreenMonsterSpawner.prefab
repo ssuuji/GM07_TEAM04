@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GreenMonsterSpawner
   monsterPrefab: {fileID: 6989522278930503029, guid: 48ff09c8210c28241aeca863e81c7fd6, type: 3}
-  monsterCountMax: 10
-  countPerWave: 4
-  waveCount: 4
-  waveCoolTime: 10
+  monsterCountMax: 2
+  countPerWave: 2
+  waveCount: 100
+  waveCoolTime: 5
   widthMin: -10
   widthMax: 10
   heightMin: 0

@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GreenSkullManSpawner
   skullManPrefab: {fileID: 2460881298250016118, guid: 684075e853da88946b971c1661104ece, type: 3}
-  skullManCountMax: 10
-  countPerWave: 4
-  waveCount: 4
-  waveCoolTime: 10
+  skullManCountMax: 2
+  countPerWave: 2
+  waveCount: 100
+  waveCoolTime: 5
   widthMin: -10
   widthMax: 10
   heightMin: 0

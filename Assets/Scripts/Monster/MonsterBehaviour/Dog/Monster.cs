@@ -47,6 +47,8 @@ public class Monster : MonoBehaviour, IDamageable
             monsterUI.Initialize(maxHealth);
         }
 
+        ui.Disappear();
+
         monsterReward = GetComponent<MonsterReward>();
         monsterAttack = GetComponent<MonsterAttack>();
 
