@@ -97,7 +97,7 @@ public class Boss : MonoBehaviour, IDamageable
             Die();
         }
 
-        if (bossUI != null)
+        if (bossUI != null && !IsFake)
         {
             bossUI.SetHP(currentHealth);
         }
