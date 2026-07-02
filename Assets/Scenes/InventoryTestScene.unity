@@ -2086,7 +2086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &838709898
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2168,9 +2168,9 @@ RectTransform:
   - {fileID: 1498847953}
   m_Father: {fileID: 838709898}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 214.5, y: -611}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 500}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &873728908
@@ -2734,9 +2734,9 @@ RectTransform:
   - {fileID: 980470791}
   m_Father: {fileID: 838709898}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 869.5, y: -611}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1010334131
@@ -6066,6 +6066,50 @@ PrefabInstance:
     - target: {fileID: 2928204986706779713, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
       propertyPath: m_Name
       value: GoldUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285913706261942393, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285913706261942393, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285913706261942393, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285913706261942393, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5539613663433523782, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5539613663433523782, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5539613663433523782, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5539613663433523782, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768386068761776090, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768386068761776090, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768386068761776090, guid: 24c0a021b11ba4a408cadf85b0ecba35, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
