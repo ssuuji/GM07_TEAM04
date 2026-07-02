@@ -109,6 +109,7 @@ public class Monster : MonoBehaviour, IDamageable
 
     IEnumerator DieCo()
     {
+        monsterAttack.enabled = false;
         dogAnimation.Die();
         SFXManager.Instance.PlayMonsterDie();
         yield return new WaitForSeconds(1f);

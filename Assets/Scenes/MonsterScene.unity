@@ -168,6 +168,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4249978691531976304, guid: b428a84304c06324282db1844e99f956, type: 3}
   m_PrefabInstance: {fileID: 852632766}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &306777916
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.37278
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.25346
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778743402038095608, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9085458830673531540, guid: 684075e853da88946b971c1661104ece, type: 3}
+      propertyPath: m_Name
+      value: GreenSkullMan
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 684075e853da88946b971c1661104ece, type: 3}
 --- !u!1 &423420875
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,25 +763,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4756235386070991007, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
-      propertyPath: countPerWave
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4756235386070991007, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
-      propertyPath: waveCoolTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4756235386070991007, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
-      propertyPath: monsterCountMax
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7217242582819261022, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.57152
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7217242582819261022, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2197
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7217242582819261022, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -761,10 +806,6 @@ PrefabInstance:
     - target: {fileID: 9137471919619085677, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
       propertyPath: m_Name
       value: MonsterSpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 9137471919619085677, guid: 5d846291ddd34c14690016aff9f9b04f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -845,11 +886,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6727702496665280219, guid: 4004d6041fb8c85429241f74f04aa3ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.26804
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6727702496665280219, guid: 4004d6041fb8c85429241f74f04aa3ba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41946
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6727702496665280219, guid: 4004d6041fb8c85429241f74f04aa3ba, type: 3}
       propertyPath: m_LocalPosition.z
@@ -882,22 +923,6 @@ PrefabInstance:
     - target: {fileID: 6727702496665280219, guid: 4004d6041fb8c85429241f74f04aa3ba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288207113082973756, guid: 4004d6041fb8c85429241f74f04aa3ba, type: 3}
-      propertyPath: waveCount
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288207113082973756, guid: 4004d6041fb8c85429241f74f04aa3ba, type: 3}
-      propertyPath: countPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288207113082973756, guid: 4004d6041fb8c85429241f74f04aa3ba, type: 3}
-      propertyPath: waveCoolTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8288207113082973756, guid: 4004d6041fb8c85429241f74f04aa3ba, type: 3}
-      propertyPath: monsterCountMax
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1198,25 +1223,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 283251101298842732, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
-      propertyPath: countPerWave
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 283251101298842732, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
-      propertyPath: waveCoolTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 283251101298842732, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
-      propertyPath: skullManCountMax
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.26804
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41946
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4351963247147810889, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1254,12 +1267,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkullManSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8174567263662631555, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee1f20b868b8aa4488c7eaf7f218d1e7, type: 3}
---- !u!1001 &218366258807196245
+--- !u!1001 &5201028608330705973
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1267,55 +1284,55 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1849345127720057977, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
-      propertyPath: m_Name
-      value: MonsterPoolPreloader
-      objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.57152
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.2197
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5888258037319390205, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+    - target: {fileID: 2835534983170427729, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508038091197225383, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
+      propertyPath: m_Name
+      value: MonsterPoolPreloader
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 29b6d8ffb4c397a4882e359ac45c0485, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 0ba1dde74e7e04c43a390861e6c079b4, type: 3}
 --- !u!1001 &6310558434752157315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1325,32 +1342,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3424378227658171894, guid: f097939bdc54c4b49949fc16015f80e9, type: 3}
-      propertyPath: waveCount
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424378227658171894, guid: f097939bdc54c4b49949fc16015f80e9, type: 3}
-      propertyPath: countPerWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424378227658171894, guid: f097939bdc54c4b49949fc16015f80e9, type: 3}
-      propertyPath: waveCoolTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424378227658171894, guid: f097939bdc54c4b49949fc16015f80e9, type: 3}
-      propertyPath: skullManCountMax
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: greenSkullManPrefab
+      value: 
+      objectReference: {fileID: 2460881298250016118, guid: 684075e853da88946b971c1661104ece, type: 3}
     - target: {fileID: 3678766274626114488, guid: f097939bdc54c4b49949fc16015f80e9, type: 3}
       propertyPath: m_Name
       value: GreenSkullManSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 7157885000977214538, guid: f097939bdc54c4b49949fc16015f80e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.31535
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7157885000977214538, guid: f097939bdc54c4b49949fc16015f80e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.59466
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7157885000977214538, guid: f097939bdc54c4b49949fc16015f80e9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1463,8 +1468,9 @@ SceneRoots:
   - {fileID: 1567286615}
   - {fileID: 1664391819}
   - {fileID: 852632766}
-  - {fileID: 218366258807196245}
+  - {fileID: 5201028608330705973}
   - {fileID: 653642570}
   - {fileID: 1099448077}
   - {fileID: 1955257115}
   - {fileID: 6310558434752157315}
+  - {fileID: 306777916}

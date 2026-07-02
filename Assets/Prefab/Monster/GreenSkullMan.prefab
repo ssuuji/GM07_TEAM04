@@ -897,9 +897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterReward
   rewardPrefabs:
   - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
-  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
-  - {fileID: 1944338577232302466, guid: 79f10b9a430c8de4ebea2c653a7457ff, type: 3}
-  expReward: 10
+  expReward: 50
 --- !u!114 &2460881298250016118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,8 +993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781fe73e55e6a7b4cb15d3687585b801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkullManAttack
-  damage: 20
-  attackCoolTime: 1
+  damage: 10
+  attackCoolTime: 0.5
   attackPoint: {fileID: 6227405808560492454}
   skullMan: {fileID: 0}
   player: {fileID: 0}
@@ -1015,7 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe12266f8ca1b24eac3a54c1c6fb606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIAppearance
-  ui: {fileID: 9085458830673531540}
+  ui: {fileID: 8113597691524195670}
 --- !u!1001 &3050396612556907390
 PrefabInstance:
   m_ObjectHideFlags: 0

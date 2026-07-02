@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GreenSkullManSpawner : MonoBehaviour
 {
-    [SerializeField] private SkullMan skullManPrefab;
+    [SerializeField] private SkullMan greenSkullManPrefab;
     [SerializeField] private int skullManCountMax = 10;
     [SerializeField] private int countPerWave = 4;
     [SerializeField] private float waveCoolTime = 10.0f;
@@ -44,14 +44,14 @@ public class GreenSkullManSpawner : MonoBehaviour
         for (int i = 0; i < countPerWave; i++)
         {
             SetRandomPosition();
-            SkullMan skullMan = Managers.Pool.GetPool(skullManPrefab);
+            SkullMan greenSkullMan = Managers.Pool.GetPool(greenSkullManPrefab);
 
-            skullMan.transform.position = randomPosition;
-            skullMan.transform.rotation = Quaternion.identity;
+            greenSkullMan.transform.position = randomPosition;
+            greenSkullMan.transform.rotation = Quaternion.identity;
 
-            if (skullMan != null)
+            if (greenSkullMan != null)
             {
-                skullMan.Initialize();
+                greenSkullMan.Initialize();
             }
         }
 

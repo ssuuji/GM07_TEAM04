@@ -111,6 +111,7 @@ public class SkullMan : MonoBehaviour, IDamageable
 
     IEnumerator DieCo()
     {
+        skullManAttack.enabled = false;
         dogAnimation.Die();
         SFXManager.Instance.PlaySkullManDie();
         yield return new WaitForSeconds(1f);
